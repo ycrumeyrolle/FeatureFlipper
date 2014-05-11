@@ -130,7 +130,7 @@ In your code :
     IMessageSender sender = container.Resolve<IMessageSender>();
     
     // Call the code. Does not worry with 'if' statement.
-    sender.SendMessage("This ");
+    sender.SendMessage("This message is sent only if the feature is enabled.");
 	
 ```
 
