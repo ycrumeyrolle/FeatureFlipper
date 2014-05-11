@@ -70,9 +70,9 @@ In your configuration file :
 
 #Go further
 
-FeatureFlipping offer many extensibility points:
+FeatureFlipper offer many extensibility points:
  
-##Creates your custom ```IFeatureProvider```
+##Create your custom ```IFeatureProvider```
 
 A ```IFeatureProvider``` simply said "Hey ! I know this feature and it is ON (or OFF) !".
 
@@ -81,7 +81,7 @@ By default, FeatureFlipper provides ```ConfigurationFeatureProvider``` and ```Pe
 See [Extending the features provider](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-features-provider) for more details.
 
 
-##Creates your custom ```IConfigurationReader```
+##Create your custom ```IConfigurationReader```
 
 The ```IConfigurationReader``` interface is used by the ```ConfigurationFeatureProvider```. It provides the value of a feature given a feature key. 
 
@@ -91,7 +91,7 @@ You could create your own implementation by reading values from a SQL/NoSQL data
 See [Extending the configuration reading](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-reading) for more details.
 
 
-##Creates your custom ```IFeatureStateParser```
+##Create your custom ```IFeatureStateParser```
 The ```IFeatureStateParser``` interface is used by the ```ConfigurationFeatureProvider```. It provides a boolean value for a feature given a feature state. 
 The defaults implementations converts boolean strings to boolean values ("true" ==> ON; "false" ==> OFF). 
 It can also convert dates representing string to boolean values, based on the predicate that past date means feature ON, an future date means feature OFF. 
