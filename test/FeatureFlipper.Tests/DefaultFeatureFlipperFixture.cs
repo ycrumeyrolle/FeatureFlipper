@@ -5,7 +5,7 @@
     using Moq;
     using Xunit;
 
-    public class FeatureFlipperFixture
+    public class DefaultFeatureFlipperFixture
     {
         [Fact]
         public void Ctor_GuardClause()

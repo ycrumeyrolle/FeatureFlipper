@@ -39,6 +39,7 @@
             Mock<IBuilderContext> context = new Mock<IBuilderContext>();
             context.SetupAllProperties();
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
+            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature1)));
 
             // Act
             strategy.PreBuildUp(context.Object);

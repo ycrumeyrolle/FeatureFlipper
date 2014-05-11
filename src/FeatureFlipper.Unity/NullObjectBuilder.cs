@@ -7,6 +7,9 @@
     using System.Reflection;
     using System.Reflection.Emit;
 
+    /// <summary>
+    /// Provides a container for building a NullObject. 
+    /// </summary>
     public class NullObjectBuilder
     {
         private const MethodAttributes GetSetAttributes = MethodAttributes.Public |
@@ -30,6 +33,11 @@
 
         private readonly Type contract;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FeatureFlipperExtension"/> class.
+        /// </summary>
+        /// <param name="contract">The type contract.</param>
+        /// <param name="moduleBuilder">The <see cref="ModuleBuilder"/>.</param>
         public NullObjectBuilder(Type contract, ModuleBuilder moduleBuilder)
         {
             if (contract == null)
@@ -51,6 +59,10 @@
             this.moduleBuilder = moduleBuilder;
         }
 
+        /// <summary>
+        /// Builds the NullObject type.
+        /// </summary>
+        /// <returns></returns>
         public Type Build()
         {
             var typeBuilder = this.CreateTypeBuilder();

@@ -71,7 +71,7 @@
     <Compile Include="FeatureFlipperExtension.cs" />
     <Compile Include="NullObjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="NullObjectGenerator.cs" />
     <Compile Include="UnityContainerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -72,8 +72,10 @@
         public void TryIsOn_GuardClause()
         {
             // Arrange
+            Mock<IConfigurationReader> reader = new Mock<IConfigurationReader>(MockBehavior.Strict);
+            Mock<IFeatureStateParser> parser = new Mock<IFeatureStateParser>(MockBehavior.Strict);
+            ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });
             bool isOn;
-            ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider();
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));

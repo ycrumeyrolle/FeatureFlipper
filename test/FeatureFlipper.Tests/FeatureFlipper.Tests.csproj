@@ -75,7 +75,7 @@
     <Compile Include="FeatureNameProviderFixture.cs" />
     <Compile Include="PerRoleFeatureProviderFixture.cs" />
     <Compile Include="FeatureFlipperExtensionsFixture.cs" />
-    <Compile Include="FeatureFlipperFixture.cs" />
+    <Compile Include="DefaultFeatureFlipperFixture.cs" />
     <Compile Include="DefaultPrincipalProviderFixture.cs" />
     <Compile Include="ConfigurationFeatureProviderFixture.cs" />
     <Compile Include="DateFeatureStateParserFixture.cs" />

@@ -10,7 +10,7 @@
         public void CreateNullObject_GuardClause()
         {
             // Arrange   
-            ProxyGenerator generator = new ProxyGenerator();
+            NullObjectGenerator generator = new NullObjectGenerator();
 
             // Act & ssert
             Assert.Throws<ArgumentNullException>(() => generator.CreateNullObject(null));
@@ -20,7 +20,7 @@
         public void CreateNullObject()
         {
             // Arrange   
-            ProxyGenerator generator = new ProxyGenerator();
+            NullObjectGenerator generator = new NullObjectGenerator();
 
             // Act 
             var result = generator.CreateNullObject(typeof(IService));

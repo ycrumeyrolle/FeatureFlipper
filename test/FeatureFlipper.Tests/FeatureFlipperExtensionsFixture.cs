@@ -70,9 +70,7 @@
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature<Feature1>(null));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature<Feature1>(null, "key"));
-            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(null, "feature"));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(null, "feature", "key"));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, null, "key"));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature", null));
@@ -101,14 +99,12 @@
                 .Returns(new[] { provider });
 
             // Act
-            FeatureFlipperExtensions.RegisterConfigurationFeature<Feature1>(flipper.Object);
-            FeatureFlipperExtensions.RegisterConfigurationFeature<Feature2>(flipper.Object, "key2");
-            FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature3");
-            FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature4", "key4");
+            FeatureFlipperExtensions.RegisterConfigurationFeature<Feature2>(flipper.Object, "key1");
+            FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature2", "key2");
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature4", "key4"));
-            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature4"));
+            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature<Feature2>(flipper.Object, "key1"));
+            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature2", "key2"));
         }
 
         [Fact]
@@ -153,7 +149,7 @@
         public void RegisterPerRoleFeature()
         {
             // Arrange
-            var provider = new PerRoleFeatureProvider();
+            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
 
             bool isOn;
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);

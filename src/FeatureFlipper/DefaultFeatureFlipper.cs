@@ -4,12 +4,19 @@
     using System.Collections.Generic;
     using System.Globalization;
 
+    /// <summary>
+    /// Default implementation of the <see cref="IFeatureFlipper"/>.
+    /// </summary>
     public class DefaultFeatureFlipper : IFeatureFlipper
     {
         private readonly IList<IFeatureProvider> providers = new List<IFeatureProvider>();
 
         private IDictionary<string, IFeatureProvider> fastCache = new Dictionary<string, IFeatureProvider>();
-
+      
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultFeatureFlipper"/> class.
+        /// </summary>
+        /// <param name="providers">The feature providers used to get the features.</param>
         public DefaultFeatureFlipper(IEnumerable<IFeatureProvider> providers)
         {
             if (providers == null)
@@ -23,11 +30,13 @@
             }
         }
 
+        /// <inheritsdoc />
         public ICollection<IFeatureProvider> Providers
         {
             get { return this.providers; }
         }
 
+        /// <inheritsdoc />
         public bool TryIsOn(string feature, out bool isOn)
         {
             if (feature == null)

@@ -17,7 +17,7 @@
         public void RegisterFeature_GuardClause()
         {
             // Arrange
-            var provider = new PerRoleFeatureProvider();
+            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => provider.RegisterFeature(null, "role", true));
@@ -30,7 +30,7 @@
         public void RegisterFeature_Doublon_ThrowsExceptioon()
         {
             // Arrange
-            var provider = new PerRoleFeatureProvider();
+            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
 
             // Act & Assert
             provider.RegisterFeature("name", "role");
@@ -120,7 +120,7 @@
         {
             const string FeatureName = "Custom feature";
             bool isOn;
-            var provider = new PerRoleFeatureProvider();
+            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
 
             bool result = provider.TryIsOn(FeatureName, out isOn);
 
@@ -132,7 +132,7 @@
         public void TryIsOn_GuardClause()
         {
             bool isOn;
-            var provider = new PerRoleFeatureProvider();
+            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
 
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
         }

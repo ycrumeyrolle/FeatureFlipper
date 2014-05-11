@@ -4,7 +4,11 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-
+     
+    /// <summary>
+    /// This implementation of the <see cref="IFeatureProvider"/> tries to get the state of the feature into a configuration repository.
+    /// Then it tries to determinate state of the feature with the help of the <see cref="IFeatureStateParser"/>.
+    /// </summary>
     public sealed class ConfigurationFeatureProvider : IFeatureProvider
     {
         private readonly IDictionary<string, ConfigurationFeatureContext> repository = new Dictionary<string, ConfigurationFeatureContext>();
@@ -13,6 +17,11 @@
 
         private readonly IList<IFeatureStateParser> featureStateProviders = new List<IFeatureStateParser>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationFeatureProvider"/> class.
+        /// </summary>
+        /// <param name="configurationReader">The <see cref="IConfigurationReader"/> used to read values.</param>
+        /// <param name="featureStateProviders">The list of <see cref="IFeatureStateParser"/> used to parse the state of the features.</param>
         public ConfigurationFeatureProvider(IConfigurationReader configurationReader, ICollection<IFeatureStateParser> featureStateProviders)
         {
             if (configurationReader == null)
@@ -31,17 +40,8 @@
                 this.featureStateProviders.Add(provider);
             }
         }
-
-        public ConfigurationFeatureProvider(IConfigurationReader configurationReader)
-            : this(configurationReader, Features.FeatureStateParsers)
-        {
-        }
-
-        public ConfigurationFeatureProvider()
-            : this(new DefaultConfigurationReader())
-        {
-        }
-
+        
+        /// <inheritsdoc />
         public bool TryIsOn(string feature, out bool isOn)
         {
             if (feature == null)
@@ -84,6 +84,11 @@
             return false;
         }
 
+        /// <summary>
+        /// Registers a feature. It map a feature name with a configuration key.
+        /// </summary>
+        /// <param name="feature">The name of the feature.</param>
+        /// <param name="configurationKey">The configuration key.</param>
         public void RegisterFeature(string feature, string configurationKey)
         {
             if (feature == null)

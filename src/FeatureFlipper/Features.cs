@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
+    /// <summary>
+    /// Provides access to features flipping.
+    /// </summary>
     public static class Features
     {
         private static ICollection<IFeatureStateParser> featureStateParsers = new Collection<IFeatureStateParser> 
@@ -22,6 +25,9 @@
 
         private static Lazy<IFeatureFlipper> flipper = new Lazy<IFeatureFlipper>(InitializeFlipper);
 
+        /// <summary>
+        /// Gets the current <see cref="IFeatureFlipper"/>.
+        /// </summary>
         public static IFeatureFlipper Flipper
         {
             get
@@ -30,6 +36,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list of currents <see cref="IFeatureStateParser"/>.
+        /// </summary>
         public static ICollection<IFeatureStateParser> FeatureStateParsers
         {
             get
@@ -38,6 +47,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the list of currents <see cref="IFeatureProvider"/>.
+        /// </summary>
         public static ICollection<IFeatureProvider> Providers
         {
             get
@@ -46,6 +58,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the current <see cref="IConfigurationReader"/>.
+        /// </summary>
         public static IConfigurationReader ConfigurationReader
         {
             get
@@ -54,6 +69,10 @@
             }
         }
 
+        /// <summary>
+        /// Sets the current <see cref="IFeatureFlipper"/>.
+        /// </summary>
+        /// <param name="flipper">The <see cref="IFeatureFlipper"/> to set.</param>
         public static void SetFlipper(IFeatureFlipper flipper)
         {
             if (flipper == null)
@@ -74,7 +93,7 @@
             return new Collection<IFeatureProvider> 
             { 
                 new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.featureStateParsers),
-                new PerRoleFeatureProvider()
+                new PerRoleFeatureProvider(new DefaultPrincipalProvider())
             };
         }
     }

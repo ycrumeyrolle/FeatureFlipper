@@ -1,22 +1,25 @@
 ﻿namespace FeatureFlipper.Unity
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Threading;
 
-    public class ProxyGenerator
+    /// <summary>
+    /// A generator of NullObject.
+    /// </summary>
+    public class NullObjectGenerator
     {
-        private const string GeneratedAssemblyName = "GeneratedProxies";
+        private const string GeneratedAssemblyName = "GeneratedNullObjects";
 
-        private const string GeneratedAssemblyFileName = GeneratedAssemblyName + ".dll";
-    
         private readonly AssemblyBuilder assemblyBuilder;
 
         private readonly ModuleBuilder moduleBuilder;
 
-        public ProxyGenerator()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NullObjectGenerator"/> class.
+        /// </summary>
+        public NullObjectGenerator()
         {
             AssemblyName assemblyName = new AssemblyName { Name = GeneratedAssemblyName };
 
@@ -27,6 +30,12 @@
             this.moduleBuilder = this.assemblyBuilder.DefineDynamicModule(this.assemblyBuilder.GetName().Name, false);
         }
 
+        /// <summary>
+        /// Creates a NullObject from a given type.
+        /// </summary>
+        /// <remarks>The contract must be an interface.</remarks>
+        /// <param name="contract">The type contract. It must be an interface.</param>
+        /// <returns>A dynamic NullObject type.</returns>
         public Type CreateNullObject(Type contract)
         {
             if (contract == null)
