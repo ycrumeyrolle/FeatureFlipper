@@ -12,11 +12,11 @@
             new DateFeatureStateParser(new SystemClock())
         };
 
-        private static ICollection<IFeatureProvider> providers = new Collection<IFeatureProvider> 
-        { 
-            new ConfigurationFeatureProvider(new DefaultConfigurationReader(), Features.featureStateParsers),
-            new PerRoleFeatureProvider()
-        };
+        private static Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
+        
+        private static ICollection<IFeatureProvider> providersInstance;
+
+        private static IConfigurationReader configurationReader = new DefaultConfigurationReader();
 
         private static IFeatureFlipper flipperInstance;
 
@@ -42,7 +42,15 @@
         {
             get
             {
-                return Features.providers;
+                return Features.providersInstance ?? (Features.providersInstance = Features.providers.Value);
+            }
+        }
+
+        public static IConfigurationReader ConfigurationReader
+        {
+            get
+            {
+                return Features.configurationReader;
             }
         }
 
@@ -60,5 +68,14 @@
         {
             return new DefaultFeatureFlipper(Features.Providers);
         }
+
+        private static ICollection<IFeatureProvider> InitializeProviders()
+        {
+ 	        return new Collection<IFeatureProvider> 
+            { 
+                new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.featureStateParsers),
+                new PerRoleFeatureProvider()
+            };
+        } 
     }
 }
