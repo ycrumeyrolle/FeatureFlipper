@@ -30,7 +30,6 @@
             Assert.Equal(1, Features.Providers.OfType<ConfigurationFeatureProvider>().Count());
             Assert.Equal(1, Features.Providers.OfType<PerRoleFeatureProvider>().Count());
 
-
             Assert.NotNull(Features.ConfigurationReader);
             Assert.IsType<DefaultConfigurationReader>(Features.ConfigurationReader);
         }

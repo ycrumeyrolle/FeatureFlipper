@@ -13,7 +13,7 @@
         };
 
         private static Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
-        
+
         private static ICollection<IFeatureProvider> providersInstance;
 
         private static IConfigurationReader configurationReader = new DefaultConfigurationReader();
@@ -71,11 +71,11 @@
 
         private static ICollection<IFeatureProvider> InitializeProviders()
         {
- 	        return new Collection<IFeatureProvider> 
+            return new Collection<IFeatureProvider> 
             { 
                 new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.featureStateParsers),
                 new PerRoleFeatureProvider()
             };
-        } 
+        }
     }
 }
