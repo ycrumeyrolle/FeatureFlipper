@@ -77,7 +77,7 @@ A ```IFeatureProvider``` simply said "Hey ! I know this feature and it is ON (or
 
 By default, FeatureFlipper provides ```ConfigurationFeatureProvider``` and ```PerRoleFeatureProvider```.
 
-See [Extending the configuration reading](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-reading) for more details.
+See [Extending the features provider](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-features-provider) for more details.
 
 
 ##Creates your custom ```IConfigurationReader```
@@ -87,7 +87,7 @@ The ```IConfigurationReader``` interface is used by the ```ConfigurationFeatureP
 The default implementation reads the value into the app/web.config file, in the appSettings section.
 You could create your own implementation by reading values from a SQL/NoSQL database, a web service or anything else 
 
-See [Extending the configuration parsing](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-parsing) for more details.
+See [Extending the configuration reading](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-reading) for more details.
 
 
 ##Creates your custom ```IFeatureStateParser```
@@ -95,6 +95,7 @@ The ```IFeatureStateParser``` interface is used by the ```ConfigurationFeaturePr
 The defaults implementations converts boolean strings to boolean values ("true" ==> ON; "false" ==> OFF). 
 It can also convert dates representing string to boolean values, based on the predicate that past date means feature ON, an future date means feature OFF. 
 
+See [Extending the configuration parsing](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-parsing) for more details.
 
 
 ##Ioc via [Unity](http://unity.codeplex.com/)
@@ -138,7 +139,7 @@ In your code :
 
 It is unnecessary to add a 'if' statement. 
 When the feature is enabled, the Ioc container returns the desired object an its method is called.
-When the feature is disabled, the Ioc container returns a [NullObject](http://refactoring.com/catalog/introduceNullObject.html). Any method called on this oject does nothing.
+When the feature is disabled, the Ioc container returns a [NullObject](http://refactoring.com/catalog/introduceNullObject.html). Any method called on this object does nothing.
 It is a bit similar to the [ConditionalAttribute](http://msdn.microsoft.com/en-us/library/system.diagnostics.conditionalattribute.aspx).
 
 #License & Copyright
