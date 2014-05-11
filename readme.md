@@ -85,8 +85,8 @@ See [Extending the features provider](https://github.com/ycrumeyrolle/FeatureFli
 
 The ```IConfigurationReader``` interface is used by the ```ConfigurationFeatureProvider```. It provides the value of a feature given a feature key. 
 
-The default implementation reads the value into the app/web.config file, in the appSettings section.
-You could create your own implementation by reading values from a SQL/NoSQL database, a web service or anything else 
+The default implementation reads the value into the app/web.config file, in the AppSettings section.
+You could create your own implementation by reading values from a SQL/NoSQL database, a web service or anything else.
 
 See [Extending the configuration reading](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-reading) for more details.
 
@@ -133,6 +133,8 @@ In your code :
     // This could be done anywhere in your code, for example by service location, constructor injection or property injection.
     IMessageSender sender = container.Resolve<IMessageSender>();
     
+    ...
+
     // Call the code. Does not worry with 'if' statement.
     sender.SendMessage("This message is sent only if the feature is enabled.");
 	
