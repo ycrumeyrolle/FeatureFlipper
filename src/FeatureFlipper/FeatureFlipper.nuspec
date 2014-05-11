@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>FeatureFlipper</id>
+        <version>1.0.0-alpha</version>
+        <title>FeatureFlipper</title>
+        <authors>Yann Crumeyrolle</authors>
+        <owners>Yann Crumeyrolle</owners>
+        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A feature flipping system.</description>
+        <summary />
+        <copyright />
+        <tags>feature flipping flipper toggle</tags>
+        <frameworkAssemblies>
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="bin\Release\FeatureFlipper.dll" target="lib\net45\FeatureFlipper.dll" />
+        <file src="bin\Release\FeatureFlipper.XML" target="lib\net45\FeatureFlipper.XML" />
+    </files>
+</package>
