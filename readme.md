@@ -77,6 +77,7 @@ A ```IFeatureProvider``` simply said "Hey ! I know this feature and it is ON (or
 
 By default, FeatureFlipper provides ```ConfigurationFeatureProvider``` and ```PerRoleFeatureProvider```.
 
+See [Extending the configuration reading](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-reading) for more details.
 
 
 ##Creates your custom ```IConfigurationReader```
@@ -86,6 +87,7 @@ The ```IConfigurationReader``` interface is used by the ```ConfigurationFeatureP
 The default implementation reads the value into the app/web.config file, in the appSettings section.
 You could create your own implementation by reading values from a SQL/NoSQL database, a web service or anything else 
 
+See [Extending the configuration parsing](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-configuration-parsing) for more details.
 
 
 ##Creates your custom ```IFeatureStateParser```
