@@ -3,6 +3,7 @@
 *A feature flipping system.*
 
 Feature flipping enable you to integrate your code earlier, avoiding feature branching.
+It can also be used to provide specific behaviour to specific users (A/B testing, beta-test users).
 http://martinfowler.com/bliki/FeatureToggle.html
 
 Example of use:
