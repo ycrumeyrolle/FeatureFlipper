@@ -118,57 +118,6 @@
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterConfigurationFeature(flipper.Object, "feature", "key"));
-        }
-
-        [Fact]
-        public void RegisterPerRoleFeature_GuardClause()
-        {
-            // Arrange
-            var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
-
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterPerRoleFeature(null, "feature", "role", true));
-            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, (string)null, "role", true));
-            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, "feature", null, true));
-        }
-
-        [Fact]
-        public void RegisterPerRoleFeature_NoRoleProvider_ThrowException()
-        {
-            // Arrange
-            var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
-            flipper
-                .Setup(f => f.Providers)
-                .Returns(new IFeatureProvider[0]);
-
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, "feature", "role", true));
-        }
-
-        [Fact]
-        public void RegisterPerRoleFeature()
-        {
-            // Arrange
-            var provider = new PerRoleFeatureProvider(new DefaultPrincipalProvider());
-
-            bool isOn;
-            var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
-            flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
-                .Returns(true);
-
-            flipper
-                .Setup(f => f.Providers)
-                .Returns(new[] { provider });
-            
-            // Act
-            FeatureFlipperExtensions.RegisterPerRoleFeature<Feature1>(flipper.Object, "role1");
-            FeatureFlipperExtensions.RegisterPerRoleFeature<Feature2>(flipper.Object, "role2", true);
-            FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, "feature3", "role3");
-            FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, "feature4", "role4", true);
-
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => FeatureFlipperExtensions.RegisterPerRoleFeature(flipper.Object, "feature4", "role4"));
-        }
+        }        
     }
 }

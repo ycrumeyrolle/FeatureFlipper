@@ -10,7 +10,7 @@
             IUnityContainer container = CreateContainer();
 
             MessageEngine engine = container.Resolve<MessageEngine>();
-            engine.Send();
+            engine.Send(args);
 
             Console.ReadKey();
         }
@@ -19,6 +19,8 @@
         {
             IUnityContainer container = new UnityContainer();
             container.AddFeatureFlippingExtension();
+            container.RegisterType<IMessageBuilder, MessageBuilder>();
+            container.RegisterType<IMessageFormatter, MessageFormatter>();
             container.RegisterType<IMessageSender, EmailSender>();
 
             return container;

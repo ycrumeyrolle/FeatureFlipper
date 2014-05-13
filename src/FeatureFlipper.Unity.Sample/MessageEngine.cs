@@ -2,16 +2,22 @@
 {
     public class MessageEngine
     {
-        private readonly IMessageSender messageSender;
+        private readonly IMessageBuilder builder;
+        private readonly IMessageFormatter formatter;
+        private readonly IMessageSender sender;
 
-        public MessageEngine(IMessageSender messageSender)
+        public MessageEngine(IMessageBuilder builder, IMessageFormatter formatter, IMessageSender sender)
         {
-            this.messageSender = messageSender;
+            this.builder = builder;
+            this.formatter = formatter;
+            this.sender = sender;
         }
 
-        public void Send()
+        public void Send(string[] text)
         {
-            this.messageSender.SendMessage("The feature 'IMessageSender' is enabled.");
+            var message = this.builder.BuildMessage(text);
+            message = this.formatter.FormatMessage(message);
+            this.sender.SendMessage(message);
         }
     }
 }

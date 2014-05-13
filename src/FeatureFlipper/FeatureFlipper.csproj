@@ -54,13 +54,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanFeatureStateParser.cs" />
+    <Compile Include="DataAnnotationMetadataProvider.cs" />
     <Compile Include="DateFeatureStateParser.cs" />
+    <Compile Include="DefaultAssembliesResolver.cs" />
+    <Compile Include="DefaultRoleMatrixProvider.cs" />
     <Compile Include="FeatureAttribute.cs" />
     <Compile Include="FeatureFlipperExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FeatureMetadata.cs" />
     <Compile Include="FeatureNameProvider.cs" />
+    <Compile Include="FeatureTypeResolver.cs" />
+    <Compile Include="IAssembliesResolver.cs" />
     <Compile Include="IFeatureStateParser.cs" />
+    <Compile Include="IMetadataProvider.cs" />
+    <Compile Include="ITypeResolver.cs" />
+    <Compile Include="IRoleMatrixProvider.cs" />
     <Compile Include="SystemClock.cs" />
     <Compile Include="ConfigurationFeatureContext.cs" />
     <Compile Include="ConfigurationFeatureProvider.cs" />

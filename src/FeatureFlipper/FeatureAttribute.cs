@@ -21,5 +21,10 @@
         /// Gets the name of the feature.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the roles required for the feature.
+        /// </summary>
+        public string Roles { get; set; }
     }
 }

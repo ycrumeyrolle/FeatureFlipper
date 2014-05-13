@@ -2,6 +2,7 @@
 {
     using System;
 
+    [Feature("EmailSender")]
     public class EmailSender : IMessageSender
     {
         public void SendMessage(string message)
