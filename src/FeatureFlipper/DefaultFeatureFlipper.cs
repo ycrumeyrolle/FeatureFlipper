@@ -11,8 +11,8 @@
     {
         private readonly IList<IFeatureProvider> providers = new List<IFeatureProvider>();
 
-        private IDictionary<string, IFeatureProvider> fastCache = new Dictionary<string, IFeatureProvider>();
-      
+        private IDictionary<string, IFeatureProvider[]> fastCache = new Dictionary<string, IFeatureProvider[]>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFeatureFlipper"/> class.
         /// </summary>
@@ -44,27 +44,45 @@
                 throw new ArgumentNullException("feature");
             }
 
-            IFeatureProvider provider;
-            if (this.fastCache.TryGetValue(feature, out provider))
+            IFeatureProvider[] providers;
+            bool partialIsOn = false;
+            isOn = true;
+            if (this.fastCache.TryGetValue(feature, out providers))
             {
-                if (provider.TryIsOn(feature, out isOn))
+                for (int i = 0;i < providers.Length;i++)
                 {
-                    return true;
+                    if (providers[i].TryIsOn(feature, out partialIsOn))
+                    {
+                        isOn &= partialIsOn;
+                    }
+                }
+
+                isOn = partialIsOn;
+                return true;
+            }
+
+            return this.TryIsOnCore(feature, out isOn);
+        }
+
+        private bool TryIsOnCore(string feature, out bool isOn)
+        {
+            isOn = true;
+            bool partialIsOn;
+            bool found = false;
+            List<IFeatureProvider> providers = new List<IFeatureProvider>();
+            for (int i = 0;i < this.providers.Count;i++)
+            {
+                var provider = this.providers[i];
+                if (provider.TryIsOn(feature, out partialIsOn))
+                {
+                    providers.Add(provider);
+                    isOn &= partialIsOn;
+                    found = true;
                 }
             }
 
-            for (int i = 0; i < this.providers.Count; i++)
-            {
-                provider = this.providers[i];
-                if (provider.TryIsOn(feature, out isOn))
-                {
-                    this.fastCache.Add(feature, provider);
-                    return true;
-                }
-            }
-
-            isOn = false;
-            return false;
+            this.fastCache.Add(feature, providers.ToArray());
+            return found;
         }
     }
 }

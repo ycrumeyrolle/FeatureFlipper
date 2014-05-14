@@ -112,7 +112,7 @@
 
             firstFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Once());
             secondFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Exactly(2));
-            thirdFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Never());
+            thirdFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Exactly(2));
         }
     }
 }
