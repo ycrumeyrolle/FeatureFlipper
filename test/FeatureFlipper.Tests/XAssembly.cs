@@ -11,7 +11,7 @@
         {               
         }
 
-        public XAssembly(SerializationInfo info, StreamingContext context)
+        protected XAssembly(SerializationInfo info, StreamingContext context)
         {
         }
     }

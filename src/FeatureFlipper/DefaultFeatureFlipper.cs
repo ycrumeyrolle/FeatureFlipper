@@ -44,14 +44,14 @@
                 throw new ArgumentNullException("feature");
             }
 
-            IFeatureProvider[] providers;
+            IFeatureProvider[] providerCache;
             bool partialIsOn = false;
             isOn = true;
-            if (this.fastCache.TryGetValue(feature, out providers))
+            if (this.fastCache.TryGetValue(feature, out providerCache))
             {
-                for (int i = 0;i < providers.Length;i++)
+                for (int i = 0;i < providerCache.Length;i++)
                 {
-                    if (providers[i].TryIsOn(feature, out partialIsOn))
+                    if (providerCache[i].TryIsOn(feature, out partialIsOn))
                     {
                         isOn &= partialIsOn;
                     }
@@ -69,19 +69,19 @@
             isOn = true;
             bool partialIsOn;
             bool found = false;
-            List<IFeatureProvider> providers = new List<IFeatureProvider>();
+            List<IFeatureProvider> providerCache = new List<IFeatureProvider>();
             for (int i = 0;i < this.providers.Count;i++)
             {
                 var provider = this.providers[i];
                 if (provider.TryIsOn(feature, out partialIsOn))
                 {
-                    providers.Add(provider);
+                    providerCache.Add(provider);
                     isOn &= partialIsOn;
                     found = true;
                 }
             }
 
-            this.fastCache.Add(feature, providers.ToArray());
+            this.fastCache.Add(feature, providerCache.ToArray());
             return found;
         }
     }
