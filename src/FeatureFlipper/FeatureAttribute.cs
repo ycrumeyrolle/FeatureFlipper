@@ -5,7 +5,7 @@
     /// <summary>
     /// Allows to give a name to a feature.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public sealed class FeatureAttribute : Attribute
     {
         /// <summary>
