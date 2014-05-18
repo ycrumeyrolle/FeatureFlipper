@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
+    using FeatureFlipper.Unity.Properties;
 
     /// <summary>
     /// Provides a container for building a NullObject. 
@@ -52,7 +53,7 @@
 
             if (!contract.IsInterface)
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Type {0} is not an interface", contract.FullName));
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Type_NotInterface, contract.FullName));
             }
 
             this.contract = contract;

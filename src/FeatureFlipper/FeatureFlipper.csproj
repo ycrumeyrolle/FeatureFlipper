@@ -70,6 +70,11 @@
     <Compile Include="IMetadataProvider.cs" />
     <Compile Include="ITypeResolver.cs" />
     <Compile Include="IRoleMatrixProvider.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="SystemClock.cs" />
     <Compile Include="ConfigurationFeatureContext.cs" />
     <Compile Include="ConfigurationFeatureProvider.cs" />
@@ -88,6 +93,12 @@
   <ItemGroup>
     <None Include="FeatureFlipper.nuspec" />
     <None Include="FeatureFlipper.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

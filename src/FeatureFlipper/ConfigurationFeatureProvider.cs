@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
+    using FeatureFlipper.Properties;
      
     /// <summary>
     /// This implementation of the <see cref="IFeatureProvider"/> tries to get the state of the feature into a configuration repository.
@@ -103,7 +104,7 @@
 
             if (this.repository.ContainsKey(feature))
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "The feature '{0}' is already registered.", feature));
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Feature_AlreadyRegistered, feature));
             }
 
             ConfigurationFeatureContext context = new ConfigurationFeatureContext(configurationKey);

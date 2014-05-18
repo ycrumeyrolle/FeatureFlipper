@@ -4,6 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
+    using FeatureFlipper.Properties;
 
     /// <summary>
     /// Provides extensions methods to the <see cref="IFeatureFlipper"/>.
@@ -69,7 +70,7 @@
                 return isOn;
             }
 
-            throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "The feature '{0}' is unknown.", feature));
+            throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Feature_Unknown, feature));
         }
 
         /// <summary>
@@ -116,7 +117,7 @@
             ConfigurationFeatureProvider provider = flipper.Providers.OfType<ConfigurationFeatureProvider>().FirstOrDefault();
             if (provider == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "No provider of type {0} were found in the Providers property. ", typeof(ConfigurationFeatureProvider).FullName));
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Feature_NoProvider, typeof(ConfigurationFeatureProvider).FullName));
             }
 
             provider.RegisterFeature(feature, configurationKey);

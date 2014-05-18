@@ -17,6 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.Unity.Sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6CEBBBBC-31D2-4AB5-B825-BCECCCCA591E}"
 	ProjectSection(SolutionItems) = preProject
+		CodeAnalysisDictionary.xml = CodeAnalysisDictionary.xml
 		FeatureFlipper.snk = FeatureFlipper.snk
 		readme.md = readme.md
 		Settings.StyleCop = Settings.StyleCop
