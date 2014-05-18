@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.WebApi", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.WebApi.Tests", "FeatureFlipper.WebApi.Tests\FeatureFlipper.WebApi.Tests.csproj", "{E5B4B620-128C-4831-8258-D08B596F9470}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.Web.Sample", "FeatureFlipper.Web.Sample\FeatureFlipper.Web.Sample.csproj", "{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{E5B4B620-128C-4831-8258-D08B596F9470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5B4B620-128C-4831-8258-D08B596F9470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5B4B620-128C-4831-8258-D08B596F9470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +92,6 @@ Global
 		{8117BB26-42FA-4842-BC87-A5053563C36D} = {80EF1D97-9B44-4E1A-B297-06CF2B618784}
 		{B8100C6F-1AC3-4989-9720-85CD8AED855F} = {80EF1D97-9B44-4E1A-B297-06CF2B618784}
 		{E5B4B620-128C-4831-8258-D08B596F9470} = {47F5BC91-4078-4BFB-AB7F-FA0C2F0574FF}
+		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45} = {80EF1D97-9B44-4E1A-B297-06CF2B618784}
 	EndGlobalSection
 EndGlobal
