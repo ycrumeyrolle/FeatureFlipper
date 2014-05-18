@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
-        <id>FeatureFlipper.Unity</id>
+        <id>FeatureFlipper.WebApi</id>
         <version>1.0.0-beta2</version>
-        <title>FeatureFlipper with Unity</title>
+        <title>FeatureFlipper for WebAPI</title>
         <authors>Yann Crumeyrolle</authors>
         <owners>Yann Crumeyrolle</owners>
         <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
         <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A feature flipping system with Unity.</description>
+        <description>A feature flipping system for ASP.Net WebAPI.</description>
         <summary />
         <copyright />
-        <tags>feature flipping flipper toggle Unity IoC</tags>
+        <tags>feature flipping flipper toggle WebAPI http</tags>
         <dependencies>
             <dependency id="FeatureFlipper" version="1.0.0-beta2" />
-            <dependency id="Unity" version="3.5.1404.0" />
+            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.1.2" />
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Release\FeatureFlipper.Unity.dll" target="lib\net45\FeatureFlipper.Unity.dll" />
-        <file src="bin\Release\FeatureFlipper.Unity.XML" target="lib\net45\FeatureFlipper.Unity.XML" />
+        <file src="bin\Release\FeatureFlipper.WebApi.dll" target="lib\net45\FeatureFlipper.WebApi.dll" />
+        <file src="bin\Release\FeatureFlipper.WebApi.XML" target="lib\net45\FeatureFlipper.WebApi.XML" />
     </files>
 </package>

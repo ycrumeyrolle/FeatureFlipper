@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FeatureFlipper.snk" />
+    <None Include="FeatureFlipper.WebApi.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
