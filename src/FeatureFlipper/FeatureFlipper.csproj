@@ -82,7 +82,7 @@
     <Compile Include="IFeatureProvider.cs" />
     <Compile Include="IPrincipalProvider.cs" />
     <Compile Include="ISystemClock.cs" />
-    <Compile Include="PerRoleFeatureProvider.cs" />
+    <Compile Include="RoleFeatureProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

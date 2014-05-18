@@ -5,20 +5,20 @@
     using Moq;
     using Xunit;
 
-    public class PerRoleFeatureProviderFixture
+    public class RoleFeatureProviderFixture
     {
         private readonly Mock<IRoleMatrixProvider> roleMatrixProvider;
 
-        public PerRoleFeatureProviderFixture()
+        public RoleFeatureProviderFixture()
         {
-            this.roleMatrixProvider = new Mock<IRoleMatrixProvider>(MockBehavior.Default);
+            this.roleMatrixProvider = new Mock<IRoleMatrixProvider>(MockBehavior.Strict);
         }
 
         [Fact]
         public void Ctor_GuardClause()
         {
-            Assert.Throws<ArgumentNullException>(() => new PerRoleFeatureProvider(null, null));
-            Assert.Throws<ArgumentNullException>(() => new PerRoleFeatureProvider(this.roleMatrixProvider.Object, null));
+            Assert.Throws<ArgumentNullException>(() => new RoleFeatureProvider(null, null));
+            Assert.Throws<ArgumentNullException>(() => new RoleFeatureProvider(this.roleMatrixProvider.Object, null));
         }
 
         [Theory]
@@ -41,7 +41,7 @@
             this.roleMatrixProvider
                 .Setup(p => p.GetRoleMatrix(FeatureName))
                 .Returns(new[] { expectedRole });
-            var provider = new PerRoleFeatureProvider(this.roleMatrixProvider.Object, principalProvider.Object);
+            var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, principalProvider.Object);
 
             // Act
             bool result = provider.TryIsOn(FeatureName, out isOn);
@@ -59,7 +59,7 @@
             this.roleMatrixProvider
                 .Setup(p => p.GetRoleMatrix(FeatureName))
                 .Returns((string[])null);
-            var provider = new PerRoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
+            var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
 
             bool result = provider.TryIsOn(FeatureName, out isOn);
 
@@ -71,7 +71,7 @@
         public void TryIsOn_GuardClause()
         {
             bool isOn;
-            var provider = new PerRoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
+            var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
 
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
         }

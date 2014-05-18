@@ -1,22 +1,20 @@
 ﻿namespace FeatureFlipper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
 
     /// <summary>
     /// This implementation of the <see cref="IFeatureProvider"/> tries to get the state of the feature according to the role membership of the current user.
     /// </summary>
-    public sealed class PerRoleFeatureProvider : IFeatureProvider
+    public sealed class RoleFeatureProvider : IFeatureProvider
     {
         private readonly IPrincipalProvider principalProvider;
 
         private readonly IRoleMatrixProvider roleManager;
 
-         /// <summary>
+        /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationFeatureProvider"/> class.
         /// </summary>
-        public PerRoleFeatureProvider(IRoleMatrixProvider roleManager, IPrincipalProvider principalProvider)
+        public RoleFeatureProvider(IRoleMatrixProvider roleManager, IPrincipalProvider principalProvider)
         {
             if (roleManager == null)
             {
@@ -50,23 +48,15 @@
             var principal = this.principalProvider.Principal;
             foreach (string role in roles)
             {
-                if (role == "*")
+                if (role == "*" || principal.IsInRole(role))
                 {
                     isOn = true;
                     return true;
-                }
-                else
-                {
-                    if (principal.IsInRole(role))
-                    {
-                        isOn = true;
-                        return true;
-                    }
                 }
             }
 
             isOn = false;
             return true;
-        }        
+        }
     }
 }

@@ -18,7 +18,7 @@
             Assert.NotNull(flipper.Providers);
             Assert.Equal(2, flipper.Providers.Count);
             Assert.Equal(1, flipper.Providers.OfType<ConfigurationFeatureProvider>().Count());
-            Assert.Equal(1, flipper.Providers.OfType<PerRoleFeatureProvider>().Count());
+            Assert.Equal(1, flipper.Providers.OfType<RoleFeatureProvider>().Count());
 
             Assert.NotNull(Features.FeatureStateParsers);
             Assert.Equal(2, Features.FeatureStateParsers.Count);
@@ -28,7 +28,7 @@
             Assert.NotNull(Features.Providers);
             Assert.Equal(2, Features.Providers.Count);
             Assert.Equal(1, Features.Providers.OfType<ConfigurationFeatureProvider>().Count());
-            Assert.Equal(1, Features.Providers.OfType<PerRoleFeatureProvider>().Count());
+            Assert.Equal(1, Features.Providers.OfType<RoleFeatureProvider>().Count());
 
             Assert.NotNull(Features.ConfigurationReader);
             Assert.IsType<DefaultConfigurationReader>(Features.ConfigurationReader);

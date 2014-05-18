@@ -78,7 +78,7 @@
     <Compile Include="Feature2.cs" />
     <Compile Include="FeaturesFixture.cs" />
     <Compile Include="FeatureNameProviderFixture.cs" />
-    <Compile Include="PerRoleFeatureProviderFixture.cs" />
+    <Compile Include="RoleFeatureProviderFixture.cs" />
     <Compile Include="FeatureFlipperExtensionsFixture.cs" />
     <Compile Include="DefaultFeatureFlipperFixture.cs" />
     <Compile Include="DefaultPrincipalProviderFixture.cs" />

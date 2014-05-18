@@ -93,7 +93,7 @@
             return new Collection<IFeatureProvider> 
             { 
                 new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.featureStateParsers),
-                new PerRoleFeatureProvider(new DefaultRoleMatrixProvider(new DataAnnotationMetadataProvider(new FeatureTypeResolver(new DefaultAssembliesResolver()))), new DefaultPrincipalProvider())
+                new RoleFeatureProvider(new DefaultRoleMatrixProvider(new DataAnnotationMetadataProvider(new FeatureTypeResolver(new DefaultAssembliesResolver()))), new DefaultPrincipalProvider())
             };
         }
     }
