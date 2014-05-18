@@ -5,16 +5,20 @@
     [Feature("MessageBuilder")]
     public class MessageBuilder : IMessageBuilder
     {
-        public string BuildMessage(string[] text)
+        public Message BuildMessage(string[] text)
         {
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0;i < text.Length;i++)
             {
                 sb.Append(text[i]);
+                if (i < text.Length - 1)
+                {
+                    sb.Append(' ');
+                }
             }
 
-            return sb.ToString();
+            return new Message { Text = sb.ToString() };
         }
     }
 }

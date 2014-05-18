@@ -2,6 +2,6 @@
 {
     public interface IMessageFormatter
     {
-        string FormatMessage(string message);
+        void FormatMessage(Message message);
     }
 }

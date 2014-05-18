@@ -1,11 +1,21 @@
 ﻿namespace FeatureFlipper.Unity.Sample
 {
+    using System;
+
     [Feature("MessageFormatter")]
     public class MessageFormatter : IMessageFormatter
     {
-        public string FormatMessage(string message)
+        public void FormatMessage(Message message)
         {
-            return message.ToUpper();
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
+
+            if (message.Text != null)
+            {
+                message.Text = message.Text.ToUpper();                
+            }
         }
     }
 }

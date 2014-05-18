@@ -2,6 +2,6 @@
 {
     public interface IMessageBuilder
     {
-        string BuildMessage(string[] text);
+        Message BuildMessage(string[] text);
     }
 }

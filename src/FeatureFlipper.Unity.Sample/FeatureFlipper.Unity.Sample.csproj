@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMessageFormatter.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MessageFormatter.cs" />
     <Compile Include="MessageBuilder.cs" />
     <Compile Include="EmailSender.cs" />

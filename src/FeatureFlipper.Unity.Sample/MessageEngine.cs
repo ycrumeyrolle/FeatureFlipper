@@ -16,7 +16,7 @@
         public void Send(string[] text)
         {
             var message = this.builder.BuildMessage(text);
-            message = this.formatter.FormatMessage(message);
+            this.formatter.FormatMessage(message);
             this.sender.SendMessage(message);
         }
     }
