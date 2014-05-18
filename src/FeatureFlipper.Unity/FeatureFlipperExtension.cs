@@ -6,7 +6,7 @@
     /// <summary>
     /// This extension installs the <see cref="FlippingBuilderStrategy"/> into the container to implement feature flipping behavior.
     /// </summary>
-    public class FeatureFlipperExtension : UnityContainerExtension
+    public sealed class FeatureFlipperExtension : UnityContainerExtension
     {
         private readonly IFeatureFlipper flipper;
 

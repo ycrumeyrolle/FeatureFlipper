@@ -7,7 +7,7 @@
     /// This implementation of <see cref="IFeatureStateParser"/> tries to parse a value into date 
     /// and compares it with the system clock.
     /// </summary>
-    public class DateFeatureStateParser : IFeatureStateParser
+    public sealed class DateFeatureStateParser : IFeatureStateParser
     {
         private readonly ISystemClock systemClock;
     

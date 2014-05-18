@@ -5,7 +5,7 @@
     /// <summary>
     /// Provides extensions methods to the <see cref="IUnityContainer"/>.
     /// </summary>
-    public static class UnityContainerExtensions
+    public static class FeatureFlippingUnityContainerExtensions
     {
         /// <summary>
         /// Add the feature flipping behavior to the unity container.

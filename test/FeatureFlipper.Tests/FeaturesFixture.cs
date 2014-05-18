@@ -42,21 +42,46 @@
             var originalFlipper = Features.Flipper;
 
             // Act
-            Features.SetFlipper(flipper.Object);
+            Features.Flipper = flipper.Object;
 
             // Assert
             Assert.NotNull(Features.Flipper);
             Assert.Equal(flipper.Object, Features.Flipper);
 
             // Teardown
-            Features.SetFlipper(originalFlipper);
+            Features.Flipper = originalFlipper;
+        }
+
+        [Fact]
+        public void SetConfigurationReader_GuardClause()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => Features.ConfigurationReader = null);
+        }
+
+        [Fact]
+        public void SetConfigurationReader()
+        {
+            // Arrange
+            var reader = new Mock<IConfigurationReader>();
+            var originnalReader = Features.ConfigurationReader;
+
+            // Act
+            Features.ConfigurationReader = reader.Object;
+
+            // Assert
+            Assert.NotNull(Features.ConfigurationReader);
+            Assert.Equal(reader.Object, Features.ConfigurationReader);
+
+            // Teardown
+            Features.ConfigurationReader = originnalReader;
         }
 
         [Fact]
         public void SetFlipper_GuardClause()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Features.SetFlipper(null));
+            Assert.Throws<ArgumentNullException>(() => Features.Flipper = null);
         }
 
         private class FeatureWithoutAttribute

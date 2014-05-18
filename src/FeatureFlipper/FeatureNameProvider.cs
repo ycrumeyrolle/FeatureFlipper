@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a provider that gives a name for a feature.
     /// </summary>
-    public class FeatureNameProvider
+    public sealed class FeatureNameProvider
     {
         private readonly ConcurrentDictionary<Type, string> featureCache = new ConcurrentDictionary<Type, string>();
 

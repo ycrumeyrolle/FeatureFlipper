@@ -6,7 +6,7 @@
     using Moq;
     using Xunit;
 
-    public class UnityContainerExtensionsFixture
+    public class FeatureUnityContainerExtensionsFixture
     {
         [Fact]
         public void Resolve_ReturnsConcrete()

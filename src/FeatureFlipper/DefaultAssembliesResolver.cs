@@ -6,7 +6,7 @@
     /// <summary>
     /// Provides an implementation of <see cref="IAssembliesResolver"/>.
     /// </summary>
-    public class DefaultAssembliesResolver : IAssembliesResolver
+    public sealed class DefaultAssembliesResolver : IAssembliesResolver
     {
         /// <summary>
         /// Returns a list of assemblies available for the application.

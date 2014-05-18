@@ -8,7 +8,7 @@
     /// A <see cref="BuilderStrategy"/> that handles feature flipping.
     /// It verifies the state of the feature and build a NullObject if the feature is <c>Off</c>. Do nothing otherwise.
     /// </summary>
-    public class FlippingBuilderStrategy : BuilderStrategy
+    public sealed class FlippingBuilderStrategy : BuilderStrategy
     {
         private readonly IDictionary<Type, object> nullObjectCache = new Dictionary<Type, object>();
 

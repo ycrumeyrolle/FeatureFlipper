@@ -3,7 +3,7 @@
     /// <summary>
     /// This implementation of <see cref="IFeatureStateParser"/> tries to parse a value into a boolean.
     /// </summary>
-    public class BooleanFeatureStateParser : IFeatureStateParser
+    public sealed class BooleanFeatureStateParser : IFeatureStateParser
     {
         /// <summary>
         /// Tries to parse the value of the feature. It must be a valid representation of a <see cref="System.Boolean"/>.

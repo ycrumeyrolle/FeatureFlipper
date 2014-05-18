@@ -10,7 +10,7 @@
     /// <summary>
     /// Provides a container for building a NullObject. 
     /// </summary>
-    public class NullObjectBuilder
+    public sealed class NullObjectBuilder
     {
         private const MethodAttributes GetSetAttributes = MethodAttributes.Public |
                                                          MethodAttributes.SpecialName |
@@ -124,94 +124,104 @@
                 {
                     if (parameters[i].IsOut)
                     {
-                        Type parameterType = parameters[i].ParameterType.GetElementType();
-
-                        if (parameterType == typeof(string))
-                        {
-                            il.Emit(OpCodes.Ldarg, i + 1);
-                            il.Emit(OpCodes.Ldsfld, stringEmpty);
-                            il.Emit(OpCodes.Stind_Ref);
-                        }
-                        else if (parameterType.IsGenericType)
-                        {
-                            Type openGeneric = parameterType.GetGenericTypeDefinition();
-
-                            if (openGeneric == typeof(IList<>) ||
-                                openGeneric == typeof(List<>) ||
-                                openGeneric == typeof(ICollection<>))
-                            {
-                                ConstructorInfo ctor = typeof(List<>).MakeGenericType(parameterType.GetGenericArguments()).GetConstructor(Type.EmptyTypes);
-
-                                il.Emit(OpCodes.Ldarg, i + 1);
-                                il.Emit(OpCodes.Newobj, ctor);
-                                il.Emit(OpCodes.Stind_Ref);
-                            }
-
-                            if (openGeneric == typeof(IEnumerable<>))
-                            {
-                                WriteEnumerableOutParam(parameterType, i, il);
-                            }
-                        }
-                        else if (parameterType.IsArray)
-                        {
-                            WriteArrayOutParam(parameterType, i, il);
-                        }
+                        GenerateOutParameter(stringEmpty, parameters, il, i);
                     }
                 }
 
-                if (method.ReturnType == typeof(void))
+                GenerateReturnValue(stringEmpty, method, il);
+            }
+        }
+
+        private static void GenerateReturnValue(FieldInfo stringEmpty, MethodInfo method, ILGenerator il)
+        {
+            if (method.ReturnType == typeof(void))
+            {
+                il.Emit(OpCodes.Ret);
+            }
+            else if (method.ReturnType.IsArray)
+            {
+                WriteArrayReturnValue(il, method);
+            }
+            else if (method.ReturnType.IsGenericType)
+            {
+                Type openGeneric = method.ReturnType.GetGenericTypeDefinition();
+
+                if (openGeneric == typeof(ICollection<>) ||
+                    openGeneric == typeof(IList<>) ||
+                    openGeneric == typeof(List<>))
                 {
-                    il.Emit(OpCodes.Ret);
+                    WriteListReturnValue(il, method);
                 }
-                else if (method.ReturnType.IsArray)
+
+                if (openGeneric == typeof(IEnumerable<>))
                 {
                     WriteArrayReturnValue(il, method);
                 }
-                else if (method.ReturnType.IsGenericType)
+            }
+            else if (method.ReturnType == typeof(string))
+            {
+                LocalBuilder lb = il.DeclareLocal(method.ReturnType);
+
+                var ret = il.DefineLabel();
+
+                il.Emit(OpCodes.Nop);
+                il.Emit(OpCodes.Ldsfld, stringEmpty);
+                il.Emit(OpCodes.Stloc_0);
+                il.Emit(OpCodes.Br_S, ret);
+                il.MarkLabel(ret);
+                il.Emit(OpCodes.Ldloc_0);
+                il.Emit(OpCodes.Ret);
+            }
+            else
+            {
+                LocalBuilder lb = il.DeclareLocal(method.ReturnType);
+
+                var ret = il.DefineLabel();
+
+                il.Emit(OpCodes.Ldloca_S, lb);
+                il.Emit(OpCodes.Initobj, method.ReturnType);
+                il.Emit(OpCodes.Ldloc_0);
+                il.Emit(OpCodes.Stloc_0);
+                il.Emit(OpCodes.Br_S, ret);
+                il.MarkLabel(ret);
+                il.Emit(OpCodes.Ldloc_0);
+                il.Emit(OpCodes.Ret);
+            }
+        }
+
+        private static void GenerateOutParameter(FieldInfo stringEmpty, ParameterInfo[] parameters, ILGenerator il, int i)
+        {
+            Type parameterType = parameters[i].ParameterType.GetElementType();
+
+            if (parameterType == typeof(string))
+            {
+                il.Emit(OpCodes.Ldarg, i + 1);
+                il.Emit(OpCodes.Ldsfld, stringEmpty);
+                il.Emit(OpCodes.Stind_Ref);
+            }
+            else if (parameterType.IsGenericType)
+            {
+                Type openGeneric = parameterType.GetGenericTypeDefinition();
+
+                if (openGeneric == typeof(IList<>) ||
+                    openGeneric == typeof(List<>) ||
+                    openGeneric == typeof(ICollection<>))
                 {
-                    Type openGeneric = method.ReturnType.GetGenericTypeDefinition();
+                    ConstructorInfo ctor = typeof(List<>).MakeGenericType(parameterType.GetGenericArguments()).GetConstructor(Type.EmptyTypes);
 
-                    if (openGeneric == typeof(ICollection<>) ||
-                        openGeneric == typeof(IList<>) ||
-                        openGeneric == typeof(List<>))
-                    {
-                        WriteListReturnValue(il, method);
-                    }
-
-                    if (openGeneric == typeof(IEnumerable<>))
-                    {
-                        WriteArrayReturnValue(il, method);
-                    }
+                    il.Emit(OpCodes.Ldarg, i + 1);
+                    il.Emit(OpCodes.Newobj, ctor);
+                    il.Emit(OpCodes.Stind_Ref);
                 }
-                else if (method.ReturnType == typeof(string))
+
+                if (openGeneric == typeof(IEnumerable<>))
                 {
-                    LocalBuilder lb = il.DeclareLocal(method.ReturnType);
-
-                    var ret = il.DefineLabel();
-
-                    il.Emit(OpCodes.Nop);
-                    il.Emit(OpCodes.Ldsfld, stringEmpty);
-                    il.Emit(OpCodes.Stloc_0);
-                    il.Emit(OpCodes.Br_S, ret);
-                    il.MarkLabel(ret);
-                    il.Emit(OpCodes.Ldloc_0);
-                    il.Emit(OpCodes.Ret);
+                    WriteEnumerableOutParam(parameterType, i, il);
                 }
-                else
-                {
-                    LocalBuilder lb = il.DeclareLocal(method.ReturnType);
-
-                    var ret = il.DefineLabel();
-
-                    il.Emit(OpCodes.Ldloca_S, lb);
-                    il.Emit(OpCodes.Initobj, method.ReturnType);
-                    il.Emit(OpCodes.Ldloc_0);
-                    il.Emit(OpCodes.Stloc_0);
-                    il.Emit(OpCodes.Br_S, ret);
-                    il.MarkLabel(ret);
-                    il.Emit(OpCodes.Ldloc_0);
-                    il.Emit(OpCodes.Ret);
-                }
+            }
+            else if (parameterType.IsArray)
+            {
+                WriteArrayOutParam(parameterType, i, il);
             }
         }
 

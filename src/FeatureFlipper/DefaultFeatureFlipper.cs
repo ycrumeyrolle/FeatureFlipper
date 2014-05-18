@@ -7,11 +7,11 @@
     /// <summary>
     /// Default implementation of the <see cref="IFeatureFlipper"/>.
     /// </summary>
-    public class DefaultFeatureFlipper : IFeatureFlipper
+    public sealed class DefaultFeatureFlipper : IFeatureFlipper
     {
         private readonly IList<IFeatureProvider> providers = new List<IFeatureProvider>();
 
-        private IDictionary<string, IFeatureProvider[]> fastCache = new Dictionary<string, IFeatureProvider[]>();
+        private readonly IDictionary<string, IFeatureProvider[]> fastCache = new Dictionary<string, IFeatureProvider[]>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFeatureFlipper"/> class.

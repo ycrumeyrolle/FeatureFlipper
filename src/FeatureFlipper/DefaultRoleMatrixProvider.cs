@@ -5,7 +5,7 @@
     /// <summary>
     /// Implementation of <see cref="IRoleMatrixProvider"/> that gets roles in data annotations.
     /// </summary>
-    public class DefaultRoleMatrixProvider : IRoleMatrixProvider
+    public sealed class DefaultRoleMatrixProvider : IRoleMatrixProvider
     {
         private readonly IMetadataProvider metataProvider;
 

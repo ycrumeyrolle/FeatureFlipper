@@ -89,7 +89,7 @@
     <Compile Include="NullObjectBuilderFixture.cs" />
     <Compile Include="FlippingBuilderStrategyFixture.cs" />
     <Compile Include="Service.cs" />
-    <Compile Include="UnityContainerExtensionsFixture.cs" />
+    <Compile Include="FeatureUnityContainerExtensionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

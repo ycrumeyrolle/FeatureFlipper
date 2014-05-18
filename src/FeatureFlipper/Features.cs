@@ -9,30 +9,38 @@
     /// </summary>
     public static class Features
     {
-        private static ICollection<IFeatureStateParser> featureStateParsers = new Collection<IFeatureStateParser> 
+        private static readonly ICollection<IFeatureStateParser> featureStateParsers = new Collection<IFeatureStateParser> 
         { 
             new BooleanFeatureStateParser(),
             new DateFeatureStateParser(new SystemClock())
         };
 
-        private static Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
-
-        private static ICollection<IFeatureProvider> providersInstance;
+        private static readonly Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
 
         private static IConfigurationReader configurationReader = new DefaultConfigurationReader();
 
         private static IFeatureFlipper flipperInstance;
 
-        private static Lazy<IFeatureFlipper> flipper = new Lazy<IFeatureFlipper>(InitializeFlipper);
+        private static readonly Lazy<IFeatureFlipper> flipper = new Lazy<IFeatureFlipper>(InitializeFlipper);
 
         /// <summary>
-        /// Gets the current <see cref="IFeatureFlipper"/>.
+        /// Gets or sets the current <see cref="IFeatureFlipper"/>.
         /// </summary>
         public static IFeatureFlipper Flipper
         {
             get
             {
-                return Features.flipperInstance ?? (Features.flipperInstance = Features.flipper.Value);
+                return Features.flipperInstance ?? Features.flipper.Value;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+
+                Features.flipperInstance = value;
             }
         }
 
@@ -54,7 +62,7 @@
         {
             get
             {
-                return Features.providersInstance ?? (Features.providersInstance = Features.providers.Value);
+                return Features.providers.Value;
             }
         }
 
@@ -67,20 +75,16 @@
             {
                 return Features.configurationReader;
             }
-        }
 
-        /// <summary>
-        /// Sets the current <see cref="IFeatureFlipper"/>.
-        /// </summary>
-        /// <param name="flipper">The <see cref="IFeatureFlipper"/> to set.</param>
-        public static void SetFlipper(IFeatureFlipper flipper)
-        {
-            if (flipper == null)
+            set
             {
-                throw new ArgumentNullException("flipper");
-            }
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
 
-            Features.flipperInstance = flipper;
+                Features.configurationReader = value;
+            }
         }
 
         private static IFeatureFlipper InitializeFlipper()

@@ -6,9 +6,9 @@
     /// <summary>
     /// Represents the metadata of a feature. 
     /// </summary>
-    public class FeatureMetadata
+    public sealed class FeatureMetadata
     {
-        private static char[] separator = { ',' };
+        private static readonly char[] separator = { ',' };
 
         private readonly string[] roles;
         

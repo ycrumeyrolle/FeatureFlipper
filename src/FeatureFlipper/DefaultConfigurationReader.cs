@@ -6,7 +6,7 @@
     /// Default implementation of <see cref="IConfigurationReader"/>.
     /// Its read its configuration in the AppSettings configuration section.
     /// </summary>
-    public class DefaultConfigurationReader : IConfigurationReader
+    public sealed class DefaultConfigurationReader : IConfigurationReader
     {
         /// <summary>
         /// Gets a value from a given key.

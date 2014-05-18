@@ -9,10 +9,15 @@
     /// <summary>
     /// Represents a resolver of feature types.
     /// </summary>
-    public class FeatureTypeResolver : ITypeResolver
+    public sealed class FeatureTypeResolver : ITypeResolver
     {
         private readonly IAssembliesResolver assembliesResolver;
 
+      
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FeatureTypeResolver"/> class.
+        /// </summary>
+        /// <param name="assembliesResolver">The <see cref="IAssembliesResolver"/> that provides assemblies to discover.</param>
         public FeatureTypeResolver(IAssembliesResolver assembliesResolver)
         {
             if (assembliesResolver == null)

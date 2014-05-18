@@ -8,7 +8,7 @@
     /// <summary>
     /// A generator of NullObject.
     /// </summary>
-    public class NullObjectGenerator
+    public sealed class NullObjectGenerator
     {
         private const string GeneratedAssemblyName = "GeneratedNullObjects";
 

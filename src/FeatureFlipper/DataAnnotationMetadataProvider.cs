@@ -11,7 +11,7 @@
     /// Provides metadata from data annotations.
     /// See <see cref="FeatureAttribute"/>.
     /// </summary>
-    public class DataAnnotationMetadataProvider : IMetadataProvider
+    public sealed class DataAnnotationMetadataProvider : IMetadataProvider
     {
         private readonly ITypeResolver typeResolver;
 
@@ -63,21 +63,26 @@
             var groups = features.GroupBy(f => f.Name);
             if (groups.Any(f => f.Count() > 1))
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("More than one feature have the same feature name : ");
-                foreach (var group in groups.Where(f => f.Count() > 1))
-                {
-                    sb.Append(" - ").AppendLine(group.Key);
-                    foreach (var item in group)
-                    {
-                        sb.Append("   + ").AppendLine(item.FeatureType.FullName);
-                    }
-                }
-
-                throw new InvalidOperationException(sb.ToString());
+                throw CreateException(groups);
             }
 
             return features.ToDictionary(f => f.Name);
+        }
+
+        private static Exception CreateException(IEnumerable<IGrouping<string, FeatureMetadata>> groups)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("More than one feature have the same feature name : ");
+            foreach (var group in groups.Where(f => f.Count() > 1))
+            {
+                sb.Append(" - ").AppendLine(group.Key);
+                foreach (var item in group)
+                {
+                    sb.Append("   + ").AppendLine(item.FeatureType.FullName);
+                }
+            }
+
+            return new InvalidOperationException(sb.ToString());
         }
     }
 }
