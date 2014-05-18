@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FeatureFlipper.Web.Sample.Controllers
 {
+    [Feature("Home")]
     public class HomeController : Controller
     {
         public ActionResult Index()

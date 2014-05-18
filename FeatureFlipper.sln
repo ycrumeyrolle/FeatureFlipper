@@ -36,9 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{80EF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.WebApi", "src\FeatureFlipper.WebApi\FeatureFlipper.WebApi.csproj", "{3B31A86F-13E9-49F5-9157-32C0102509F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.WebApi.Tests", "FeatureFlipper.WebApi.Tests\FeatureFlipper.WebApi.Tests.csproj", "{E5B4B620-128C-4831-8258-D08B596F9470}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.WebApi.Tests", "test\FeatureFlipper.WebApi.Tests\FeatureFlipper.WebApi.Tests.csproj", "{E5B4B620-128C-4831-8258-D08B596F9470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.Web.Sample", "FeatureFlipper.Web.Sample\FeatureFlipper.Web.Sample.csproj", "{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper.Web.Sample", "src\FeatureFlipper.Web.Sample\FeatureFlipper.Web.Sample.csproj", "{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

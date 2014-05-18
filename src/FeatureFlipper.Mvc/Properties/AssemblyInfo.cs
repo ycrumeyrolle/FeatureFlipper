@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FeatureFlipper.WebApi.Tests")]
+[assembly: AssemblyTitle("FeatureFlipper.Mvc")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FeatureFlipper.WebApi.Tests")]
+[assembly: AssemblyProduct("FeatureFlipper.Mvc")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e0154232-afcf-4c9c-9fc2-dab30f990775")]
+[assembly: Guid("41187bf5-7d9d-4c39-be96-4a1e91e5f9f4")]
 
 // Version information for an assembly consists of the following four values:
 //
