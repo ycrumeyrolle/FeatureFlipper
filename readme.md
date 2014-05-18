@@ -76,7 +76,7 @@ FeatureFlipper offer many extensibility points:
 
 A ```IFeatureProvider``` simply said "Hey ! I know this feature and it is ON (or OFF) !".
 
-By default, FeatureFlipper provides ```ConfigurationFeatureProvider``` and ```PerRoleFeatureProvider```.
+By default, FeatureFlipper provides ```ConfigurationFeatureProvider``` and ```RoleFeatureProvider```.
 
 See [Extending the features provider](https://github.com/ycrumeyrolle/FeatureFlipper/wiki/Extending-the-features-provider) for more details.
 
