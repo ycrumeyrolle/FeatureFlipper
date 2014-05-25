@@ -83,6 +83,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Feature1.cs" />
+    <Compile Include="VersionSelectionStrategyFixture.cs" />
     <Compile Include="IFeature1.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ProxyGeneratorFixture.cs" />
