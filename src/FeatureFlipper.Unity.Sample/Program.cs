@@ -21,7 +21,8 @@
             container.AddFeatureFlippingExtension();
             container.RegisterType<IMessageBuilder, MessageBuilder>();
             container.RegisterType<IMessageFormatter, MessageFormatter>();
-            container.RegisterType<IMessageSender, EmailSender>();
+            container.RegisterType<IMessageSender, EmailSender>("Email");
+            container.RegisterType<IMessageSender, SmsSender>("SMS");
 
             return container;
         }

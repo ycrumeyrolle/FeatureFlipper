@@ -15,7 +15,7 @@
         ///  If the feature is not parsed, contains false. 
         /// </param>
         /// <returns><c>true</c> if the feature is parsed; otherwise, <c>false</c>.</returns>   
-        public bool TryParse(string value, out bool isOn)
+        public bool TryParse(string value, string version, out bool isOn)
         {
             return bool.TryParse(value, out isOn);
         }

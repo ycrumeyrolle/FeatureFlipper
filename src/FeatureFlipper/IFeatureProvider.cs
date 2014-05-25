@@ -15,6 +15,6 @@
         ///  If the feature is not found, contains false. 
         /// </param>
         /// <returns><c>true</c> if the feature is found; otherwise, <c>false</c>.</returns>   
-        bool TryIsOn(string feature, out bool isOn);
+        bool TryIsOn(string feature, string version, out bool isOn);
     }
 }

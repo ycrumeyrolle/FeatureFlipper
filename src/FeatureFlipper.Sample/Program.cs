@@ -5,7 +5,8 @@
     public class Program
     {
         public static void Main(string[] args)
-        {            
+        {
+            Features.FeatureStateParsers.Add(new VersionStateParser());
             // By type feature flipping
             if (Features.Flipper.IsOn<FeatureByType>())
             {
@@ -25,6 +26,12 @@
                 Console.WriteLine(FeatureByDate());
             }
 
+            // By version feature flipping
+            if (Features.Flipper.IsOn("featureByVersion", "V2"))
+            {
+                Console.WriteLine(FeatureByVersion());
+            }
+
             Console.ReadKey();
         }
 
@@ -36,6 +43,11 @@
         private static string FeatureByDate()
         {
             return "FeatureByDate is enabled.";
+        }
+
+        private static string FeatureByVersion()
+        {
+            return "FeatureByVersion is enabled.";
         }
     }
 }

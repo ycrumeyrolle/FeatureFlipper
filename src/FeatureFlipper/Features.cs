@@ -12,7 +12,8 @@
         private static readonly ICollection<IFeatureStateParser> featureStateParsers = new Collection<IFeatureStateParser> 
         { 
             new BooleanFeatureStateParser(),
-            new DateFeatureStateParser(new SystemClock())
+            new DateFeatureStateParser(new SystemClock()),
+            new VersionStateParser()
         };
 
         private static readonly Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);

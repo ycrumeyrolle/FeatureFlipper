@@ -10,9 +10,23 @@
         public void Ctor_GuardClause()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata(null, this.GetType(), "*"));
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, "*"));
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", this.GetType(), null));
+            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata(null, null, this.GetType(), "*"));
+            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, null, "*"));
+            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, this.GetType(), null));
+        }
+
+        [Theory]
+        [InlineData("X", null, "X")]
+        [InlineData("X", "V1", "X¤V1")]
+        public void Ctor(string name, string version, string expectedKey)
+        {
+            // Arrange
+            FeatureMetadata featureMetadata = new FeatureMetadata(name, version, this.GetType(), string.Empty);
+
+            // Act & assert
+            Assert.Equal(name, featureMetadata.Name);
+            Assert.Equal(version, featureMetadata.Version);
+            Assert.Equal(expectedKey, featureMetadata.Key);
         }
 
         [Theory]
@@ -20,10 +34,10 @@
         [InlineData(",,,,A, B, C, , , ", new[] { "A", "B", "C" })]
         [InlineData("A", new[] { "A" })]
         [InlineData("", new string[0])]
-        public void Ctor(string roles, string[] expectedRoles)
+        public void GetRoles(string roles, string[] expectedRoles)
         {
             // Arrange
-            FeatureMetadata featureMetadata = new FeatureMetadata("X", this.GetType(), roles);
+            FeatureMetadata featureMetadata = new FeatureMetadata("X", null, this.GetType(), roles);
 
             // Act
             var result = featureMetadata.GetRoles();

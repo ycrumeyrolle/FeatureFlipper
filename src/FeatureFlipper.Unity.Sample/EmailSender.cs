@@ -2,7 +2,7 @@
 {
     using System;
 
-    [Feature("EmailSender")]
+    [Feature("Sender", Version = "Email")]
     public class EmailSender : IMessageSender
     {
         public void SendMessage(Message message)

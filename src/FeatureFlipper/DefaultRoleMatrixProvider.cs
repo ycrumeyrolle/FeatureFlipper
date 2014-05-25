@@ -24,14 +24,14 @@
         }
 
         /// <inheritsdoc/>
-        public string[] GetRoleMatrix(string feature)
+        public string[] GetRoleMatrix(string feature, string version)
         {
             if (feature == null)
             {
                 throw new ArgumentNullException("feature");
             }
 
-            FeatureMetadata featureMetatada = this.metataProvider.GetMetadata(feature);
+            FeatureMetadata featureMetatada = this.metataProvider.GetMetadata(feature, version);
 
             if (featureMetatada != null)
             {

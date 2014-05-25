@@ -11,6 +11,7 @@
         {
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn<Feature1>(null));
+            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn<Feature1>(null, null));
         }
 
         [Fact]
@@ -20,7 +21,7 @@
             bool isOn = true;
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
             // Act
@@ -29,7 +30,7 @@
             // Assert
             Assert.True(result);
             Assert.True(isOn);
-            flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, out isOn), Times.Once());
+            flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, It.IsAny<string>(), out isOn), Times.Once());
         }
 
         [Fact]
@@ -37,11 +38,18 @@
         {
             // Arrange
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
+            bool isOn;
+            flipper
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
+                .Returns(true);
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, typeof(Feature1)));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(flipper.Object, (Type)null));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, (string)null));
+            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, (Type)null, null));
+            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, (string)null, null));
+            Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(flipper.Object, (Type)null, null));
         }
 
         [Fact]
@@ -51,16 +59,16 @@
             bool isOn = true;
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
             // Act
-            var result = FeatureFlipperExtensions.IsOn(flipper.Object, typeof(Feature1));
+            var result = FeatureFlipperExtensions.IsOn(flipper.Object, typeof(Feature1), null);
 
             // Assert
             Assert.True(result);
             Assert.True(isOn);
-            flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, out isOn), Times.Once());
+            flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, It.IsAny<string>(), out isOn), Times.Once());
         }
 
         [Fact]
@@ -85,13 +93,13 @@
             var reader = new Mock<IConfigurationReader>(MockBehavior.Strict);
             Mock<IFeatureStateParser> parser = new Mock<IFeatureStateParser>(MockBehavior.Strict);
             parser
-                .Setup(p => p.TryParse("X", out providerIsOn))
+                .Setup(p => p.TryParse("X", It.IsAny<string>(), out providerIsOn))
                 .Returns(true);
             var provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });
 
             var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
             flipper

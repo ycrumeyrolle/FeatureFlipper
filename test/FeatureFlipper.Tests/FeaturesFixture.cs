@@ -21,9 +21,10 @@
             Assert.Equal(1, flipper.Providers.OfType<RoleFeatureProvider>().Count());
 
             Assert.NotNull(Features.FeatureStateParsers);
-            Assert.Equal(2, Features.FeatureStateParsers.Count);
+            Assert.Equal(3, Features.FeatureStateParsers.Count);
             Assert.Equal(1, Features.FeatureStateParsers.OfType<BooleanFeatureStateParser>().Count());
             Assert.Equal(1, Features.FeatureStateParsers.OfType<DateFeatureStateParser>().Count());
+            Assert.Equal(1, Features.FeatureStateParsers.OfType<VersionStateParser>().Count());
    
             Assert.NotNull(Features.Providers);
             Assert.Equal(2, Features.Providers.Count);

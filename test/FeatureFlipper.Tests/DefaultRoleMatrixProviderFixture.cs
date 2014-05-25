@@ -30,7 +30,7 @@
             // Arrange
             var metatadataProvider = new Mock<IMetadataProvider>(MockBehavior.Strict);
             metatadataProvider
-               .Setup(p => p.GetMetadata(It.IsAny<string>()))
+               .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
                .Returns((FeatureMetadata)null);
             DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider(metatadataProvider.Object);
 
@@ -51,8 +51,8 @@
             // Arrange
             var metatadataProvider = new Mock<IMetadataProvider>(MockBehavior.Strict);
             metatadataProvider
-                .Setup(p => p.GetMetadata(It.IsAny<string>()))
-                .Returns(new FeatureMetadata("X", this.GetType(), roles));
+                .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new FeatureMetadata("X", null, this.GetType(), roles));
             DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider(metatadataProvider.Object);
 
             // Act

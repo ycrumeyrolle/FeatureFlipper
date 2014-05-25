@@ -22,12 +22,19 @@
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "By design")]
         public static bool IsOn<TFeature>(this IFeatureFlipper flipper)
         {
-            if (flipper == null)
-            {
-                throw new ArgumentNullException("flipper");
-            }
+            return flipper.IsOn(typeof(TFeature).FullName, null);
+        }
 
-            return flipper.IsOn(typeof(TFeature).FullName);
+        /// <summary>
+        /// Gets the state of the feature.
+        /// </summary>
+        /// <typeparam name="TFeature">The type of the feature.</typeparam>
+        /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
+        /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "By design")]
+        public static bool IsOn<TFeature>(this IFeatureFlipper flipper, string version)
+        {
+            return flipper.IsOn(typeof(TFeature).FullName, version);
         }
 
         /// <summary>
@@ -37,6 +44,22 @@
         /// <param name="featureType">The type of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         public static bool IsOn(this IFeatureFlipper flipper, Type featureType)
+        {
+            if (featureType == null)
+            {
+                throw new ArgumentNullException("featureType");
+            }
+            
+            return flipper.IsOn(featureType.FullName, null);
+        }
+
+        /// <summary>
+        /// Gets the state of the feature.
+        /// </summary>
+        /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
+        /// <param name="featureType">The type of the feature.</param>
+        /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
+        public static bool IsOn(this IFeatureFlipper flipper, Type featureType, string version)
         {
             if (flipper == null)
             {
@@ -48,7 +71,18 @@
                 throw new ArgumentNullException("featureType");
             }
 
-            return flipper.IsOn(featureType.FullName);
+            return flipper.IsOn(featureType.FullName, version);
+        }
+
+        /// <summary>
+        /// Gets the state of the feature.
+        /// </summary>
+        /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
+        /// <param name="featureType">The name of the feature.</param>
+        /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
+        public static bool IsOn(this IFeatureFlipper flipper, string feature)
+        {
+            return flipper.IsOn(feature, null);
         }
 
         /// <summary>
@@ -56,8 +90,9 @@
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         /// <param name="feature">The name of the feature.</param>
-         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
-        public static bool IsOn(this IFeatureFlipper flipper, string feature)
+        /// <param name="versions">The version of the feature.</param>
+        /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
+        public static bool IsOn(this IFeatureFlipper flipper, string feature, string version)
         {
             if (flipper == null)
             {
@@ -65,14 +100,14 @@
             }
 
             bool isOn;
-            if (flipper.TryIsOn(feature, out isOn))
+            if (flipper.TryIsOn(feature, version, out isOn))
             {
                 return isOn;
             }
 
             throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Feature_Unknown, feature));
         }
-
+        
         /// <summary>
         /// Registers a feature. It maps a feature type with a configuration key.
         /// </summary>

@@ -28,7 +28,7 @@
 
             Mock<IFeatureStateParser> parser = new Mock<IFeatureStateParser>(MockBehavior.Strict);
             parser
-                .Setup(p => p.TryParse(featureValue, out isOn))
+                .Setup(p => p.TryParse(featureValue, It.IsAny<string>(), out isOn))
                 .Returns(expectedResult);
 
             ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });
@@ -55,7 +55,7 @@
 
             Mock<IFeatureStateParser> parser = new Mock<IFeatureStateParser>(MockBehavior.Strict);
             parser
-                .Setup(p => p.TryParse(featureValue, out isOn))
+                .Setup(p => p.TryParse(featureValue, It.IsAny<string>(), out isOn))
                 .Returns(expectedResult);
 
             ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });

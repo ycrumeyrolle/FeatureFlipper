@@ -31,7 +31,7 @@
             bool isOn = true;
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
             FlippingBuilderStrategy strategy = new FlippingBuilderStrategy(flipper.Object);
@@ -56,7 +56,7 @@
             bool isOn = false;
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
             FlippingBuilderStrategy strategy = new FlippingBuilderStrategy(flipper.Object);
@@ -83,7 +83,7 @@
             bool isOn = false;
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(false);
 
             FlippingBuilderStrategy strategy = new FlippingBuilderStrategy(flipper.Object);

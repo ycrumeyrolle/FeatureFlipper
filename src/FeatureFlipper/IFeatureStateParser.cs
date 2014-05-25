@@ -15,6 +15,6 @@
         ///  If the feature is not parsed, contains false. 
         /// </param>
         /// <returns><c>true</c> if the feature is parsed; otherwise, <c>false</c>.</returns>   
-        bool TryParse(string value, out bool isOn);
+        bool TryParse(string value, string version, out bool isOn);
     }
 }

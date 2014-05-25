@@ -53,6 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureProviderExtensions.cs" />
+    <Compile Include="FeatureStateParserExtensions.cs" />
+    <Compile Include="MetadataProviderExtensions.cs" />
+    <Compile Include="RoleMatrixProviderExtensions.cs" />
+    <Compile Include="VersionStateParser.cs" />
     <Compile Include="BooleanFeatureStateParser.cs" />
     <Compile Include="DataAnnotationMetadataProvider.cs" />
     <Compile Include="DateFeatureStateParser.cs" />

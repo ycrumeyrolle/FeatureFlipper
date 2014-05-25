@@ -70,7 +70,7 @@
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             bool isOn = true;
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
             Features.Flipper = flipper.Object;
 
@@ -100,7 +100,7 @@
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
             bool isOn = false;
             flipper
-                .Setup(f => f.TryIsOn(It.IsAny<string>(), out isOn))
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
             Features.Flipper = flipper.Object;
 

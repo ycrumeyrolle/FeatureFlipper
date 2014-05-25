@@ -15,7 +15,7 @@
             bool isOnValue = true;
             Mock<IFeatureProvider> featureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
             featureProvider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(), out isOnValue))
+                .Setup(p => p.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOnValue))
                 .Returns(true);
 
             IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object });
@@ -67,7 +67,7 @@
             bool isOnValue = false;
             Mock<IFeatureProvider> featureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
             featureProvider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(), out isOnValue))
+                .Setup(p => p.TryIsOn(It.IsAny<string>(),  It.IsAny<string>(), out isOnValue))
                 .Returns(true);
 
             IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object });

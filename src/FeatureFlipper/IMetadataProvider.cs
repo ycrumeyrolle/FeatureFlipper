@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="feature">The name of the feature.</param>
         /// <returns>The <see cref="FeatureMetadata"/> of the feature.</returns>
-        FeatureMetadata GetMetadata(string feature);
+        FeatureMetadata GetMetadata(string feature, string version);
     }
 }

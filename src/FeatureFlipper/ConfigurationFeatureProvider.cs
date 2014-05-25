@@ -43,7 +43,7 @@
         }
         
         /// <inheritsdoc />
-        public bool TryIsOn(string feature, out bool isOn)
+        public bool TryIsOn(string feature, string version, out bool isOn)
         {
             if (feature == null)
             {
@@ -61,10 +61,10 @@
                 key = feature;
             }
 
-            return this.TryIsOnCore(key, out isOn);
+            return this.TryIsOnCore(key, version, out isOn);
         }
 
-        private bool TryIsOnCore(string key, out bool isOn)
+        private bool TryIsOnCore(string key, string version, out bool isOn)
         {
             isOn = false;
             string value = this.configurationReader.GetValue(key);
@@ -76,7 +76,7 @@
 
             for (int i = 0; i < this.featureStateProviders.Count; i++)
             {
-                if (this.featureStateProviders[i].TryParse(value, out isOn))
+                if (this.featureStateProviders[i].TryParse(value, version, out isOn))
                 {
                     return true;
                 }

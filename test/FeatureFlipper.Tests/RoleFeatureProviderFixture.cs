@@ -39,7 +39,7 @@
                 .Returns(new GenericPrincipal(new GenericIdentity("user"), userRoles));
 
             this.roleMatrixProvider
-                .Setup(p => p.GetRoleMatrix(FeatureName))
+                .Setup(p => p.GetRoleMatrix(FeatureName, It.IsAny<string>()))
                 .Returns(new[] { expectedRole });
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, principalProvider.Object);
 
@@ -57,7 +57,7 @@
             const string FeatureName = "Custom feature";
             bool isOn;
             this.roleMatrixProvider
-                .Setup(p => p.GetRoleMatrix(FeatureName))
+                .Setup(p => p.GetRoleMatrix(FeatureName, It.IsAny<string>()))
                 .Returns((string[])null);
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
 

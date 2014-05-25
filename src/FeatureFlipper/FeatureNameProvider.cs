@@ -22,23 +22,34 @@
                 throw new ArgumentNullException("featureType");
             }
 
-            string name;
-            if (!this.featureCache.TryGetValue(featureType, out name))
+            string featureName;
+            if (!this.TryGetFeatureName(featureType, out featureName))
+            {
+                featureName = featureType.FullName;
+                this.featureCache.TryAdd(featureType, featureName);
+            }
+
+            return featureName;
+        }
+
+        private bool TryGetFeatureName(Type featureType, out string featureName)
+        {
+            if (!this.featureCache.TryGetValue(featureType, out featureName))
             {
                 var attributes = featureType.GetCustomAttributes(typeof(FeatureAttribute), true);
                 if (attributes.Length != 0)
                 {
-                    name = ((FeatureAttribute)attributes[0]).Name;
-                }
-                else
-                {
-                    name = featureType.FullName;
+                    featureName = ((FeatureAttribute)attributes[0]).Name;
+                    this.featureCache.TryAdd(featureType, featureName);
+                    return true;
                 }
 
-                this.featureCache.TryAdd(featureType, name);
+                featureName = null;
+                this.featureCache.TryAdd(featureType, null);
+                return false;
             }
 
-            return name;
+            return featureName != null;
         }
     }
 }

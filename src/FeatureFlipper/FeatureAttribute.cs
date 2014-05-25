@@ -26,5 +26,7 @@
         /// Gets or sets the roles required for the feature.
         /// </summary>
         public string Roles { get; set; }
+
+        public string Version { get; set; }
     }
 }

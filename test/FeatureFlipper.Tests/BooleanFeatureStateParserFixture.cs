@@ -18,7 +18,7 @@
             bool isOn;
 
             // Act
-            var result = parser.TryParse(value, out isOn);
+            var result = parser.TryParse(value, null, out isOn);
 
             // Assert
             Assert.Equal(expectedIsOn, isOn);

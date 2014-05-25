@@ -2,6 +2,7 @@
 {
     using System;
 
+    [Feature("Sender", Version = "SMS")]
     public class SmsSender : IMessageSender
     {
         public void SendMessage(Message message)

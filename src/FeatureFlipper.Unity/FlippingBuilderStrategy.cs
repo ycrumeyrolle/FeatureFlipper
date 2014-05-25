@@ -45,7 +45,7 @@
             {
                 string featureName = this.nameProvider.GetFeatureName(context.BuildKey.Type);
                 bool isOn;
-                if (context.Existing == null && this.flipper.TryIsOn(featureName, out isOn) && !isOn)
+                if (context.Existing == null && this.flipper.TryIsOn(featureName, context.BuildKey.Name, out isOn) && !isOn)
                 {
                     object nullObject;
                     if (!this.nullObjectCache.TryGetValue(fromType, out nullObject))

@@ -38,7 +38,7 @@
             bool isOn;
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => flipper.TryIsOn(null, out isOn));
+            Assert.Throws<ArgumentNullException>(() => flipper.TryIsOn(null, null, out isOn));
         }
 
         [Theory]
@@ -49,7 +49,7 @@
             // Arrange
             Mock<IFeatureProvider> provider = new Mock<IFeatureProvider>();
             provider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(), out providerIsOn))
+                .Setup(p => p.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out providerIsOn))
                 .Returns(true);
 
             var providers = new[] { provider.Object };
@@ -69,7 +69,7 @@
             bool providerIsOn;
             Mock<IFeatureProvider> provider = new Mock<IFeatureProvider>();
             provider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(), out providerIsOn))
+                .Setup(p => p.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out providerIsOn))
                 .Returns(false);
 
             var providers = new[] { provider.Object };
@@ -77,42 +77,6 @@
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => flipper.IsOn("X"));
-        }
-
-        [Fact]
-        public void IsOn_FastPath()
-        {
-            // Arrange
-            const string FeatureName = "X";
-            bool isOnValue = true;
-
-            Mock<IFeatureProvider> firstFeatureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
-            firstFeatureProvider
-                .Setup(p => p.TryIsOn(FeatureName, out isOnValue))
-                .Returns(false);
-
-            Mock<IFeatureProvider> secondFeatureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
-            secondFeatureProvider
-                .Setup(p => p.TryIsOn(FeatureName, out isOnValue))
-                .Callback(() => isOnValue = true)
-                .Returns(true);
-
-            Mock<IFeatureProvider> thirdFeatureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
-            thirdFeatureProvider
-                .Setup(p => p.TryIsOn(FeatureName, out isOnValue))
-                .Returns(true);
-
-            var flipper = new DefaultFeatureFlipper(new[] { firstFeatureProvider.Object, secondFeatureProvider.Object, thirdFeatureProvider.Object });
-
-            // Act
-            bool isOn = flipper.IsOn(FeatureName);
-            isOn = flipper.IsOn(FeatureName);
-
-            Assert.Equal(true, isOn);
-
-            firstFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Once());
-            secondFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Exactly(2));
-            thirdFeatureProvider.Verify(p => p.TryIsOn(FeatureName, out isOnValue), Times.Exactly(2));
         }
     }
 }
