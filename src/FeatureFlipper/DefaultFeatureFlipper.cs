@@ -12,8 +12,6 @@
     {
         private readonly IList<IFeatureProvider> providers = new List<IFeatureProvider>();
 
-        private readonly ConcurrentDictionary<string, IFeatureProvider[]> fastCache = new ConcurrentDictionary<string, IFeatureProvider[]>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFeatureFlipper"/> class.
         /// </summary>

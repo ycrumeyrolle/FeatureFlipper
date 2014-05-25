@@ -30,6 +30,7 @@
         /// </summary>
         /// <typeparam name="TFeature">The type of the feature.</typeparam>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "By design")]
         public static bool IsOn<TFeature>(this IFeatureFlipper flipper, string version)
@@ -58,6 +59,7 @@
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         /// <param name="featureType">The type of the feature.</param>
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         public static bool IsOn(this IFeatureFlipper flipper, Type featureType, string version)
         {
@@ -78,7 +80,7 @@
         /// Gets the state of the feature.
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
-        /// <param name="featureType">The name of the feature.</param>
+        /// <param name="feature">The name of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         public static bool IsOn(this IFeatureFlipper flipper, string feature)
         {
@@ -89,8 +91,7 @@
         /// Gets the state of the feature.
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
-        /// <param name="feature">The name of the feature.</param>
-        /// <param name="versions">The version of the feature.</param>
+        /// <param name="feature">The name of the feature.</param>        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         public static bool IsOn(this IFeatureFlipper flipper, string feature, string version)
         {

@@ -22,6 +22,7 @@
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => roleMatrixProvider.GetRoleMatrix(null));
+            Assert.Throws<ArgumentNullException>(() => RoleMatrixProviderExtensions.GetRoleMatrix(null, string.Empty));
         }
 
         [Fact]

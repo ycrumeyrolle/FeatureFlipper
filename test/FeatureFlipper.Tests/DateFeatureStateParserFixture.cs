@@ -6,6 +6,16 @@
 
     public class DateFeatureStateParserFixture
     {
+        [Fact]
+        public void TryParse_GuardClause()
+        {
+            // Arrange
+            bool isOn;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => FeatureStateParserExtensions.TryParse(null, null, out isOn));
+        }
+
         [Theory]
         [InlineData("2000-06-06T00:00:00+00:00", true, true)]
         [InlineData("2000-06-06T00:00:01+00:00", false, true)]

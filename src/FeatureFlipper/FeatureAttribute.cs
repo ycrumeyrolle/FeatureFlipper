@@ -27,6 +27,9 @@
         /// </summary>
         public string Roles { get; set; }
 
+        /// <summary>
+        /// Gets or sets the version of the feature. Could be null.
+        /// </summary>
         public string Version { get; set; }
     }
 }

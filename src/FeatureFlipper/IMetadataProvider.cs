@@ -9,6 +9,7 @@
         /// Gets the metadata of a feature.
         /// </summary>
         /// <param name="feature">The name of the feature.</param>
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <returns>The <see cref="FeatureMetadata"/> of the feature.</returns>
         FeatureMetadata GetMetadata(string feature, string version);
     }

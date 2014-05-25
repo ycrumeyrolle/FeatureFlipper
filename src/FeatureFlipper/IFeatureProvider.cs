@@ -9,6 +9,7 @@
         /// Tries to get the state of the feature.
         /// </summary>
         /// <param name="feature">The name of the feature.</param>
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <param name="isOn">
         ///  When this method returns, if the feature is found, contains true if the feature is <c>On</c>
         ///  or false if the feature is <c>Off</c>.

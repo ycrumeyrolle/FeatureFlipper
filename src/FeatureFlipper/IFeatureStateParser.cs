@@ -9,6 +9,7 @@
         /// Tries to parse the value of the feature.
         /// </summary>
         /// <param name="value">The value of the feature.</param>
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <param name="isOn">
         ///  When this method returns, if the feature is parsed, contains true if the feature is <c>On</c>
         ///  or false if the feature is <c>Off</c>.

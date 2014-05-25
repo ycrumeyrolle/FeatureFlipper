@@ -15,6 +15,13 @@
         }
 
         [Fact]
+        public void GetMetadata_GuardClause()
+        {
+            // Act & assert
+            Assert.Throws<ArgumentNullException>(() => MetadataProviderExtensions.GetMetadata(null, string.Empty));
+        }
+
+        [Fact]
         public void GetMetadata_NoType_ReturnNull()
         {
             // Arrange
