@@ -68,6 +68,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="SystemClockFixture.cs" />
     <Compile Include="VersionStateParserFixture.cs" />
     <Compile Include="FeatureTypeResolverFixture.cs" />
     <Compile Include="DefaultAssembliesResolverFixture.cs" />
