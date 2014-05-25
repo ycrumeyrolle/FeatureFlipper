@@ -8,10 +8,10 @@
     /// </summary>
     public sealed class FeatureMetadata
     {
-        private static readonly char[] separator = { ',' };
+        private static readonly char[] Separator = { ',' };
 
         private readonly string[] roles;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureMetadata"/> class.
         /// </summary>
@@ -38,7 +38,7 @@
 
             this.Name = name;
             this.FeatureType = type;
-            this.roles = roles.Split(separator, StringSplitOptions.RemoveEmptyEntries).Select(r => r.Trim()).Where(r => r.Length != 0).ToArray();
+            this.roles = roles.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(r => r.Trim()).Where(r => r.Length != 0).ToArray();
 
             if (version != null)
             {
@@ -69,7 +69,7 @@
         /// <summary>
         /// Gets the key of the feature. 
         /// </summary>
-        public string Key {get; private set;}
+        public string Key { get; private set; }
 
         /// <summary>
         /// Gets the roles associated to the feature.

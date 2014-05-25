@@ -27,7 +27,7 @@
         protected override void Initialize()
         {
             FlippingBuilderStrategy flippingBuilderStrategy = new FlippingBuilderStrategy(this.flipper);
-            this.Context.Registering += OnRegistering;
+            this.Context.Registering += this.OnRegistering;
 
             this.Context.Strategies.Add(flippingBuilderStrategy, UnityBuildStage.PreCreation);
 
@@ -35,13 +35,13 @@
             this.Context.Strategies.Add(versionSelectionStrategy, UnityBuildStage.TypeMapping);
         }
 
-        void OnRegistering(object sender, RegisterEventArgs e)
+        private void OnRegistering(object sender, RegisterEventArgs e)
         {
             IDictionary<Type, string> featureMapper;
-            if (!featureVersionMapping.TryGetValue(e.TypeFrom, out featureMapper))
+            if (!this.featureVersionMapping.TryGetValue(e.TypeFrom, out featureMapper))
             {
                 featureMapper = new Dictionary<Type, string>();
-                featureVersionMapping.Add(e.TypeFrom, featureMapper);
+                this.featureVersionMapping.Add(e.TypeFrom, featureMapper);
             }
 
             featureMapper.Add(e.TypeTo, e.Name);

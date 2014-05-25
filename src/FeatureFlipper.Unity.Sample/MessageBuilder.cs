@@ -9,7 +9,7 @@
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0;i < text.Length;i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 sb.Append(text[i]);
                 if (i < text.Length - 1)

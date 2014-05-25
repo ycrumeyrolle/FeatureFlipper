@@ -3,26 +3,27 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading;
 
     /// <summary>
     /// Provides access to features flipping.
     /// </summary>
     public static class Features
     {
-        private static readonly ICollection<IFeatureStateParser> featureStateParsers = new Collection<IFeatureStateParser> 
+        private static readonly ICollection<IFeatureStateParser> FeatureStateParserCollection = new Collection<IFeatureStateParser> 
         { 
             new BooleanFeatureStateParser(),
             new DateFeatureStateParser(new SystemClock()),
             new VersionStateParser()
         };
 
-        private static readonly Lazy<ICollection<IFeatureProvider>> providers = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
+        private static readonly Lazy<ICollection<IFeatureProvider>> ProvidersInstance = new Lazy<ICollection<IFeatureProvider>>(InitializeProviders);
 
         private static IConfigurationReader configurationReader = new DefaultConfigurationReader();
 
         private static IFeatureFlipper flipperInstance;
 
-        private static readonly Lazy<IFeatureFlipper> flipper = new Lazy<IFeatureFlipper>(InitializeFlipper);
+        private static readonly Lazy<IFeatureFlipper> FlipperInner = new Lazy<IFeatureFlipper>(InitializeFlipper);
 
         /// <summary>
         /// Gets or sets the current <see cref="IFeatureFlipper"/>.
@@ -31,7 +32,7 @@
         {
             get
             {
-                return Features.flipperInstance ?? Features.flipper.Value;
+                return Features.flipperInstance ?? Features.FlipperInner.Value;
             }
 
             set
@@ -52,7 +53,7 @@
         {
             get
             {
-                return Features.featureStateParsers;
+                return Features.FeatureStateParserCollection;
             }
         }
 
@@ -63,7 +64,7 @@
         {
             get
             {
-                return Features.providers.Value;
+                return Features.ProvidersInstance.Value;
             }
         }
 
@@ -97,7 +98,7 @@
         {
             return new Collection<IFeatureProvider> 
             { 
-                new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.featureStateParsers),
+                new ConfigurationFeatureProvider(Features.ConfigurationReader, Features.FeatureStateParserCollection),
                 new RoleFeatureProvider(new DefaultRoleMatrixProvider(new DataAnnotationMetadataProvider(new FeatureTypeResolver(new DefaultAssembliesResolver()))), new DefaultPrincipalProvider())
             };
         }

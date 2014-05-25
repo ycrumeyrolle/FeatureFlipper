@@ -79,6 +79,7 @@
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
+            Assert.Throws<ArgumentNullException>(() => FeatureProviderExtensions.TryIsOn(null, string.Empty, out isOn));
         }
 
         [Fact]

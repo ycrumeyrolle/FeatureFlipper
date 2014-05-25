@@ -17,6 +17,7 @@
         [Fact]
         public void Ctor_GuardClause()
         {
+            // Act & assert
             Assert.Throws<ArgumentNullException>(() => new RoleFeatureProvider(null, null));
             Assert.Throws<ArgumentNullException>(() => new RoleFeatureProvider(this.roleMatrixProvider.Object, null));
         }
@@ -54,6 +55,7 @@
         [Fact]
         public void TryIsOn_UnregisteredFeature()
         {
+            // Arrange
             const string FeatureName = "Custom feature";
             bool isOn;
             this.roleMatrixProvider
@@ -61,8 +63,10 @@
                 .Returns((string[])null);
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
 
+            // Act
             bool result = provider.TryIsOn(FeatureName, out isOn);
 
+            // Assert
             Assert.False(isOn);
             Assert.False(result);
         }
@@ -70,9 +74,12 @@
         [Fact]
         public void TryIsOn_GuardClause()
         {
+            // Arrange
             bool isOn;
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
-
+            
+            // Act & assert
+            Assert.Throws<ArgumentNullException>(() => FeatureProviderExtensions.TryIsOn(null, string.Empty, out isOn));
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
         }
     }

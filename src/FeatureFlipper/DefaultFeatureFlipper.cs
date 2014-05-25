@@ -44,45 +44,18 @@
             }
 
             isOn = true;
-            /*
-            IFeatureProvider[] providerCache;
-            bool partialIsOn = false;
-            
-            if (this.fastCache.TryGetValue(feature, out providerCache))
-            {
-                for (int i = 0;i < providerCache.Length;i++)
-                {
-                    if (providerCache[i].TryIsOn(feature, version, out partialIsOn))
-                    {
-                        isOn &= partialIsOn;
-                    }
-                }
-
-                isOn = partialIsOn;
-                return true;
-            }*/
-
-            return this.TryIsOnCore(feature, version, out isOn);
-        }
-
-        private bool TryIsOnCore(string feature, string version, out bool isOn)
-        {
-            isOn = true;
             bool partialIsOn;
             bool found = false;
-        //    List<IFeatureProvider> providerCache = new List<IFeatureProvider>();
-            for (int i = 0;i < this.providers.Count;i++)
+            for (int i = 0; i < this.providers.Count; i++)
             {
                 var provider = this.providers[i];
                 if (provider.TryIsOn(feature, version, out partialIsOn))
                 {
-                //    providerCache.Add(provider);
                     isOn &= partialIsOn;
                     found = true;
                 }
             }
 
-       //     this.fastCache.TryAdd(feature, providerCache.ToArray());
             return found;
         }
     }

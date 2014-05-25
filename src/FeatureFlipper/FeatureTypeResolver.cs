@@ -13,7 +13,6 @@
     {
         private readonly IAssembliesResolver assembliesResolver;
 
-      
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureTypeResolver"/> class.
         /// </summary>
