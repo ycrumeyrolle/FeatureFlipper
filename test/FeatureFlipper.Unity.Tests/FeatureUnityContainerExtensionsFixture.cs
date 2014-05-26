@@ -35,8 +35,11 @@
                 Assert.Equal(42, service.GetValue());
                 Assert.Equal("A", service.StringMethod());
                 Assert.NotNull(service.ArrayMethod());
+                Assert.Equal(3, service.ArrayMethod().Count());
                 Assert.NotNull(service.CollectionMethod());
+                Assert.Equal(3, service.CollectionMethod().Count());
                 Assert.NotNull(service.IEnumerableMethod());
+                Assert.Equal(4, service.IEnumerableMethod().Count());
                 Assert.NotNull(service.ObjectMethod());
                 int value = 10;
                 service.OutMethod(out value);
@@ -89,8 +92,11 @@
                 Assert.Equal(string.Empty, service.StringMethod());
                 Assert.Equal(0, service.GetValue());
                 Assert.NotNull(service.ArrayMethod());
+                Assert.Equal(0, service.ArrayMethod().Count());
                 Assert.NotNull(service.CollectionMethod());
+                Assert.Equal(0, service.CollectionMethod().Count());
                 Assert.NotNull(service.IEnumerableMethod());
+                Assert.Equal(0, service.IEnumerableMethod().Count());
                 Assert.Null(service.ObjectMethod());
                 int value = 10;
                 service.OutMethod(out value);
