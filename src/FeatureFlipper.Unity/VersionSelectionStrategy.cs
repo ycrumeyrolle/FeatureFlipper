@@ -47,7 +47,6 @@
             Type fromType = context.OriginalBuildKey.Type;
 
             string featureName = this.nameProvider.GetFeatureName(context.BuildKey.Type);
-            bool isOn;
             if (context.Existing == null)
             {
                 IDictionary<Type, string> mapping;
@@ -55,6 +54,7 @@
                 {
                     foreach (var item in mapping)
                     {
+                        bool isOn;
                         featureName = this.nameProvider.GetFeatureName(item.Key);
                         if (this.flipper.TryIsOn(featureName, item.Value, out isOn) && !isOn)
                         {

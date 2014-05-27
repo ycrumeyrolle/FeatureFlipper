@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureFlipper", "src\FeatureFlipper\FeatureFlipper.csproj", "{2D6BBACD-0698-4FC1-AE56-B9A98FFFFCD0}"
 EndProject
@@ -93,5 +93,8 @@ Global
 		{B8100C6F-1AC3-4989-9720-85CD8AED855F} = {80EF1D97-9B44-4E1A-B297-06CF2B618784}
 		{E5B4B620-128C-4831-8258-D08B596F9470} = {47F5BC91-4078-4BFB-AB7F-FA0C2F0574FF}
 		{EDE40657-F0C6-414B-8B4D-4B04F9FE8C45} = {80EF1D97-9B44-4E1A-B297-06CF2B618784}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

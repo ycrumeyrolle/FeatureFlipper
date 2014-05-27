@@ -10,7 +10,7 @@
     /// </summary>
     public sealed class NullObjectGenerator
     {
-        private const string GeneratedAssemblyName = "GeneratedNullObjects";
+        private const string GeneratedAssemblyName = "NullObjectsAssembly";
 
         private readonly AssemblyBuilder assemblyBuilder;
 
@@ -23,9 +23,9 @@
         {
             AssemblyName assemblyName = new AssemblyName { Name = GeneratedAssemblyName };
 
-            AppDomain thisDomain = Thread.GetDomain();
+            AppDomain domain = Thread.GetDomain();
 
-            this.assemblyBuilder = thisDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            this.assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 
             this.moduleBuilder = this.assemblyBuilder.DefineDynamicModule(this.assemblyBuilder.GetName().Name, false);
         }

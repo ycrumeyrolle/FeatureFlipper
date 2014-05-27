@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using Microsoft.Practices.ObjectBuilder2;
 
     /// <summary>
@@ -10,7 +11,7 @@
     /// </summary>
     public sealed class FlippingBuilderStrategy : BuilderStrategy
     {
-        private readonly IDictionary<Type, object> nullObjectCache = new Dictionary<Type, object>();
+        private readonly ConcurrentDictionary<Type, object> nullObjectCache = new ConcurrentDictionary<Type, object>();
 
         private readonly NullObjectGenerator generator = new NullObjectGenerator();
 
@@ -54,7 +55,7 @@
 
                         context.BuildKey = new NamedTypeBuildKey(nullType, context.BuildKey.Name);
                         nullObject = Activator.CreateInstance(nullType);
-                        this.nullObjectCache.Add(fromType, nullObject);
+                        this.nullObjectCache.TryAdd(fromType, nullObject);
                     }
 
                     context.Existing = nullObject;
