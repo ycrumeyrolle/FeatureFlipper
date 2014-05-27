@@ -1,5 +1,6 @@
 ﻿namespace FeatureFlipper
 {
+    using System.Collections.Concurrent;
     using System.Configuration;
 
     /// <summary>
@@ -8,6 +9,8 @@
     /// </summary>
     public sealed class DefaultConfigurationReader : IConfigurationReader
     {
+        private readonly ConcurrentDictionary<string, string> cache = new ConcurrentDictionary<string, string>();
+
         /// <summary>
         /// Gets a value from a given key.
         /// </summary>
@@ -15,7 +18,14 @@
         /// <returns>The value of the feature. <c>null</c> if the key is unknown.</returns>
         public string GetValue(string key)
         {
-            return ConfigurationManager.AppSettings[key];
+            string value;
+            if (!this.cache.TryGetValue(key, out value))
+            {
+                value = ConfigurationManager.AppSettings[key];
+                this.cache.TryAdd(key, value);
+            }
+
+            return value;
         }
     }
 }
