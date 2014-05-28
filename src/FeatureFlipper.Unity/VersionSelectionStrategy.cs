@@ -15,14 +15,14 @@
 
         private readonly FeatureNameProvider nameProvider = new FeatureNameProvider();
 
-        private readonly IDictionary<Type, IList<TypeMapping>> featureVersionMapping;
+        private readonly IDictionary<Type, TypeMappingCollection> featureVersionMapping;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FlippingBuilderStrategy"/> class.
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         /// <param name="featureVersionMapping">The from-to-verion type mapping.</param>
-        public VersionSelectionStrategy(IFeatureFlipper flipper, IDictionary<Type, IList<TypeMapping>> featureVersionMapping)
+        public VersionSelectionStrategy(IFeatureFlipper flipper, IDictionary<Type, TypeMappingCollection> featureVersionMapping)
         {
             if (flipper == null)
             {
@@ -50,17 +50,17 @@
 
             if (context.Existing == null)
             {
-                IList<TypeMapping> mapping;
+                TypeMappingCollection mapping;
                 if (this.featureVersionMapping.TryGetValue(fromType, out mapping))
                 {
                     for (int i = 0; i < mapping.Count; i++)
                     {
                         var map = mapping[i];
                         bool isOn;
-                        string featureName = this.nameProvider.GetFeatureName(map.Type);
-                        if (this.flipper.TryIsOn(featureName, map.Name, out isOn) && !isOn)
+                        string featureName = this.nameProvider.GetFeatureName(map.FeatureType);
+                        if (this.flipper.TryIsOn(featureName, map.FeatureName, out isOn) && !isOn)
                         {
-                            context.BuildKey = new NamedTypeBuildKey(map.Type, map.Name);
+                            context.BuildKey = new NamedTypeBuildKey(map.FeatureType, map.FeatureName);
                             break;
                         }
                     }
