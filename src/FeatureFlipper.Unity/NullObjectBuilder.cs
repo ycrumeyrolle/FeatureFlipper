@@ -280,7 +280,7 @@
 
         private TypeBuilder CreateTypeBuilder()
         {
-            string name = contract.Name + Guid.NewGuid().ToString();
+            string name = this.contract.Name + Guid.NewGuid().ToString();
 
             TypeBuilder typeBuilder = this.moduleBuilder.DefineType(name, TypeAttr, typeof(object), new[] { this.contract });
 

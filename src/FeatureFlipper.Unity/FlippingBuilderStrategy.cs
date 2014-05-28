@@ -1,7 +1,6 @@
 ﻿namespace FeatureFlipper.Unity
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
     using Microsoft.Practices.ObjectBuilder2;
 
