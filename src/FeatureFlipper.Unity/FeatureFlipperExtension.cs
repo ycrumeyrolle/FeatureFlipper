@@ -12,7 +12,7 @@
     {
         private readonly IFeatureFlipper flipper;
 
-        private readonly IDictionary<Type, IDictionary<Type, string>> featureVersionMapping = new Dictionary<Type, IDictionary<Type, string>>();
+        private readonly IDictionary<Type, IList<TypeMapping>> featureVersionMapping = new Dictionary<Type, IList<TypeMapping>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureFlipperExtension"/> class.
@@ -37,14 +37,14 @@
 
         private void OnRegistering(object sender, RegisterEventArgs e)
         {
-            IDictionary<Type, string> featureMapper;
+            IList<TypeMapping> featureMapper;
             if (!this.featureVersionMapping.TryGetValue(e.TypeFrom, out featureMapper))
             {
-                featureMapper = new Dictionary<Type, string>();
+                featureMapper = new List<TypeMapping>();
                 this.featureVersionMapping.Add(e.TypeFrom, featureMapper);
             }
 
-            featureMapper.Add(e.TypeTo, e.Name);
+            featureMapper.Add(new TypeMapping { Type = e.TypeTo, Name = e.Name });
         }
     }
 }

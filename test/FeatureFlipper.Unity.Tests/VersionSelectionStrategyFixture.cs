@@ -21,7 +21,7 @@
         {
             // Arrange
             Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
-            VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, new Dictionary<Type, IDictionary<Type, string>>());
+            VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, new Dictionary<Type, IList<TypeMapping>>());
 
             Assert.Throws<ArgumentNullException>(() => strategy.PreBuildUp(null));
         }
@@ -36,8 +36,8 @@
                 .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
-            IDictionary<Type, IDictionary<Type, string>> featureVersionMapping = new Dictionary<Type, IDictionary<Type, string>>();
-            featureVersionMapping.Add(typeof(IFeature1), new Dictionary<Type, string>() { { typeof(Feature1), "V1" } });
+            IDictionary<Type, IList<TypeMapping>> featureVersionMapping = new Dictionary<Type, IList<TypeMapping>>();
+            featureVersionMapping.Add(typeof(IFeature1), new List<TypeMapping>() { new TypeMapping { Type = typeof(Feature1), Name = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 
@@ -66,8 +66,8 @@
                 .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(true);
 
-            IDictionary<Type, IDictionary<Type, string>> featureVersionMapping = new Dictionary<Type, IDictionary<Type, string>>();
-            featureVersionMapping.Add(typeof(IFeature1), new Dictionary<Type, string>() { { typeof(Feature1), "V1" } });
+            IDictionary<Type, IList<TypeMapping>> featureVersionMapping = new Dictionary<Type, IList<TypeMapping>>();
+            featureVersionMapping.Add(typeof(IFeature1), new List<TypeMapping>() { new TypeMapping { Type = typeof(Feature1), Name = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 
@@ -96,8 +96,8 @@
                 .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
                 .Returns(false);
 
-            IDictionary<Type, IDictionary<Type, string>> featureVersionMapping = new Dictionary<Type, IDictionary<Type, string>>();
-            featureVersionMapping.Add(typeof(IFeature1), new Dictionary<Type, string>() { { typeof(Feature1), "V1" } });
+            IDictionary<Type, IList<TypeMapping>> featureVersionMapping = new Dictionary<Type, IList<TypeMapping>>();
+            featureVersionMapping.Add(typeof(IFeature1), new List<TypeMapping>() { new TypeMapping { Type = typeof(Feature1), Name = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 

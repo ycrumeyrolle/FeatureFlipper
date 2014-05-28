@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TypeMapping.cs" />
     <Compile Include="VersionSelectionStrategy.cs" />
     <Compile Include="FlippingBuilderStrategy.cs" />
     <Compile Include="FeatureFlipperExtension.cs" />

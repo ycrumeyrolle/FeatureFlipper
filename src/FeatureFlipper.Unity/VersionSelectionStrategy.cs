@@ -1,7 +1,9 @@
 ﻿namespace FeatureFlipper.Unity
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.Practices.ObjectBuilder2;
 
     /// <summary>
@@ -13,14 +15,14 @@
 
         private readonly FeatureNameProvider nameProvider = new FeatureNameProvider();
 
-        private readonly IDictionary<Type, IDictionary<Type, string>> featureVersionMapping;
+        private readonly IDictionary<Type, IList<TypeMapping>> featureVersionMapping;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FlippingBuilderStrategy"/> class.
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         /// <param name="featureVersionMapping">The from-to-verion type mapping.</param>
-        public VersionSelectionStrategy(IFeatureFlipper flipper, IDictionary<Type, IDictionary<Type, string>> featureVersionMapping)
+        public VersionSelectionStrategy(IFeatureFlipper flipper, IDictionary<Type, IList<TypeMapping>> featureVersionMapping)
         {
             if (flipper == null)
             {
@@ -46,19 +48,19 @@
 
             Type fromType = context.OriginalBuildKey.Type;
 
-            string featureName = this.nameProvider.GetFeatureName(context.BuildKey.Type);
             if (context.Existing == null)
             {
-                IDictionary<Type, string> mapping;
+                IList<TypeMapping> mapping;
                 if (this.featureVersionMapping.TryGetValue(fromType, out mapping))
                 {
-                    foreach (var item in mapping)
+                    for (int i = 0; i < mapping.Count; i++)
                     {
+                        var map = mapping[i];
                         bool isOn;
-                        featureName = this.nameProvider.GetFeatureName(item.Key);
-                        if (this.flipper.TryIsOn(featureName, item.Value, out isOn) && !isOn)
+                        string featureName = this.nameProvider.GetFeatureName(map.Type);
+                        if (this.flipper.TryIsOn(featureName, map.Name, out isOn) && !isOn)
                         {
-                            context.BuildKey = new NamedTypeBuildKey(item.Key, item.Value);
+                            context.BuildKey = new NamedTypeBuildKey(map.Type, map.Name);
                             break;
                         }
                     }
