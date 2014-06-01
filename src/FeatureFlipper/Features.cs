@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Threading;
 
     /// <summary>
     /// Provides access to features flipping.
@@ -13,7 +12,7 @@
         private static readonly ICollection<IFeatureStateParser> FeatureStateParserCollection = new Collection<IFeatureStateParser> 
         { 
             new BooleanFeatureStateParser(),
-            new DateFeatureStateParser(new SystemClock()),
+            new DateFeatureStateParser(clock),
             new VersionStateParser()
         };
 
@@ -24,6 +23,8 @@
         private static IFeatureFlipper flipperInstance;
 
         private static readonly Lazy<IFeatureFlipper> FlipperInner = new Lazy<IFeatureFlipper>(InitializeFlipper);
+        
+        private static ISystemClock clock = new SystemClock();
 
         /// <summary>
         /// Gets or sets the current <see cref="IFeatureFlipper"/>.
@@ -67,7 +68,7 @@
                 return Features.ProvidersInstance.Value;
             }
         }
-
+        
         /// <summary>
         /// Gets the current <see cref="IConfigurationReader"/>.
         /// </summary>
@@ -86,6 +87,27 @@
                 }
 
                 Features.configurationReader = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current <see cref="ISystemClock"/>.
+        /// </summary>
+        public static ISystemClock Clock
+        {
+            get
+            {
+                return Features.clock;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+
+                Features.clock = value;
             }
         }
 
