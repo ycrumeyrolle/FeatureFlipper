@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/ycrumeyrolle/FeatureFlipper.png?branch=master)](https://travis-ci.org/ycrumeyrolle/FeatureFlipper)
+[![Coverage Status](https://coveralls.io/repos/ycrumeyrolle/FeatureFlipper/badge.png)](https://coveralls.io/r/ycrumeyrolle/FeatureFlipper)
+
 #FeatureFlipper
 
 *A feature flipping system.*
