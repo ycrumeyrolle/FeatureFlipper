@@ -39,7 +39,7 @@
             }
 
             var roles = this.roleManager.GetRoleMatrix(metadata);
-            if (roles == null)
+            if (roles == null || roles.Length == 0)
             {
                 isOn = false;
                 return false;
