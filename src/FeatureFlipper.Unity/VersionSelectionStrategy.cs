@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Practices.ObjectBuilder2;
@@ -16,6 +17,10 @@
         private readonly FeatureNameProvider nameProvider = new FeatureNameProvider();
 
         private readonly IDictionary<Type, TypeMappingCollection> featureVersionMapping;
+
+        private readonly ConcurrentDictionary<Type, object> nullObjectCache = new ConcurrentDictionary<Type, object>();
+
+        private readonly NullObjectGenerator generator = new NullObjectGenerator();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FlippingBuilderStrategy"/> class.
@@ -53,16 +58,39 @@
                 TypeMappingCollection mapping;
                 if (this.featureVersionMapping.TryGetValue(fromType, out mapping))
                 {
+                    bool enabled = false;
+                    bool found = false;
                     for (int i = 0; i < mapping.Count; i++)
                     {
                         var map = mapping[i];
                         bool isOn;
                         string featureName = this.nameProvider.GetFeatureName(map.FeatureType);
-                        if (this.flipper.TryIsOn(featureName, map.FeatureName, out isOn) && !isOn)
+                        if (this.flipper.TryIsOn(featureName, map.FeatureName, out isOn))
                         {
-                            context.BuildKey = new NamedTypeBuildKey(map.FeatureType, map.FeatureName);
-                            break;
+                            found = true;
+                            if (isOn)
+	                        {
+                                context.BuildKey = new NamedTypeBuildKey(map.FeatureType, map.FeatureName);
+                                enabled = true;
+                                break;
+	                        }
                         }
+                    }
+
+                    if (!enabled && found)
+                    {
+                        object nullObject;
+                        if (!this.nullObjectCache.TryGetValue(fromType, out nullObject))
+                        {
+                            Type nullType = this.generator.CreateNullObject(fromType);
+
+                            context.BuildKey = new NamedTypeBuildKey(nullType, context.BuildKey.Name);
+                            nullObject = Activator.CreateInstance(nullType);
+                            this.nullObjectCache.TryAdd(fromType, nullObject);
+                        }
+
+                        context.Existing = nullObject;
+                        context.BuildComplete = true;
                     }
                 }
             }

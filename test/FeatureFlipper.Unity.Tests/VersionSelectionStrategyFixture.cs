@@ -53,7 +53,7 @@
             Assert.Null(context.Object.Existing);
             Assert.NotNull(context.Object.BuildKey);
             Assert.Equal(typeof(Feature1), context.Object.BuildKey.Type);
-            Assert.Equal(null, context.Object.BuildKey.Name);
+            Assert.Equal("V1", context.Object.BuildKey.Name);
         }
 
         [Fact]
@@ -80,10 +80,10 @@
             strategy.PreBuildUp(context.Object);
 
             // Assert
-            Assert.Null(context.Object.Existing);
+            Assert.NotNull(context.Object.Existing);
             Assert.NotNull(context.Object.BuildKey);
-            Assert.Equal(typeof(Feature1), context.Object.BuildKey.Type);
-            Assert.Equal("V1", context.Object.BuildKey.Name);
+            Assert.NotEqual(typeof(Feature1), context.Object.BuildKey.Type);
+            Assert.Null( context.Object.BuildKey.Name);
         }
 
         [Fact]

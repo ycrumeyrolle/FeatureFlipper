@@ -62,7 +62,7 @@
             foreach (Type type in featuresType)
             {
                 FeatureAttribute attribute = type.GetCustomAttribute<FeatureAttribute>(true);
-                features.Add(new FeatureMetadata(attribute.Name, attribute.Version, type, attribute.Roles ?? "*", null));
+                features.Add(new FeatureMetadata(attribute.Name, attribute.Version, type, attribute.Roles, null));
             }
 
             var groups = features.GroupBy(f => f.Key);
