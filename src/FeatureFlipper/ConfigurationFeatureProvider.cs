@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="configurationReader">The <see cref="IConfigurationReader"/> used to read values.</param>
         /// <param name="featureStateProviders">The list of <see cref="IFeatureStateParser"/> used to parse the state of the features.</param>
-        public ConfigurationFeatureProvider(IConfigurationReader configurationReader, ICollection<IFeatureStateParser> featureStateProviders)
+        public ConfigurationFeatureProvider(IConfigurationReader configurationReader, IEnumerable<IFeatureStateParser> featureStateProviders)
         {
             if (configurationReader == null)
             {
@@ -43,25 +43,25 @@
         }
         
         /// <inheritsdoc />
-        public bool TryIsOn(string feature, string version, out bool isOn)
+        public bool TryIsOn(FeatureMetadata metadata, out bool isOn)
         {
-            if (feature == null)
+            if (metadata == null)
             {
-                throw new ArgumentNullException("feature");
+                throw new ArgumentNullException("metadata");
             }
 
             ConfigurationFeatureContext context;
             string key;
-            if (this.repository.TryGetValue(feature, out context))
+            if (this.repository.TryGetValue(metadata.Name, out context))
             {
                 key = context.Key;
             }
             else
             {
-                key = feature;
+                key = metadata.Name;
             }
 
-            return this.TryIsOnCore(key, version, out isOn);
+            return this.TryIsOnCore(key, metadata.Version, out isOn);
         }
 
         private bool TryIsOnCore(string key, string version, out bool isOn)

@@ -7,39 +7,18 @@
     public class DefaultRoleMatrixProviderFixture
     {
         [Fact]
-        public void Ctor_GuardClause()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new DefaultRoleMatrixProvider(null));
-        }
-
-        [Fact]
-        public void GetRoleMatrixCtor_GuardClause()
+        public void GetRoleMatrix_UnknowFeature_ReturnsEmptyArray()
         {
             // Arrange
-            var metatadataProvider = new Mock<IMetadataProvider>(MockBehavior.Strict);
-            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider(metatadataProvider.Object);
-
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => roleMatrixProvider.GetRoleMatrix(null));
-            Assert.Throws<ArgumentNullException>(() => RoleMatrixProviderExtensions.GetRoleMatrix(null, string.Empty));
-        }
-
-        [Fact]
-        public void GetRoleMatrix_UnknowFeature_ReturnsNull()
-        {
-            // Arrange
-            var metatadataProvider = new Mock<IMetadataProvider>(MockBehavior.Strict);
-            metatadataProvider
-               .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
-               .Returns((FeatureMetadata)null);
-            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider(metatadataProvider.Object);
+            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider();
+            FeatureMetadata metadata = new FeatureMetadata("X", null, this.GetType(), null, null);
 
             // Act
-            var result = roleMatrixProvider.GetRoleMatrix("X");
+            var result = roleMatrixProvider.GetRoleMatrix(metadata);
 
             // Assert
-            Assert.Null(result);
+            Assert.NotNull(result);
+            Assert.Empty(result);
         }
 
         [Theory]
@@ -50,14 +29,11 @@
         public void GetRoleMatrix_KnowFeature_ReturnsRoles(string roles, string[] expectedRoles)
         {
             // Arrange
-            var metatadataProvider = new Mock<IMetadataProvider>(MockBehavior.Strict);
-            metatadataProvider
-                .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(new FeatureMetadata("X", null, this.GetType(), roles));
-            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider(metatadataProvider.Object);
+            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider();
+            FeatureMetadata metadata = new FeatureMetadata("X", null, this.GetType(), roles, null);
 
             // Act
-            var result = roleMatrixProvider.GetRoleMatrix("X");
+            var result = roleMatrixProvider.GetRoleMatrix(metadata);
 
             // Assert
             Assert.Equal(expectedRoles, result);

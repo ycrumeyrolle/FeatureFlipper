@@ -68,7 +68,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DefaultCycleDetectorFixture.cs" />
     <Compile Include="DateRangeFeatureStateParserFixture.cs" />
+    <Compile Include="ServiceContainerFixture.cs" />
     <Compile Include="SystemClockFixture.cs" />
     <Compile Include="VersionStateParserFixture.cs" />
     <Compile Include="FeatureTypeResolverFixture.cs" />

@@ -68,11 +68,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="FeatureVersionExtension.cs" />
     <Compile Include="TypeMapping.cs" />
     <Compile Include="TypeMappingCollection.cs" />
     <Compile Include="VersionSelectionStrategy.cs" />
     <Compile Include="FlippingBuilderStrategy.cs" />
-    <Compile Include="FeatureFlipperExtension.cs" />
+    <Compile Include="FeatureFlippingExtension.cs" />
     <Compile Include="NullObjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NullObjectGenerator.cs" />

@@ -12,6 +12,8 @@
 
         private readonly string[] roles;
 
+        private readonly string[] dependsOn;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureMetadata"/> class.
         /// </summary>
@@ -19,7 +21,8 @@
         /// <param name="version">The version of the feature. Can be null.</param>
         /// <param name="type">The type of the feature.</param>
         /// <param name="roles">The roles associated to the feature.</param>
-        public FeatureMetadata(string name, string version, Type type, string roles)
+        /// <param name="dependsOn">The dependants features.</param>
+        public FeatureMetadata(string name, string version, Type type, string roles, string dependsOn)
         {
             if (name == null)
             {
@@ -31,14 +34,16 @@
                 throw new ArgumentNullException("type");
             }
 
-            if (roles == null)
-            {
-                throw new ArgumentNullException("roles");
-            }
-
             this.Name = name;
             this.FeatureType = type;
-            this.roles = roles.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(r => r.Trim()).Where(r => r.Length != 0).ToArray();
+            if (roles == null)
+            {
+                this.roles = new string[0];
+            }
+            else
+            {
+                this.roles = roles.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(r => r.Trim()).Where(r => r.Length != 0).ToArray();                
+            }
 
             if (version != null)
             {
@@ -48,6 +53,15 @@
             else
             {
                 this.Key = name;
+            }
+
+            if (dependsOn == null)
+            {
+                this.dependsOn = new string[0];
+            }
+            else
+            {
+                this.dependsOn = dependsOn.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Select(f => f.Trim()).Where(f => f.Length != 0).ToArray();
             }
         }
 
@@ -64,8 +78,8 @@
         /// <summary>
         /// Gets the version of the feature.
         /// </summary>
-        public string Version { get; set; }
-
+        public string Version { get; private set; }
+        
         /// <summary>
         /// Gets the key of the feature. 
         /// </summary>
@@ -74,10 +88,19 @@
         /// <summary>
         /// Gets the roles associated to the feature.
         /// </summary>
-        /// <returns>An array of <see cref="string"/> reprenting the roles associated to the feature.</returns>
+        /// <returns>An array of <see cref="string"/> representing the roles associated to the feature.</returns>
         public string[] GetRoles()
         {
-            return this.roles;
+            return (string[])this.roles.Clone();
+        }
+
+        /// <summary>
+        /// Gets the dependants features.
+        /// </summary>
+        /// <returns>An array of <see cref="string"/> representing the required features.</returns>
+        public string[] GetDependsOn()
+        {
+            return (string[])this.dependsOn.Clone();
         }
     }
 }

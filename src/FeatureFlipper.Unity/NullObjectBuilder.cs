@@ -35,7 +35,7 @@
         private readonly Type contract;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeatureFlipperExtension"/> class.
+        /// Initializes a new instance of the <see cref="FeatureFlippingExtension"/> class.
         /// </summary>
         /// <param name="contract">The type contract.</param>
         /// <param name="moduleBuilder">The <see cref="ModuleBuilder"/>.</param>

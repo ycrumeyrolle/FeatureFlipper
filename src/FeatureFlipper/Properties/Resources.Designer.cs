@@ -79,7 +79,7 @@ namespace FeatureFlipper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The feature &apos;{0}&apos; is unknown..
+        ///   Looks up a localized string similar to The feature &apos;{0}&apos; or of its dependency is unknown..
         /// </summary>
         internal static string Feature_Unknown {
             get {

@@ -40,12 +40,13 @@
                 .Returns(new GenericPrincipal(new GenericIdentity("user"), userRoles));
 
             this.roleMatrixProvider
-                .Setup(p => p.GetRoleMatrix(FeatureName, It.IsAny<string>()))
+                .Setup(p => p.GetRoleMatrix(It.IsAny<FeatureMetadata>()))
                 .Returns(new[] { expectedRole });
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, principalProvider.Object);
+            FeatureMetadata metadata = new FeatureMetadata(FeatureName, null, this.GetType(), null, null);
 
             // Act
-            bool result = provider.TryIsOn(FeatureName, out isOn);
+            bool result = provider.TryIsOn(metadata, out isOn);
 
             // Assert
             Assert.Equal(expectedIsOn, isOn);
@@ -59,12 +60,13 @@
             const string FeatureName = "Custom feature";
             bool isOn;
             this.roleMatrixProvider
-                .Setup(p => p.GetRoleMatrix(FeatureName, It.IsAny<string>()))
+                .Setup(p => p.GetRoleMatrix(It.IsAny<FeatureMetadata>()))
                 .Returns((string[])null);
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
+            FeatureMetadata metadata = new FeatureMetadata(FeatureName, null, this.GetType(), null, null);
 
             // Act
-            bool result = provider.TryIsOn(FeatureName, out isOn);
+            bool result = provider.TryIsOn(metadata, out isOn);
 
             // Assert
             Assert.False(isOn);
@@ -79,7 +81,6 @@
             var provider = new RoleFeatureProvider(this.roleMatrixProvider.Object, new DefaultPrincipalProvider());
             
             // Act & assert
-            Assert.Throws<ArgumentNullException>(() => FeatureProviderExtensions.TryIsOn(null, string.Empty, out isOn));
             Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
         }
     }

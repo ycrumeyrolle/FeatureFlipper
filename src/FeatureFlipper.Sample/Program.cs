@@ -1,38 +1,44 @@
 ﻿namespace FeatureFlipper.Sample
 {
     using System;
+    using System.IO;
+    using System.Threading.Tasks;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            Features.FeatureStateParsers.Add(new VersionStateParser());
-            // By type feature flipping
-            if (Features.Flipper.IsOn<FeatureByType>())
-            {
-                FeatureByType feature1 = new FeatureByType("FeatureByType is enabled.");
-                Console.WriteLine(feature1.GetValue());
-            }
+            Console.SetOut(TextWriter.Null);
+           // Features.Services.AddRange(typeof(IFeatureStateParser), new VersionStateParser());
 
-            // By key feature flipping
-            if (Features.Flipper.IsOn("featureByKey"))
-            {
-                Console.WriteLine(FeatureByKey());
-            }
+       //     Parallel.For(0, int.MaxValue /100000, _ =>
+       //     {
+                // By type feature flipping
+                if (Features.Flipper.IsOn<FeatureByType>())
+                {
+                    FeatureByType feature1 = new FeatureByType("FeatureByType is enabled.");
+                    Console.WriteLine(feature1.GetValue());
+                }
 
-            // By date feature flipping
-            if (Features.Flipper.IsOn("featureByDate"))
-            {
-                Console.WriteLine(FeatureByDate());
-            }
+                // By key feature flipping
+                if (Features.Flipper.IsOn("featureByKey"))
+                {
+                    Console.WriteLine(FeatureByKey());
+                }
 
-            // By version feature flipping
-            if (Features.Flipper.IsOn("featureByVersion", "V2"))
-            {
-                Console.WriteLine(FeatureByVersion());
-            }
+                // By date feature flipping
+                if (Features.Flipper.IsOn("featureByDate"))
+                {
+                    Console.WriteLine(FeatureByDate());
+                }
 
-            Console.ReadKey();
+                // By version feature flipping
+                if (Features.Flipper.IsOn("featureByVersion", "V2"))
+                {
+                    Console.WriteLine(FeatureByVersion());
+                }
+           // });
+          //  Console.ReadKey();
         }
 
         private static string FeatureByKey()

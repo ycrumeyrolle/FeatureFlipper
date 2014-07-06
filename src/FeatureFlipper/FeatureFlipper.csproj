@@ -54,11 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="CycleDetection\DefaultCycleDetector.cs" />
+    <Compile Include="CycleDetection\ICycleDetector.cs" />
+    <Compile Include="CycleDetection\Tarjan.cs" />
+    <Compile Include="CycleDetection\VertexCollection.cs" />
     <Compile Include="DateRangeFeatureStateParser.cs" />
-    <Compile Include="FeatureProviderExtensions.cs" />
     <Compile Include="FeatureStateParserExtensions.cs" />
     <Compile Include="MetadataProviderExtensions.cs" />
-    <Compile Include="RoleMatrixProviderExtensions.cs" />
+    <Compile Include="ServiceContainer.cs" />
+    <Compile Include="ServiceProviderExtensions.cs" />
     <Compile Include="VersionStateParser.cs" />
     <Compile Include="BooleanFeatureStateParser.cs" />
     <Compile Include="DataAnnotationMetadataProvider.cs" />
@@ -96,6 +103,7 @@
     <Compile Include="ISystemClock.cs" />
     <Compile Include="RoleFeatureProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CycleDetection\Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FeatureFlipper.nuspec" />

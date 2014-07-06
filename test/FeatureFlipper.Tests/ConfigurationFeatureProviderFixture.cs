@@ -32,9 +32,10 @@
                 .Returns(expectedResult);
 
             ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });
+            FeatureMetadata metadata = new FeatureMetadata(feature, null, this.GetType(), null, null);
 
             // Act
-            var result = provider.TryIsOn(feature, out isOn);
+            var result = provider.TryIsOn(metadata, out isOn);
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -60,9 +61,10 @@
 
             ConfigurationFeatureProvider provider = new ConfigurationFeatureProvider(reader.Object, new[] { parser.Object });
             provider.RegisterFeature(featureName, featureKey);
+            FeatureMetadata metadata = new FeatureMetadata(featureName, null, this.GetType(), null, null);
 
             // Act
-            var resultByName = provider.TryIsOn(featureName, out isOn);
+            var resultByName = provider.TryIsOn(metadata, out isOn);
 
             // Assert
             Assert.Equal(expectedResult, resultByName);
@@ -78,8 +80,7 @@
             bool isOn;
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));
-            Assert.Throws<ArgumentNullException>(() => FeatureProviderExtensions.TryIsOn(null, string.Empty, out isOn));
+            Assert.Throws<ArgumentNullException>(() => provider.TryIsOn(null, out isOn));            
         }
 
         [Fact]

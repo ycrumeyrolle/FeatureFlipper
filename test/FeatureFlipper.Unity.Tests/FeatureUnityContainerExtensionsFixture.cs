@@ -15,10 +15,15 @@
             bool isOnValue = true;
             Mock<IFeatureProvider> featureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
             featureProvider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOnValue))
+                .Setup(p => p.TryIsOn(It.IsAny<FeatureMetadata>(), out isOnValue))
                 .Returns(true);
 
-            IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object });
+            Mock<IMetadataProvider> metadataProvider = new Mock<IMetadataProvider>();
+            metadataProvider
+                .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new FeatureMetadata("X", null, this.GetType(), null, null));
+
+            IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object }, metadataProvider.Object);
 
             using (IUnityContainer container = new UnityContainer())
             {
@@ -70,10 +75,15 @@
             bool isOnValue = false;
             Mock<IFeatureProvider> featureProvider = new Mock<IFeatureProvider>(MockBehavior.Strict);
             featureProvider
-                .Setup(p => p.TryIsOn(It.IsAny<string>(),  It.IsAny<string>(), out isOnValue))
+                .Setup(p => p.TryIsOn(It.IsAny<FeatureMetadata>(), out isOnValue))
                 .Returns(true);
 
-            IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object });
+            Mock<IMetadataProvider> metadataProvider = new Mock<IMetadataProvider>();
+            metadataProvider
+                .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(new FeatureMetadata("X", null, this.GetType(), null, null));
+
+            IFeatureFlipper flipper = new DefaultFeatureFlipper(new[] { featureProvider.Object }, metadataProvider.Object);
 
             using (IUnityContainer container = new UnityContainer())
             {
@@ -132,6 +142,53 @@
             var flipper = container.Resolve<IFeatureFlipper>();
             Assert.NotNull(flipper);
             Assert.Same(Features.Flipper, flipper);
+        }
+
+        [Fact]
+        public void AddFlippingExtension_CustomInstance()
+        {
+            // Arrange 
+            IUnityContainer container = new UnityContainer();
+            Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>();
+
+            // Act
+            container.AddFeatureFlippingExtension(flipper.Object);
+
+            // Assert 
+            var result = container.Resolve<IFeatureFlipper>();
+            Assert.NotNull(result);
+            Assert.Same(flipper.Object, result);
+        }
+        
+        [Fact]
+        public void AddVersioningExtension()
+        {
+            // Arrange 
+            IUnityContainer container = new UnityContainer();
+
+            // Act
+            container.AddFeatureVersioningExtension();
+
+            // Assert 
+            var flipper = container.Resolve<IFeatureFlipper>();
+            Assert.NotNull(flipper);
+            Assert.Same(Features.Flipper, flipper);
+        }
+
+        [Fact]
+        public void AddVersioningExtension_CustomInstance()
+        {
+            // Arrange 
+            IUnityContainer container = new UnityContainer();
+            Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>();
+
+            // Act
+            container.AddFeatureVersioningExtension(flipper.Object);
+
+            // Assert 
+            var result = container.Resolve<IFeatureFlipper>();
+            Assert.NotNull(result);
+            Assert.Same(flipper.Object, result);
         }
     }
 }

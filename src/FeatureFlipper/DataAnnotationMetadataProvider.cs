@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using FeatureFlipper.CycleDetection;
 
     /// <summary>
     /// Default implementation of <see cref="IMetadataProvider"/>.
@@ -61,7 +62,7 @@
             foreach (Type type in featuresType)
             {
                 FeatureAttribute attribute = type.GetCustomAttribute<FeatureAttribute>(true);
-                features.Add(new FeatureMetadata(attribute.Name, attribute.Version, type, attribute.Roles ?? "*"));
+                features.Add(new FeatureMetadata(attribute.Name, attribute.Version, type, attribute.Roles ?? "*", null));
             }
 
             var groups = features.GroupBy(f => f.Key);
@@ -70,7 +71,23 @@
                 throw CreateException(groups);
             }
 
+            var cycles = DetectCycles(features);
+            if (cycles.Length > 0)
+            {
+                throw CreateDependencyException(cycles);
+            }
+
             return features.GroupBy(f => f.Name).ToDictionary(g => g.Key, g => g.ToDictionary(f => f.Version ?? string.Empty));
+        }
+
+        private static string[] DetectCycles(List<FeatureMetadata> features)
+        {
+            // TODO : DI
+            ICycleDetector detector = new DefaultCycleDetector();
+
+            var hasCycles = detector.DetectCycles(features);
+
+            return hasCycles.ToArray();
         }
 
         private static Exception CreateException(IEnumerable<IGrouping<string, FeatureMetadata>> groups)
@@ -87,6 +104,12 @@
             }
 
             return new InvalidOperationException(sb.ToString());
+        }
+
+        private static Exception CreateDependencyException(IEnumerable<string> dependencies)
+        {
+            string message = dependencies.Aggregate(new StringBuilder("The following features have cyclic dependencies : ").AppendLine(), (sb, d) => sb.Append(" - ").AppendLine(d), sb => sb.ToString());
+            return new InvalidOperationException(message);
         }
     }
 }

@@ -124,6 +124,6 @@
     <value>No provider of type {0} were found in the Providers property.</value>
   </data>
   <data name="Feature_Unknown" xml:space="preserve">
-    <value>The feature '{0}' is unknown.</value>
+    <value>The feature '{0}' or of its dependency is unknown.</value>
   </data>
 </root>

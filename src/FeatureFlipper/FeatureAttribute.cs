@@ -31,5 +31,10 @@
         /// Gets or sets the version of the feature. Could be null.
         /// </summary>
         public string Version { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the required features. Features are comma separated.
+        /// </summary>
+        public string DependsOn { get; set; }
     }
 }

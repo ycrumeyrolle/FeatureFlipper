@@ -31,14 +31,14 @@
         }
 
         /// <inheritsdoc />
-        public bool TryIsOn(string feature, string version, out bool isOn)
+        public bool TryIsOn(FeatureMetadata metadata, out bool isOn)
         {
-            if (feature == null)
+            if (metadata == null)
             {
-                throw new ArgumentNullException("feature");
+                throw new ArgumentNullException("metadata");
             }
 
-            var roles = this.roleManager.GetRoleMatrix(feature, version);
+            var roles = this.roleManager.GetRoleMatrix(metadata);
             if (roles == null)
             {
                 isOn = false;

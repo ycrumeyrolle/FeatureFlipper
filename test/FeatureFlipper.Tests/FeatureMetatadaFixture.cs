@@ -10,9 +10,8 @@
         public void Ctor_GuardClause()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata(null, null, this.GetType(), "*"));
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, null, "*"));
-            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, this.GetType(), null));
+            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata(null, null, this.GetType(), "*", null));
+            Assert.Throws<ArgumentNullException>(() => new FeatureMetadata("X", null, null, "*", null));
         }
 
         [Theory]
@@ -21,7 +20,7 @@
         public void Ctor(string name, string version, string expectedKey)
         {
             // Arrange
-            FeatureMetadata featureMetadata = new FeatureMetadata(name, version, this.GetType(), string.Empty);
+            FeatureMetadata featureMetadata = new FeatureMetadata(name, version, this.GetType(), string.Empty, null);
 
             // Act & assert
             Assert.Equal(name, featureMetadata.Name);
@@ -37,7 +36,7 @@
         public void GetRoles(string roles, string[] expectedRoles)
         {
             // Arrange
-            FeatureMetadata featureMetadata = new FeatureMetadata("X", null, this.GetType(), roles);
+            FeatureMetadata featureMetadata = new FeatureMetadata("X", null, this.GetType(), roles, null);
 
             // Act
             var result = featureMetadata.GetRoles();
