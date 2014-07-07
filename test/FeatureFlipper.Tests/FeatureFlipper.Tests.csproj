@@ -68,8 +68,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DefaultConfigurationReaderFixture.cs" />
     <Compile Include="DefaultCycleDetectorFixture.cs" />
     <Compile Include="DateRangeFeatureStateParserFixture.cs" />
+    <Compile Include="ServiceProviderExtensionsFixture.cs" />
     <Compile Include="ServiceContainerFixture.cs" />
     <Compile Include="SystemClockFixture.cs" />
     <Compile Include="VersionStateParserFixture.cs" />
@@ -101,6 +103,9 @@
       <Project>{2d6bbacd-0698-4fc1-ae56-b9a98ffffcd0}</Project>
       <Name>FeatureFlipper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

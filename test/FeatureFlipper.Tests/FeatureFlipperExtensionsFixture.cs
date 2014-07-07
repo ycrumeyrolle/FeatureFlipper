@@ -70,7 +70,7 @@
             Assert.True(isOn);
             flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, It.IsAny<string>(), out isOn), Times.Once());
         }
-
+        
         [Fact]
         public void RegisterConfigurationFeature_GuardClause()
         {

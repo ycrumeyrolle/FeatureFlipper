@@ -120,10 +120,22 @@
   <data name="Feature_AlreadyRegistered" xml:space="preserve">
     <value>The feature '{0}' is already registered.</value>
   </data>
+  <data name="Feature_CyclicDependencies" xml:space="preserve">
+    <value>The following features have cyclic dependencies :</value>
+  </data>
+  <data name="Feature_Duplicate" xml:space="preserve">
+    <value>More than one feature have the same feature name :</value>
+  </data>
   <data name="Feature_NoProvider" xml:space="preserve">
     <value>No provider of type {0} were found in the Providers property.</value>
   </data>
   <data name="Feature_Unknown" xml:space="preserve">
-    <value>The feature '{0}' or of its dependency is unknown.</value>
+    <value>The feature '{0}' or one of its dependency is unknown.</value>
+  </data>
+  <data name="Service_Invalid" xml:space="preserve">
+    <value>The type {0} is not a valid service type.</value>
+  </data>
+  <data name="Service_Unsupported" xml:space="preserve">
+    <value>The service type {0} is not supported.</value>
   </data>
 </root>

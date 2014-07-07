@@ -20,7 +20,7 @@
         {
             string value;
             if (!this.cache.TryGetValue(key, out value))
-            {
+            {                
                 value = ConfigurationManager.AppSettings[key];
                 this.cache.TryAdd(key, value);
             }

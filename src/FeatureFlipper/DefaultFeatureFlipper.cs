@@ -58,7 +58,7 @@
             FeatureMetadata metadata = this.metadataProvider.GetMetadata(feature, version);
             if (metadata == null)
             {
-                metadata = new FeatureMetadata(feature, version, this.GetType(), null, null);
+                metadata = new FeatureMetadata(feature, version, typeof(void), null, null);
             }
 
             context.Metadata = metadata;

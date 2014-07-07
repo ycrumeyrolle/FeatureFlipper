@@ -68,6 +68,33 @@
         }
 
         [Fact]
+        public void IsOn_UnknowMetadata_UseBaseMetadata()
+        {
+            // Arrange
+            bool providerIsOn = true;
+            Mock<IFeatureProvider> provider = new Mock<IFeatureProvider>();
+            provider
+                .Setup(p => p.TryIsOn(It.Is<FeatureMetadata>(m => m.Name == "name" && m.Version == "version"), out providerIsOn))
+                .Returns(true)
+                .Verifiable();
+
+            var providers = new[] { provider.Object };
+            Mock<IMetadataProvider> metadataProvider = new Mock<IMetadataProvider>();
+            metadataProvider
+                .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns((FeatureMetadata)null);
+            var flipper = new DefaultFeatureFlipper(providers, metadataProvider.Object);
+            bool isOn;
+
+            // Act 
+            var result= flipper.TryIsOn("name", "version", out isOn);
+
+            // Assert
+            Assert.Equal(providerIsOn, isOn);
+            provider.Verify();
+        }
+
+        [Fact]
         public void IsOn_NoProvider_ThrowsException()
         {
             // Arrange
@@ -81,15 +108,14 @@
             metadataProvider
                 .Setup(p => p.GetMetadata(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new FeatureMetadata("X", null, this.GetType(), null, null));
-     
+
             var providers = new[] { provider.Object };
             var flipper = new DefaultFeatureFlipper(providers, metadataProvider.Object);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => flipper.IsOn("X"));
         }
-
-
+        
         [Fact]
         public void IsOn_WithDependencies()
         {

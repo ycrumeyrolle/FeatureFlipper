@@ -70,6 +70,24 @@ namespace FeatureFlipper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following features have cyclic dependencies :.
+        /// </summary>
+        internal static string Feature_CyclicDependencies {
+            get {
+                return ResourceManager.GetString("Feature_CyclicDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More than one feature have the same feature name :.
+        /// </summary>
+        internal static string Feature_Duplicate {
+            get {
+                return ResourceManager.GetString("Feature_Duplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No provider of type {0} were found in the Providers property..
         /// </summary>
         internal static string Feature_NoProvider {
@@ -79,11 +97,29 @@ namespace FeatureFlipper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The feature &apos;{0}&apos; or of its dependency is unknown..
+        ///   Looks up a localized string similar to The feature &apos;{0}&apos; or one of its dependency is unknown..
         /// </summary>
         internal static string Feature_Unknown {
             get {
                 return ResourceManager.GetString("Feature_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} is not a valid service type..
+        /// </summary>
+        internal static string Service_Invalid {
+            get {
+                return ResourceManager.GetString("Service_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The service type {0} is not supported..
+        /// </summary>
+        internal static string Service_Unsupported {
+            get {
+                return ResourceManager.GetString("Service_Unsupported", resourceCulture);
             }
         }
     }
