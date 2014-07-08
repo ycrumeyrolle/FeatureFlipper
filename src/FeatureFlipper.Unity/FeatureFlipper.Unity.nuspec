@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>FeatureFlipper.Unity</id>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <title>FeatureFlipper with Unity</title>
         <authors>Yann Crumeyrolle</authors>
         <owners>Yann Crumeyrolle</owners>
@@ -14,7 +14,7 @@
         <copyright />
         <tags>feature flipping flipper toggle Unity IoC</tags>
         <dependencies>
-            <dependency id="FeatureFlipper" version="2.0.0" />
+            <dependency id="FeatureFlipper" version="2.0.1" />
             <dependency id="Unity" version="3.5.1404.0" />
         </dependencies>
     </metadata>

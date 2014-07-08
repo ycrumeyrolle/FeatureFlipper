@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     /// <summary>
@@ -160,6 +161,7 @@
         /// </summary>
         /// <param name="serviceContainer">The <see cref="ServiceContainer"/></param>
         /// <typeparam name="TService">The type of the service to remove.</typeparam>
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "By design")]
         public static void RemoveAll<TService>(this ServiceContainer serviceContainer)
         {
             if (serviceContainer == null)

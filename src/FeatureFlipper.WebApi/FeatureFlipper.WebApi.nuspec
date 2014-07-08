@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>FeatureFlipper.WebApi</id>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <title>FeatureFlipper for WebAPI</title>
         <authors>Yann Crumeyrolle</authors>
         <owners>Yann Crumeyrolle</owners>
@@ -14,7 +14,7 @@
         <copyright />
         <tags>feature flipping flipper toggle WebAPI http</tags>
         <dependencies>
-            <dependency id="FeatureFlipper" version="2.0.0" />
+            <dependency id="FeatureFlipper" version="2.0.1" />
             <dependency id="Microsoft.AspNet.WebApi.Core" version="5.1.2" />
         </dependencies>
     </metadata>
