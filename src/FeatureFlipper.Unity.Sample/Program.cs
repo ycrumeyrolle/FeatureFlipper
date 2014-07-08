@@ -11,14 +11,10 @@
         {
             IUnityContainer container = CreateContainer();
 
-          //  Console.SetOut(TextWriter.Null);
+            MessageEngine engine = container.Resolve<MessageEngine>();
+            engine.Send(args);
 
-          //  Parallel.For(0, int.MaxValue / 1000, _ =>
-           // {
-                MessageEngine engine = container.Resolve<MessageEngine>();
-                engine.Send(args);
-          //  });
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         private static IUnityContainer CreateContainer()

@@ -20,53 +20,7 @@
             Assert.Equal(1, flipper.Providers.OfType<ConfigurationFeatureProvider>().Count());
             Assert.Equal(1, flipper.Providers.OfType<RoleFeatureProvider>().Count());
 
-            //Assert.NotNull(Features.FeatureStateParsers);
-            //Assert.Equal(3, Features.FeatureStateParsers.Count);
-            //Assert.Equal(1, Features.FeatureStateParsers.OfType<BooleanFeatureStateParser>().Count());
-            //Assert.Equal(1, Features.FeatureStateParsers.OfType<DateFeatureStateParser>().Count());
-            //Assert.Equal(1, Features.FeatureStateParsers.OfType<VersionStateParser>().Count());
-   
-            //Assert.NotNull(Features.Providers);
-            //Assert.Equal(2, Features.Providers.Count);
-            //Assert.Equal(1, Features.Providers.OfType<ConfigurationFeatureProvider>().Count());
-            //Assert.Equal(1, Features.Providers.OfType<RoleFeatureProvider>().Count());
-
-            //Assert.NotNull(Features.ConfigurationReader);
-            //Assert.IsType<DefaultConfigurationReader>(Features.ConfigurationReader);
-        }
-
-        //[Fact]
-        //public void SetConfigurationReader_GuardClause()
-        //{
-        //    // Act & Assert
-        //    Assert.Throws<ArgumentNullException>(() => Features.ConfigurationReader = null);
-        //}
-
-        //[Fact]
-        //public void SetConfigurationReader()
-        //{
-        //    // Arrange
-        //    var reader = new Mock<IConfigurationReader>();
-        //    var originnalReader = Features.ConfigurationReader;
-
-        //    // Act
-        //    Features.ConfigurationReader = reader.Object;
-
-        //    // Assert
-        //    Assert.NotNull(Features.ConfigurationReader);
-        //    Assert.Equal(reader.Object, Features.ConfigurationReader);
-
-        //    // Teardown
-        //    Features.ConfigurationReader = originnalReader;
-        //}
-        
-        private class FeatureWithoutAttribute
-        {
-        }
-
-        [Feature("feature1")]
-        private class FeatureWithAttribute
-        {
+            Assert.NotNull(Features.Services);
         }
     }
 }

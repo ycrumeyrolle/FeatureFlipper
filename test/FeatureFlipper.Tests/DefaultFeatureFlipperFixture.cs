@@ -87,7 +87,7 @@
             bool isOn;
 
             // Act 
-            var result= flipper.TryIsOn("name", "version", out isOn);
+            var result = flipper.TryIsOn("name", "version", out isOn);
 
             // Assert
             Assert.Equal(providerIsOn, isOn);

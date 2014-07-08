@@ -69,11 +69,11 @@
                         {
                             found = true;
                             if (isOn)
-	                        {
+                            {
                                 context.BuildKey = new NamedTypeBuildKey(map.FeatureType, map.FeatureName);
                                 enabled = true;
                                 break;
-	                        }
+                            }
                         }
                     }
 

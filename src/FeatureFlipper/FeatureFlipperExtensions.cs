@@ -91,7 +91,8 @@
         /// Gets the state of the feature.
         /// </summary>
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
-        /// <param name="feature">The name of the feature.</param>        /// <param name="version">Optionnal. The version of the feature.</param>
+        /// <param name="feature">The name of the feature.</param>        
+        /// <param name="version">Optionnal. The version of the feature.</param>
         /// <returns><c>true</c> if the feature is <c>On</c>; otherwise, <c>false</c>.</returns>   
         public static bool IsOn(this IFeatureFlipper flipper, string feature, string version)
         {
