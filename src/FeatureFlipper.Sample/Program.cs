@@ -8,8 +8,6 @@
     {
         public static void Main(string[] args)
         {
-            Console.SetOut(TextWriter.Null);
-
             // By type feature flipping
             if (Features.Flipper.IsOn<FeatureByType>())
             {
