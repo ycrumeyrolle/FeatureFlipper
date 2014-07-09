@@ -13,4 +13,5 @@ before_install:
 
 script:
   - xbuild FeatureFlipper.sln
-  - ./xunit.sh test/FeatureFlipper.Tests/bin/Debug/FeatureFlipper.Tests.dll test/FeatureFlipper.Unity.Tests/bin/Debug/FeatureFlipper.Unity.Tests.dll test/FeatureFlipper.WebApi.Tests/bin/Debug/FeatureFlipper/WebApi.Tests.dll
+  - ./xunit.sh test/FeatureFlipper.Tests/bin/Debug/FeatureFlipper.Tests.dll 
+# test/FeatureFlipper.Unity.Tests/bin/Debug/FeatureFlipper.Unity.Tests.dll test/FeatureFlipper.WebApi.Tests/bin/Debug/FeatureFlipper/WebApi.Tests.dll
