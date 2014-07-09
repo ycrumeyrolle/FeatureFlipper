@@ -161,7 +161,7 @@
             }
             else if (method.ReturnType == typeof(string))
             {
-                LocalBuilder lb = il.DeclareLocal(method.ReturnType);
+                il.DeclareLocal(method.ReturnType);
 
                 var ret = il.DefineLabel();
 

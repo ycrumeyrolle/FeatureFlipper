@@ -90,6 +90,7 @@
             var result = flipper.TryIsOn("name", "version", out isOn);
 
             // Assert
+            Assert.True(result);
             Assert.Equal(providerIsOn, isOn);
             provider.Verify();
         }
