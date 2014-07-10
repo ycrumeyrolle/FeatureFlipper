@@ -5,6 +5,7 @@ mono --runtime=v4.0 .nuget/NuGet.exe install xunit.core -Version 2.0.0-beta-buil
 
 runTest(){
    cp packages/xunit.core.2.0.0-beta-build2700/lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid/*.dll packages/xunit.runners.2.0.0-beta-build2700/tools/
+   cp packages/xunit.core.2.0.0-beta-build2700/lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid/*.dll ./
    mono --runtime=v4.0 packages/xunit.runners.2.0.0-beta-build2700/tools/xunit.console.exe $@ -xml coverage.xml
    if [ $? -ne 0 ]
    then   
