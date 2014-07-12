@@ -14,6 +14,6 @@ runTest(){
    fi
 }
 
-runTest $1
+runTest test/FeatureFlipper.Tests/bin/Debug/
 
-exit test/FeatureFlipper.Tests/bin/Debug/
+exit 
