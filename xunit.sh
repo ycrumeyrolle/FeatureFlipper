@@ -7,7 +7,7 @@ runTest(){
    cp packages/xunit.core.2.0.0-beta-build2700/lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid/* ./
    cp $@ ./
    
-   mono --runtime=v4.0 packages/xunit.runners.2.0.0-beta-build2700/tools/xunit.console.exe ./*.dll -xml coverage.xml
+   mono --runtime=v4.0 packages/xunit.runners.2.0.0-beta-build2700/tools/xunit.console.exe ./FeatureFlipper.Tests.dll -xml coverage.xml
    if [ $? -ne 0 ]
    then   
      exit 1
