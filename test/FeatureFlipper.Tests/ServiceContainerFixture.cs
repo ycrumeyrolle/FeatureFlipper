@@ -175,6 +175,21 @@
             Assert.Same(provider2.Object, result.ElementAt(1));
         }
 
+        [Fact]
+        public void RemoveAll()
+        {
+            // Arrange 
+            var container = new ServiceContainer();
+
+            // Act
+            container.RemoveAll(typeof(IFeatureStateParser));
+
+            // Assert
+            var result = container.GetServices(typeof(IFeatureStateParser));
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
         public static IEnumerable<object[]> SingleServices()
         {
             yield return new object[] { typeof(ISystemClock) };

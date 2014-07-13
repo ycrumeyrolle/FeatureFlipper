@@ -7,6 +7,19 @@
     public class DefaultRoleMatrixProviderFixture
     {
         [Fact]
+        public void GetRoleMatrix_GuardClause()
+        {
+            // Arrange
+            DefaultRoleMatrixProvider roleMatrixProvider = new DefaultRoleMatrixProvider();
+
+            // Act
+            var result = roleMatrixProvider.GetRoleMatrix(null);
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public void GetRoleMatrix_UnknowFeature_ReturnsEmptyArray()
         {
             // Arrange

@@ -5,8 +5,15 @@
     using Moq;
     using Xunit;
 
-    public class FeaturesFixture
+    public class FeaturesFixture : IDisposable
     {
+        private readonly IFeatureFlipper flipper;
+
+        public FeaturesFixture()
+        {
+            this.flipper = Features.Flipper;
+        }
+
         [Fact]
         public void PropertiesCheck()
         {
@@ -21,6 +28,32 @@
             Assert.Equal(1, flipper.Providers.OfType<RoleFeatureProvider>().Count());
 
             Assert.NotNull(Features.Services);
+        }
+
+        [Fact]
+        public void SetFlipperToNull_ThrowsArgumentNullException()
+        {
+            // Act
+            Assert.Throws<ArgumentNullException>(() => Features.Flipper = null);
+        }
+
+        [Fact]
+        public void SetFlipper()
+        {
+            // Arrange
+            Mock<IFeatureFlipper> flipper = new Mock<IFeatureFlipper>();
+            Features.Flipper = flipper.Object;
+
+            // Act
+            var result = Features.Flipper;
+
+            // Act 
+            Assert.Same(flipper.Object, result);
+        }
+
+        public void Dispose()
+        {
+            Features.Flipper = this.flipper;
         }
     }
 }

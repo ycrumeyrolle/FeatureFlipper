@@ -34,6 +34,25 @@
         }
 
         [Fact]
+        public void IsOn_TFeature_WithVersion()
+        {
+            // Arrange
+            bool isOn = true;
+            var flipper = new Mock<IFeatureFlipper>(MockBehavior.Strict);
+            flipper
+                .Setup(f => f.TryIsOn(It.IsAny<string>(), It.IsAny<string>(), out isOn))
+                .Returns(true);
+
+            // Act
+            var result = FeatureFlipperExtensions.IsOn<Feature1>(flipper.Object, "version");
+
+            // Assert
+            Assert.True(result);
+            Assert.True(isOn);
+            flipper.Verify(f => f.TryIsOn(typeof(Feature1).FullName, It.IsAny<string>(), out isOn), Times.Once());
+        }
+
+        [Fact]
         public void IsOn_GuardClause()
         {
             // Arrange
@@ -50,6 +69,8 @@
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, (Type)null, null));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(null, (string)null, null));
             Assert.Throws<ArgumentNullException>(() => FeatureFlipperExtensions.IsOn(flipper.Object, (Type)null, null));
+            Assert.DoesNotThrow(() => FeatureFlipperExtensions.IsOn(flipper.Object, this.GetType()));
+            Assert.DoesNotThrow(() => FeatureFlipperExtensions.IsOn<object>(flipper.Object));
         }
 
         [Fact]
