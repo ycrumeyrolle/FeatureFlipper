@@ -4,7 +4,7 @@ mono --runtime=v4.0 .nuget/NuGet.exe install xunit.runners -Version 2.0.0-beta-b
 mono --runtime=v4.0 .nuget/NuGet.exe install xunit.core -Version 2.0.0-beta-build2700 -o packages
 
 runTest(){
-   md build
+   mkdir build
    cp packages/xunit.runners.2.0.0-beta-build2700/tools/* ./build
    cp packages/xunit.core.2.0.0-beta-build2700/lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid/* ./build
    cp $1* ./build
