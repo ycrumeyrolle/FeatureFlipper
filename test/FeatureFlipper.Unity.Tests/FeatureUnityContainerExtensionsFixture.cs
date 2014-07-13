@@ -98,32 +98,53 @@
                 Assert.NotNull(service);
                 Assert.IsNotType<Service>(service);
                 Assert.IsAssignableFrom<IService>(service);
+
+                Assert.IsAssignableFrom(typeof(int), service.IntProperty);
                 Assert.Equal(0, service.IntProperty);
+
+                Assert.IsAssignableFrom(typeof(string), service.StringMethod());
                 Assert.Equal(string.Empty, service.StringMethod());
+
+                Assert.IsAssignableFrom(typeof(int), service.GetValue());
                 Assert.Equal(0, service.GetValue());
+
+                Assert.IsAssignableFrom(typeof(string[]), service.ArrayMethod());
                 Assert.NotNull(service.ArrayMethod());
                 Assert.Equal(0, service.ArrayMethod().Count());
+
+                Assert.IsAssignableFrom(typeof(ICollection<bool>), service.CollectionMethod());
                 Assert.NotNull(service.CollectionMethod());
                 Assert.Equal(0, service.CollectionMethod().Count());
+
+                Assert.IsAssignableFrom(typeof(IEnumerable<int>), service.IEnumerableMethod());
                 Assert.NotNull(service.IEnumerableMethod());
                 Assert.Equal(0, service.IEnumerableMethod().Count());
+
                 Assert.Null(service.ObjectMethod());
+
                 int value = 10;
                 service.OutMethod(out value);
                 Assert.Equal(10, value);
+
                 string[] array;
                 service.OutArrayMethod(out array);
                 Assert.NotNull(array);
+                Assert.IsAssignableFrom(typeof(string[]), array);
                 Assert.Equal(0, array.Length);
+
                 string outString = "x";
                 service.OutStringMethod(out outString);
                 Assert.Equal(string.Empty, outString);
+
                 IEnumerable<string> outEnumerable = new[] { "x" };
                 service.OutEnumerableMethod(out outEnumerable);
                 Assert.NotNull(outEnumerable);
+                Assert.IsAssignableFrom(typeof(IEnumerable<string>), outEnumerable);
                 Assert.Equal(0, outEnumerable.Count());
+
                 ICollection<string> outCollection;
                 service.OutCollectionMethod(out outCollection);
+                Assert.IsAssignableFrom(typeof(ICollection<string>), outCollection);
                 Assert.NotNull(outCollection);
                 Assert.Equal(0, outCollection.Count());
             }

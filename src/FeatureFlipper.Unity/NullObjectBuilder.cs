@@ -156,7 +156,7 @@
 
                 if (openGeneric == typeof(IEnumerable<>))
                 {
-                    WriteArrayReturnValue(il, method);
+                    WriteListReturnValue(il, method);
                 }
             }
             else if (method.ReturnType == typeof(string))
@@ -270,7 +270,7 @@
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Newarr, typeof(string));
+            il.Emit(OpCodes.Newarr, method.ReturnType.GetElementType());
             il.Emit(OpCodes.Stloc_0);
             il.Emit(OpCodes.Br, ret);
             il.MarkLabel(ret);
