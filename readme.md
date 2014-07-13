@@ -1,5 +1,5 @@
 #FeatureFlipper
--[![Build Status](https://travis-ci.org/ycrumeyrolle/FeatureFlipper.png?branch=master)](https://travis-ci.org/ycrumeyrolle/FeatureFlipper)
+[![Build Status](https://travis-ci.org/ycrumeyrolle/FeatureFlipper.png?branch=master)](https://travis-ci.org/ycrumeyrolle/FeatureFlipper)
 
 *A feature flipping system.*
 
