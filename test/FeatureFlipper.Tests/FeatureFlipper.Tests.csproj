@@ -78,6 +78,7 @@
     <Compile Include="ServiceProviderExtensionsFixture.cs" />
     <Compile Include="ServiceContainerFixture.cs" />
     <Compile Include="SystemClockFixture.cs" />
+    <Compile Include="TarjanFixture.cs" />
     <Compile Include="VersionStateParserFixture.cs" />
     <Compile Include="FeatureTypeResolverFixture.cs" />
     <Compile Include="DefaultAssembliesResolverFixture.cs" />
@@ -108,9 +109,7 @@
       <Name>FeatureFlipper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

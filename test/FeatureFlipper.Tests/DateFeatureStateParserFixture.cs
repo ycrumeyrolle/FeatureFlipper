@@ -4,6 +4,7 @@
     using Moq;
     using Xunit;
 
+    [Trait("Category", "Parser")]
     public class DateFeatureStateParserFixture
     {
         [Fact]

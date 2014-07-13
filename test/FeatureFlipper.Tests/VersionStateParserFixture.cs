@@ -2,6 +2,7 @@
 {
     using Xunit;
 
+    [Trait("Category", "Parser")]
     public class VersionStateParserFixture
     {
         [Theory]
