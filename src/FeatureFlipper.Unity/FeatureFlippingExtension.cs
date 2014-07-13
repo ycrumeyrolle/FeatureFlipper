@@ -18,6 +18,11 @@
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         public FeatureFlippingExtension(IFeatureFlipper flipper)
         {
+            if (flipper == null)
+            {
+                throw new ArgumentNullException("flipper");
+            }
+
             this.flipper = flipper;
         }
 
@@ -26,7 +31,7 @@
         {
             FlippingBuilderStrategy flippingBuilderStrategy = new FlippingBuilderStrategy(this.flipper);
 
-            this.Context.Strategies.Add(flippingBuilderStrategy, UnityBuildStage.PreCreation);
+            this.Context.Strategies.Add(flippingBuilderStrategy, UnityBuildStage.TypeMapping);
         }
     }
 }

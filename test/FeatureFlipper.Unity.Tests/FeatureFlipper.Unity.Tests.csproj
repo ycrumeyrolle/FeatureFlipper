@@ -82,9 +82,14 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Feature2.cs" />
     <Compile Include="Feature1.cs" />
+    <Compile Include="FeatureFlippingExtensionFixture.cs" />
+    <Compile Include="FeatureFlippingUnityContainerExtensionsFixture.cs" />
+    <Compile Include="FeatureVersionExtensionFixture.cs" />
+    <Compile Include="FeatureFlipperUnityTest.cs" />
     <Compile Include="VersionSelectionStrategyFixture.cs" />
-    <Compile Include="IFeature1.cs" />
+    <Compile Include="IFeature.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ProxyGeneratorFixture.cs" />
     <Compile Include="NullObjectBuilderFixture.cs" />

@@ -26,7 +26,7 @@
         {
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => new NullObjectBuilder(null, null));
-            Assert.Throws<ArgumentNullException>(() => new NullObjectBuilder(typeof(IFeature1), null));
+            Assert.Throws<ArgumentNullException>(() => new NullObjectBuilder(typeof(IFeature), null));
             Assert.Throws<ArgumentException>(() => new NullObjectBuilder(typeof(Feature1), CreateModuleBuilder()));
         }
 

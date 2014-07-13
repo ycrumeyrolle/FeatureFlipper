@@ -20,13 +20,18 @@
         /// <param name="flipper">The <see cref="IFeatureFlipper"/>.</param>
         public FeatureVersionExtension(IFeatureFlipper flipper)
         {
+            if (flipper == null)
+            {
+                throw new ArgumentNullException("flipper");
+            }
+
             this.flipper = flipper;
         }
 
         /// <inheritsdoc/>
         protected override void Initialize()
         {
-            this.Context.Registering += this.OnRegistering;            
+            this.Context.Registering += this.OnRegistering;
             
             VersionSelectionStrategy versionSelectionStrategy = new VersionSelectionStrategy(this.flipper, this.featureVersionMapping);
             this.Context.Strategies.Add(versionSelectionStrategy, UnityBuildStage.TypeMapping);

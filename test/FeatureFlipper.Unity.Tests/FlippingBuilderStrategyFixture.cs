@@ -39,7 +39,7 @@
             Mock<IBuilderContext> context = new Mock<IBuilderContext>();
             context.SetupAllProperties();
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
-            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature)));
 
             // Act
             strategy.PreBuildUp(context.Object);
@@ -65,7 +65,7 @@
             context.SetupAllProperties();
             context
                 .Setup(c => c.OriginalBuildKey)
-                .Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+                .Returns(new NamedTypeBuildKey(typeof(IFeature)));
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
 
             // Act
@@ -92,7 +92,7 @@
             context.SetupAllProperties();
             context
                 .Setup(c => c.OriginalBuildKey)
-                .Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+                .Returns(new NamedTypeBuildKey(typeof(IFeature)));
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
 
             // Act

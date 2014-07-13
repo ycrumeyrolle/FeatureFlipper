@@ -37,14 +37,14 @@
                 .Returns(true);
 
             IDictionary<Type, TypeMappingCollection> featureVersionMapping = new Dictionary<Type, TypeMappingCollection>();
-            featureVersionMapping.Add(typeof(IFeature1), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
+            featureVersionMapping.Add(typeof(IFeature), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 
             Mock<IBuilderContext> context = new Mock<IBuilderContext>();
             context.SetupAllProperties();
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
-            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature)));
 
             // Act
             strategy.PreBuildUp(context.Object);
@@ -67,14 +67,14 @@
                 .Returns(true);
 
             IDictionary<Type, TypeMappingCollection> featureVersionMapping = new Dictionary<Type, TypeMappingCollection>();
-            featureVersionMapping.Add(typeof(IFeature1), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
+            featureVersionMapping.Add(typeof(IFeature), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 
             Mock<IBuilderContext> context = new Mock<IBuilderContext>();
             context.SetupAllProperties();
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
-            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature)));
 
             // Act
             strategy.PreBuildUp(context.Object);
@@ -97,14 +97,14 @@
                 .Returns(false);
 
             IDictionary<Type, TypeMappingCollection> featureVersionMapping = new Dictionary<Type, TypeMappingCollection>();
-            featureVersionMapping.Add(typeof(IFeature1), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
+            featureVersionMapping.Add(typeof(IFeature), new TypeMappingCollection { new TypeMapping { FeatureType = typeof(Feature1), FeatureName = "V1" } });
 
             VersionSelectionStrategy strategy = new VersionSelectionStrategy(flipper.Object, featureVersionMapping);
 
             Mock<IBuilderContext> context = new Mock<IBuilderContext>();
             context.SetupAllProperties();
             context.Object.BuildKey = new NamedTypeBuildKey(typeof(Feature1));
-            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature1)));
+            context.Setup(c => c.OriginalBuildKey).Returns(new NamedTypeBuildKey(typeof(IFeature)));
 
             // Act
             strategy.PreBuildUp(context.Object);
