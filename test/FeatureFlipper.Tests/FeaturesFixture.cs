@@ -5,7 +5,7 @@
     using Moq;
     using Xunit;
 
-    public class FeaturesFixture : IDisposable
+    public sealed class FeaturesFixture : IDisposable
     {
         private readonly IFeatureFlipper flipper;
 
