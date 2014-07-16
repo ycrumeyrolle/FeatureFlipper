@@ -17,8 +17,8 @@ runTest(){
    fi
 }
 
-runTest test/FeatureFlipper.Tests/bin/Debug/ FeatureFlipper.Tests.dll
-runTest test/FeatureFlipper.Unity.Tests/bin/Debug/ FeatureFlipper.Unity.Tests.dll
-runTest test/FeatureFlipper.WebApi.Tests/bin/Debug/ FeatureFlipper.WebApi.Tests.dll
+runTest test/FeatureFlipper.Tests/bin/Release/ FeatureFlipper.Tests.dll
+runTest test/FeatureFlipper.Unity.Tests/bin/Release/ FeatureFlipper.Unity.Tests.dll
+runTest test/FeatureFlipper.WebApi.Tests/bin/Release/ FeatureFlipper.WebApi.Tests.dll
 
 exit 
