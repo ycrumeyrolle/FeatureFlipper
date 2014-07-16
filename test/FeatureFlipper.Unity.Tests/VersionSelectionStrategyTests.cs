@@ -83,7 +83,7 @@
             Assert.NotNull(context.Object.Existing);
             Assert.NotNull(context.Object.BuildKey);
             Assert.NotEqual(typeof(Feature1), context.Object.BuildKey.Type);
-            Assert.Null( context.Object.BuildKey.Name);
+            Assert.Null(context.Object.BuildKey.Name);
         }
 
         [Fact]

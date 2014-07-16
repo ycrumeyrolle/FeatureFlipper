@@ -33,7 +33,7 @@
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceContainer">The <see cref="ServiceContainer"/></param>
         /// <returns>The list of the service instances.</returns>
-        public static IEnumerable<TService> GetServices<TService>(this ServiceContainer serviceContainer)
+        public static IEnumerable<TService> GetServices<TService>(this ServiceContainer serviceContainer) where TService : class
         {
             if (serviceContainer == null)
             {
@@ -57,12 +57,17 @@
                 throw new ArgumentNullException("serviceContainer");
             }
 
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException("serviceType");
+            }
+
             if (services == null)
             {
                 throw new ArgumentNullException("services");
             }
 
-            serviceContainer.Replace(serviceType, () => services.ToArray());
+            serviceContainer.Replace(serviceType, services.ToArray);
         }
 
         /// <summary>
@@ -78,10 +83,38 @@
                 throw new ArgumentNullException("serviceContainer");
             }
 
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException("serviceType");
+            }
+
             if (service == null)
             {
                 throw new ArgumentNullException("service");
             }
+
+            serviceContainer.Replace(serviceType, () => service);
+        }
+
+        /// <summary>
+        /// Replaces a service by an other.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <param name="serviceContainer">The <see cref="ServiceContainer"/></param>
+        /// <param name="service">The service instance.</param>
+        public static void Replace<TService>(this ServiceContainer serviceContainer, TService service) where TService : class
+        {
+            if (serviceContainer == null)
+            {
+                throw new ArgumentNullException("serviceContainer");
+            }
+
+            if (service == null)
+            {
+                throw new ArgumentNullException("service");
+            }
+
+            Type serviceType = typeof(TService);
 
             serviceContainer.Replace(serviceType, () => service);
         }
@@ -100,6 +133,11 @@
             if (serviceContainer == null)
             {
                 throw new ArgumentNullException("serviceContainer");
+            }
+
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException("serviceType");
             }
 
             if (service == null)
