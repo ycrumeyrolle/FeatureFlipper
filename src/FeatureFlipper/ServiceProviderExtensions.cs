@@ -62,7 +62,7 @@
                 throw new ArgumentNullException("services");
             }
 
-            serviceContainer.Replace(serviceType, () => services);
+            serviceContainer.Replace(serviceType, () => services.ToArray());
         }
 
         /// <summary>
@@ -121,7 +121,7 @@
         /// <remarks>
         /// <see cref="IFeatureStateParser"/> and <see cref="IFeatureProvider"/> are the only possible types.
         /// </remarks>
-        public static void Add<TService>(this ServiceContainer serviceContainer, TService service)
+        public static void Add<TService>(this ServiceContainer serviceContainer, TService service) where TService : class
         {
             if (serviceContainer == null)
             {
@@ -162,7 +162,7 @@
         /// <param name="serviceContainer">The <see cref="ServiceContainer"/></param>
         /// <typeparam name="TService">The type of the service to remove.</typeparam>
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "By design")]
-        public static void RemoveAll<TService>(this ServiceContainer serviceContainer)
+        public static void RemoveAll<TService>(this ServiceContainer serviceContainer) where TService : class
         {
             if (serviceContainer == null)
             {

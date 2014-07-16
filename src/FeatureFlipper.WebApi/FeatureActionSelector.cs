@@ -53,7 +53,7 @@
             var featureAttributes = action.GetCustomAttributes<FeatureAttribute>();
             if (featureAttributes.Count != 0)
             {
-                var featureAttribute = (FeatureAttribute)featureAttributes[0];
+                var featureAttribute = featureAttributes[0];
                 if (!Features.Flipper.IsOn(featureAttribute.Name))
                 {
                     throw new HttpResponseException(Create410Response(controllerContext));

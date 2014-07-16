@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Globalization;
     using FeatureFlipper.Properties;
      
@@ -70,7 +69,6 @@
             string value = this.configurationReader.GetValue(key);
             if (value == null)
             {
-                isOn = false;
                 return false;
             }
 

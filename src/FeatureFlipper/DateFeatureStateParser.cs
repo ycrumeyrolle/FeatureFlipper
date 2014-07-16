@@ -1,7 +1,6 @@
 ﻿namespace FeatureFlipper
 {
     using System;
-    using System.Globalization;
 
     /// <summary>
     /// This implementation of <see cref="IFeatureStateParser"/> tries to parse a value into date 

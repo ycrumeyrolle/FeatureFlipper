@@ -1,8 +1,6 @@
 ﻿namespace FeatureFlipper.Unity.Sample
 {
     using System;
-    using System.IO;
-    using System.Threading.Tasks;
     using Microsoft.Practices.Unity;
 
     public class Program

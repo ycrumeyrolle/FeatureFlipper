@@ -1,8 +1,6 @@
 ﻿namespace FeatureFlipper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Provides access to features flipping.

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// Tarjan algorithm to detect cycles in a graph. 
@@ -22,7 +21,7 @@
         /// </summary>
         /// <param name="graph">Graph to detect cycles within.</param>
         /// <returns>Set of strongly connected components (sets of vertices)</returns>
-        public Collection<VertexCollection> DetectCycle(VertexCollection graph)
+        public Collection<VertexCollection> DetectCycle(IEnumerable<Vertex> graph)
         {
             if (graph == null)
             {
@@ -72,7 +71,7 @@
                     current = this.stack.Pop();
                     vertices.Add(current);
                 }
-                while (vertex != current);
+                while (current != vertex);
 
                 this.stronglyConnectedComponents.Add(vertices);
             }

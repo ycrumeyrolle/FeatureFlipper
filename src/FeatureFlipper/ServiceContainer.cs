@@ -16,7 +16,7 @@
         private readonly ConcurrentDictionary<Type, object> table = new ConcurrentDictionary<Type, object>();
         private readonly ConcurrentDictionary<Type, Func<object>> factories = new ConcurrentDictionary<Type, Func<object>>();
 
-        private readonly ConcurrentDictionary<Type, IEnumerable<object>> tableMulti = new ConcurrentDictionary<Type, IEnumerable<object>>();
+        private readonly ConcurrentDictionary<Type, object[]> tableMulti = new ConcurrentDictionary<Type, object[]>();
         private readonly ConcurrentDictionary<Type, Func<IEnumerable<object>>> factoriesMulti = new ConcurrentDictionary<Type, Func<IEnumerable<object>>>();
   
         /// <summary>
@@ -89,7 +89,7 @@
                 throw new ArgumentNullException("serviceType");
             }
 
-            IEnumerable<object> services;
+            object[] services;
             if (this.tableMulti.TryGetValue(serviceType, out services))
             {
                 return services;
@@ -98,7 +98,13 @@
             Func<IEnumerable<object>> factory;
             if (this.factoriesMulti.TryGetValue(serviceType, out factory))
             {
-                services = factory();
+                var newServices = factory();
+                if (newServices == null)
+                {
+                    newServices = new object[0];
+                }
+
+                services = newServices.ToArray();
                 this.tableMulti.TryAdd(serviceType, services);
                 return services;
             }
@@ -155,7 +161,7 @@
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Service_Invalid, serviceType.Name), "serviceType");
             }
 
-            IEnumerable<object> services;
+            object[] services;
             this.tableMulti.TryRemove(serviceType, out services);
             this.factoriesMulti[serviceType] = serviceFactories;
         }

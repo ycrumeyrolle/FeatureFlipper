@@ -1,9 +1,7 @@
 ﻿namespace FeatureFlipper
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Globalization;
 
     /// <summary>
     /// Default implementation of the <see cref="IFeatureFlipper"/>.
@@ -54,7 +52,6 @@
             }
 
             FeatureContext context = new FeatureContext();
-            isOn = true;
             FeatureMetadata metadata = this.metadataProvider.GetMetadata(feature, version);
             if (metadata == null)
             {
@@ -113,12 +110,12 @@
 
         private bool TryIsOnCore(FeatureMetadata metadata, out bool isOn)
         {
-            bool partialIsOn;
             bool found = false;
             isOn = true;
             for (int i = 0; i < this.providers.Count; i++)
             {
                 var provider = this.providers[i];
+                bool partialIsOn;
                 if (provider.TryIsOn(metadata, out partialIsOn))
                 {
                     isOn &= partialIsOn;

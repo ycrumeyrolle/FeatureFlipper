@@ -1,7 +1,6 @@
 ﻿namespace FeatureFlipper
 {
     using System;
-    using System.Globalization;
 
     /// <summary>
     /// Represents a parser of date range. A date range is a string like "Date1,Date2".
@@ -16,7 +15,7 @@
     /// </summary>
     public class DateRangeFeatureStateParser : IFeatureStateParser
     {
-        private static readonly char[] Separators = new[] { ',' };
+        private static readonly char[] Separators = { ',' };
 
         private static readonly Func<DateTimeOffset, DateTimeOffset, bool> IncludeStartPredicate = (startDate, now) => startDate <= now;
         private static readonly Func<DateTimeOffset, DateTimeOffset, bool> ExcludeStartPredicate = (startDate, now) => startDate < now;

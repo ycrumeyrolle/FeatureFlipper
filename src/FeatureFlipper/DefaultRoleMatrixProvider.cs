@@ -1,7 +1,5 @@
 ﻿namespace FeatureFlipper
 {
-    using System;
-
     /// <summary>
     /// Implementation of <see cref="IRoleMatrixProvider"/> that gets roles in data annotations.
     /// </summary>

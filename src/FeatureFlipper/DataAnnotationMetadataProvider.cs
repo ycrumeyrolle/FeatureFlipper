@@ -39,9 +39,9 @@
         {
             var metadataCache = this.cache.Value;
             Dictionary<string, FeatureMetadata> lookup;
-            FeatureMetadata featureMetatada;
             if (metadataCache.TryGetValue(feature, out lookup))
             {
+                FeatureMetadata featureMetatada;
                 if (lookup.TryGetValue(version ?? string.Empty, out featureMetatada))
                 {
                     return featureMetatada;
@@ -81,7 +81,7 @@
             return features.GroupBy(f => f.Name).ToDictionary(g => g.Key, g => g.ToDictionary(f => f.Version ?? string.Empty));
         }
 
-        private static string[] DetectCycles(List<FeatureMetadata> features)
+        private static string[] DetectCycles(IEnumerable<FeatureMetadata> features)
         {
             // TODO : DI
             ICycleDetector detector = new DefaultCycleDetector();

@@ -13,10 +13,6 @@
     /// </summary>
     public sealed class NullObjectBuilder
     {
-        private const MethodAttributes GetSetAttributes = MethodAttributes.Public |
-                                                         MethodAttributes.SpecialName |
-                                                         MethodAttributes.HideBySig;
-
         private const TypeAttributes TypeAttr = TypeAttributes.Public |
                                                TypeAttributes.Class |
                                                TypeAttributes.AutoClass |

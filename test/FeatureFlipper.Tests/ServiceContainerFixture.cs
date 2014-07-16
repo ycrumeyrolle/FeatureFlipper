@@ -106,6 +106,21 @@
         }
 
         [Fact]
+        public void GetServices_Null_ReturnEmptyArray()
+        {
+            // Arrange 
+            var container = new ServiceContainer();
+            container.Replace(typeof(IFeatureStateParser), () => (object[])null);
+
+            // Act 
+            var services = container.GetServices<IFeatureStateParser>();
+            
+            // Assert
+            Assert.NotNull(services);
+            Assert.Empty(services);
+        }
+
+        [Fact]
         public void GetServices_Unknow_ThrowsInvalidOperationException()
         {
             // Arrange 
