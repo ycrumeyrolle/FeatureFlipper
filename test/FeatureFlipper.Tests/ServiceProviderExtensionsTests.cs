@@ -1,7 +1,6 @@
 ﻿namespace FeatureFlipper.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Moq;
     using Xunit;
@@ -32,7 +31,7 @@
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace(null, this.GetType(), new object[0]));
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace(new ServiceContainer(), null, new object[0]));
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace(new ServiceContainer(), this.GetType(), null));
-            Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace<IFeatureFlipper>(null, new Mock<IFeatureFlipper>().Object));
+            Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace(null, new Mock<IFeatureFlipper>().Object));
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Replace<IFeatureFlipper>(new ServiceContainer(), null));
             Assert.DoesNotThrow(() => ServiceProviderExtensions.Replace(new ServiceContainer(), new Mock<IFeatureFlipper>().Object));
         }
@@ -87,10 +86,10 @@
             Mock<IAssembliesResolver> resolver = new Mock<IAssembliesResolver>();
             
             // Act & assert
-            Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Add<object>(null, new object()));
+            Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Add(null, new object()));
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.Add<object>(new ServiceContainer(), null));
-            Assert.Throws<InvalidOperationException>(() => ServiceProviderExtensions.Add<IAssembliesResolver>(new ServiceContainer(), resolver.Object));
-            Assert.DoesNotThrow(() => ServiceProviderExtensions.Add<IFeatureStateParser>(new ServiceContainer(), parser.Object));
+            Assert.Throws<InvalidOperationException>(() => ServiceProviderExtensions.Add(new ServiceContainer(), resolver.Object));
+            Assert.DoesNotThrow(() => ServiceProviderExtensions.Add(new ServiceContainer(), parser.Object));
         }
 
         [Fact]
@@ -136,11 +135,8 @@
         }
 
         [Fact]
-        public void RemoveAll()
+        public void RemoveAll_GuardClause()
         {
-            // Arrange
-            Mock<IFeatureProvider> provider = new Mock<IFeatureProvider>();
-
             // Act & assert
             Assert.Throws<ArgumentNullException>(() => ServiceProviderExtensions.RemoveAll<object>(null));
             Assert.DoesNotThrow(() => ServiceProviderExtensions.RemoveAll<IFeatureStateParser>(new ServiceContainer()));
