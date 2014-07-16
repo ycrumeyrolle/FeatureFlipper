@@ -16,7 +16,7 @@
         public void Ctor()
         {
             // Act 
-            var key = "123";
+            const string key = "123";
             var context = new ConfigurationFeatureContext(key);
 
             // Assert

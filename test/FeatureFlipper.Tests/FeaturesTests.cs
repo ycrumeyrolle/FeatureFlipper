@@ -7,11 +7,11 @@
 
     public sealed class FeaturesTests : IDisposable
     {
-        private readonly IFeatureFlipper flipper;
+        private readonly IFeatureFlipper flipperBackup;
 
         public FeaturesTests()
         {
-            this.flipper = Features.Flipper;
+            this.flipperBackup = Features.Flipper;
         }
 
         [Fact]
@@ -53,7 +53,7 @@
 
         public void Dispose()
         {
-            Features.Flipper = this.flipper;
+            Features.Flipper = this.flipperBackup;
         }
     }
 }

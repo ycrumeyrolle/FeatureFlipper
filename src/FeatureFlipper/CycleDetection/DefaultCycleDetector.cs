@@ -31,17 +31,19 @@
 
         private static string FormatCycle(VertexCollection vertices)
         {
-            return vertices.Aggregate(new StringBuilder(), (sb, c) => sb.Append(c.Value).Append(" --> "), sb => sb.Append(vertices[0].Value).ToString());
+            return vertices.Aggregate(new StringBuilder(), (sb, c) => sb.Append(c.Value).Append(" --> "), sb => sb.Append(vertices.Select(v => v.Value).FirstOrDefault()).ToString());
         }
 
-        private static VertexCollection PrepareGraph(IEnumerable<FeatureMetadata> features)
+        private static IEnumerable<Vertex> PrepareGraph(IEnumerable<FeatureMetadata> features)
         {
             var vertices = features.Select(f => new Vertex(f.Name, f.GetDependsOn().Select(f2 => new Vertex(f2)))).ToArray();
 
-            foreach (var vertexA in vertices)
+            for (int indexA = 0; indexA < vertices.Length; indexA++)
             {
-                foreach (var vertexB in vertices)
+                var vertexA = vertices[indexA];
+                for (int indexB = 0; indexB < vertices.Length; indexB++)
                 {
+                    var vertexB = vertices[indexB];
                     for (int i = 0; i < vertexB.Dependencies.Count; i++)
                     {
                         if (vertexA.Value == vertexB.Dependencies[i].Value)
@@ -52,7 +54,7 @@
                 }
             }
 
-            return new VertexCollection(vertices);
+            return vertices;
         }
     }
 }

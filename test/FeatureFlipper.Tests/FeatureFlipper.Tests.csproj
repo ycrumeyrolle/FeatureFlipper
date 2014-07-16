@@ -83,7 +83,7 @@
     <Compile Include="FeatureTypeResolverTests.cs" />
     <Compile Include="DefaultAssembliesResolverTests.cs" />
     <Compile Include="DataAnnotationMetadataProviderTests.cs" />
-    <Compile Include="FeatureMetatadaTests.cs" />
+    <Compile Include="FeatureMetadataTests.cs" />
     <Compile Include="DefaultRoleMatrixProviderTests.cs" />
     <Compile Include="ConfigurationFeatureContextTests.cs" />
     <Compile Include="Feature1.cs" />
