@@ -78,8 +78,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="FlipperHttpConfigurationExtensionsFixture.cs" />
-    <Compile Include="FeatureActionSelectorFixture.cs" />
+    <Compile Include="FlipperHttpConfigurationExtensionsTests.cs" />
+    <Compile Include="FeatureActionSelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

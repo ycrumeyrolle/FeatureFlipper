@@ -72,31 +72,31 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="DefaultConfigurationReaderFixture.cs" />
-    <Compile Include="DefaultCycleDetectorFixture.cs" />
-    <Compile Include="DateRangeFeatureStateParserFixture.cs" />
-    <Compile Include="ServiceProviderExtensionsFixture.cs" />
-    <Compile Include="ServiceContainerFixture.cs" />
-    <Compile Include="SystemClockFixture.cs" />
-    <Compile Include="TarjanFixture.cs" />
-    <Compile Include="VersionStateParserFixture.cs" />
-    <Compile Include="FeatureTypeResolverFixture.cs" />
-    <Compile Include="DefaultAssembliesResolverFixture.cs" />
-    <Compile Include="DataAnnotationMetadataProviderFixture.cs" />
-    <Compile Include="FeatureMetatadaFixture.cs" />
-    <Compile Include="DefaultRoleMatrixProviderFixture.cs" />
-    <Compile Include="ConfigurationFeatureContextFixture.cs" />
+    <Compile Include="CycleDetection\DefaultCycleDetectorTests.cs" />
+    <Compile Include="CycleDetection\TarjanTests.cs" />
+    <Compile Include="DefaultConfigurationReaderTests.cs" />
+    <Compile Include="DateRangeFeatureStateParserTests.cs" />
+    <Compile Include="ServiceProviderExtensionsTests.cs" />
+    <Compile Include="ServiceContainerTests.cs" />
+    <Compile Include="SystemClockTests.cs" />
+    <Compile Include="VersionStateParserTests.cs" />
+    <Compile Include="FeatureTypeResolverTests.cs" />
+    <Compile Include="DefaultAssembliesResolverTests.cs" />
+    <Compile Include="DataAnnotationMetadataProviderTests.cs" />
+    <Compile Include="FeatureMetatadaTests.cs" />
+    <Compile Include="DefaultRoleMatrixProviderTests.cs" />
+    <Compile Include="ConfigurationFeatureContextTests.cs" />
     <Compile Include="Feature1.cs" />
     <Compile Include="Feature2.cs" />
-    <Compile Include="FeaturesFixture.cs" />
-    <Compile Include="FeatureNameProviderFixture.cs" />
-    <Compile Include="RoleFeatureProviderFixture.cs" />
-    <Compile Include="FeatureFlipperExtensionsFixture.cs" />
-    <Compile Include="DefaultFeatureFlipperFixture.cs" />
-    <Compile Include="DefaultPrincipalProviderFixture.cs" />
-    <Compile Include="ConfigurationFeatureProviderFixture.cs" />
-    <Compile Include="DateFeatureStateParserFixture.cs" />
-    <Compile Include="BooleanFeatureStateParserFixture.cs" />
+    <Compile Include="FeaturesTests.cs" />
+    <Compile Include="FeatureNameProviderTests.cs" />
+    <Compile Include="RoleFeatureProviderTests.cs" />
+    <Compile Include="FeatureFlipperExtensionsTests.cs" />
+    <Compile Include="DefaultFeatureFlipperTests.cs" />
+    <Compile Include="DefaultPrincipalProviderTests.cs" />
+    <Compile Include="ConfigurationFeatureProviderTests.cs" />
+    <Compile Include="DateFeatureStateParserTests.cs" />
+    <Compile Include="BooleanFeatureStateParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XAssembly.cs" />
   </ItemGroup>

@@ -84,18 +84,18 @@
   <ItemGroup>
     <Compile Include="Feature2.cs" />
     <Compile Include="Feature1.cs" />
-    <Compile Include="FeatureFlippingExtensionFixture.cs" />
-    <Compile Include="FeatureFlippingUnityContainerExtensionsFixture.cs" />
-    <Compile Include="FeatureVersionExtensionFixture.cs" />
-    <Compile Include="FeatureFlipperUnityTest.cs" />
-    <Compile Include="VersionSelectionStrategyFixture.cs" />
+    <Compile Include="FeatureFlippingExtensionTests.cs" />
+    <Compile Include="FeatureFlippingUnityContainerExtensionsTests.cs" />
+    <Compile Include="FeatureVersionExtensionTests.cs" />
+    <Compile Include="FeatureFlipperUnityTests.cs" />
+    <Compile Include="VersionSelectionStrategyTests.cs" />
     <Compile Include="IFeature.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="ProxyGeneratorFixture.cs" />
-    <Compile Include="NullObjectBuilderFixture.cs" />
-    <Compile Include="FlippingBuilderStrategyFixture.cs" />
+    <Compile Include="ProxyGeneratorTests.cs" />
+    <Compile Include="NullObjectBuilderTests.cs" />
+    <Compile Include="FlippingBuilderStrategyTests.cs" />
     <Compile Include="Service.cs" />
-    <Compile Include="FeatureUnityContainerExtensionsFixture.cs" />
+    <Compile Include="FeatureUnityContainerExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
