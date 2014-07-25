@@ -6,6 +6,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
+    using FeatureFlipper.CycleDetection;
     using FeatureFlipper.Properties;
 
     /// <summary>
@@ -35,8 +36,11 @@
                 new VersionStateParser()
             };
 
+            this.factories[typeof(IFeatureExplorer)] = () => new DefaultFeatureExplorer(this.GetService<IFeatureMetadataStore>());
+            this.factories[typeof(ICycleDetector)] = () => new DefaultCycleDetector();
+            this.factories[typeof(IFeatureMetadataStore)] = () => new FeatureMetadataStore(this.GetService<ITypeResolver>(), this.GetService<ICycleDetector>());
             this.factories[typeof(IAssembliesResolver)] = () => new DefaultAssembliesResolver();
-            this.factories[typeof(IMetadataProvider)] = () => new DataAnnotationMetadataProvider(this.GetService<ITypeResolver>());
+            this.factories[typeof(IMetadataProvider)] = () => new DataAnnotationMetadataProvider(this.GetService<IFeatureMetadataStore>());
             this.factories[typeof(ITypeResolver)] = () => new FeatureTypeResolver(this.GetService<IAssembliesResolver>());
             this.factories[typeof(IRoleMatrixProvider)] = () => new DefaultRoleMatrixProvider();
             this.factoriesMulti[typeof(IFeatureProvider)] = () => new List<IFeatureProvider> 

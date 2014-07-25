@@ -1,0 +1,67 @@
+﻿@using System.Text
+@model IEnumerable<FeatureFlipper.FeatureDescriptor>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Version
+            </th>
+            <th>
+                Roles
+            </th>
+            <th>
+                Depends on
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td colspan="3">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{
+                        bool isOn;
+                        FeatureFlipper.Features.Flipper.TryIsOn(item.Name, null, out isOn);
+                        @isOn
+                    }
+                </td>
+            </tr>
+            if (item.Versions.Count > 0)
+            {
+                foreach (var version in item.Versions)
+                {
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            @version.Name
+                        </td>
+                        <td>
+                            @string.Join(", ", version.Roles)
+                        </td>
+                        <td>
+                            @string.Join(", ", version.Dependencies)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</body>
+</html>

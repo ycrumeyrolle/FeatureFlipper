@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using FeatureFlipper.CycleDetection;
-    using FeatureFlipper.Properties;
 
     /// <summary>
     /// Default implementation of <see cref="IMetadataProvider"/>.
@@ -15,31 +12,27 @@
     /// </summary>
     public sealed class DataAnnotationMetadataProvider : IMetadataProvider
     {
-        private readonly ITypeResolver typeResolver;
-
-        private readonly Lazy<IDictionary<string, Dictionary<string, FeatureMetadata>>> cache;
+        private readonly IFeatureMetadataStore store;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataAnnotationMetadataProvider"/> class.
         /// </summary>
-        /// <param name="typeResolver">The <see cref="ITypeResolver"/>.</param>
-        public DataAnnotationMetadataProvider(ITypeResolver typeResolver)
+        /// <param name="store">The <see cref="IFeatureMetadataStore"/>.</param>
+        public DataAnnotationMetadataProvider(IFeatureMetadataStore store)
         {
-            if (typeResolver == null)
+            if (store == null)
             {
-                throw new ArgumentNullException("typeResolver");
+                throw new ArgumentNullException("store");
             }
 
-            this.typeResolver = typeResolver;
-            this.cache = new Lazy<IDictionary<string, Dictionary<string, FeatureMetadata>>>(this.InitializeMetatada);
+            this.store = store;
         }
 
         /// <inheritsdoc />
         public FeatureMetadata GetMetadata(string feature, string version)
         {
-            var metadataCache = this.cache.Value;
             Dictionary<string, FeatureMetadata> lookup;
-            if (metadataCache.TryGetValue(feature, out lookup))
+            if (this.store.Value.TryGetValue(feature, out lookup))
             {
                 FeatureMetadata featureMetatada;
                 if (lookup.TryGetValue(version ?? string.Empty, out featureMetatada))
@@ -49,68 +42,6 @@
             }
 
             return null;
-        }
-
-        private IDictionary<string, Dictionary<string, FeatureMetadata>> InitializeMetatada()
-        {
-            var featuresType = this.typeResolver.GetTypes();
-            if (featuresType == null)
-            {
-                return new Dictionary<string, Dictionary<string, FeatureMetadata>>();
-            }
-
-            var features = new List<FeatureMetadata>();
-            foreach (Type type in featuresType)
-            {
-                FeatureAttribute attribute = type.GetCustomAttribute<FeatureAttribute>(true);
-                features.Add(new FeatureMetadata(attribute.Name, attribute.Version, type, attribute.Roles, attribute.DependsOn));
-            }
-
-            var groups = features.GroupBy(f => f.Key);
-            if (groups.Any(f => f.Count() > 1))
-            {
-                throw CreateException(groups);
-            }
-
-            var cycles = DetectCycles(features);
-            if (cycles.Length > 0)
-            {
-                throw CreateDependencyException(cycles);
-            }
-
-            return features.GroupBy(f => f.Name).ToDictionary(g => g.Key, g => g.ToDictionary(f => f.Version ?? string.Empty));
-        }
-
-        private static string[] DetectCycles(IEnumerable<FeatureMetadata> features)
-        {
-            // TODO : DI
-            ICycleDetector detector = new DefaultCycleDetector();
-
-            var hasCycles = detector.DetectCycles(features);
-
-            return hasCycles.ToArray();
-        }
-
-        private static Exception CreateException(IEnumerable<IGrouping<string, FeatureMetadata>> groups)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(Resources.Feature_Duplicate);
-            foreach (var group in groups.Where(f => f.Count() > 1))
-            {
-                sb.Append(" - ").AppendLine(group.Key);
-                foreach (var item in group)
-                {
-                    sb.Append("   + ").AppendLine(item.FeatureType.FullName);
-                }
-            }
-
-            return new InvalidOperationException(sb.ToString());
-        }
-
-        private static Exception CreateDependencyException(IEnumerable<string> dependencies)
-        {
-            string message = dependencies.Aggregate(new StringBuilder(Resources.Feature_CyclicDependencies).AppendLine(), (sb, d) => sb.Append(" - ").AppendLine(d), sb => sb.ToString());
-            return new InvalidOperationException(message);
         }
     }
 }

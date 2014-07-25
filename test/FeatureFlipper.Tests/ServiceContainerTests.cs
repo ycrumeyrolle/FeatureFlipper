@@ -216,6 +216,8 @@
             yield return new object[] { typeof(IRoleMatrixProvider) };
             yield return new object[] { typeof(IPrincipalProvider) };
             yield return new object[] { typeof(IFeatureFlipper) };
+            yield return new object[] { typeof(IFeatureExplorer) };
+            yield return new object[] { typeof(IFeatureMetadataStore) };
         }
 
         public static IEnumerable<object[]> MultiServices()

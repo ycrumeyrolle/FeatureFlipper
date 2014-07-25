@@ -58,10 +58,16 @@
     <Compile Include="CycleDetection\Tarjan.cs" />
     <Compile Include="CycleDetection\VertexCollection.cs" />
     <Compile Include="DateRangeFeatureStateParser.cs" />
+    <Compile Include="DefaultFeatureExplorer.cs" />
+    <Compile Include="FeatureDescriptor.cs" />
+    <Compile Include="FeatureMetadataStore.cs" />
     <Compile Include="FeatureStateParserExtensions.cs" />
+    <Compile Include="IFeatureExplorer.cs" />
+    <Compile Include="IFeatureMetadataStore.cs" />
     <Compile Include="MetadataProviderExtensions.cs" />
     <Compile Include="ServiceContainer.cs" />
     <Compile Include="ServiceProviderExtensions.cs" />
+    <Compile Include="VersionDescriptor.cs" />
     <Compile Include="VersionStateParser.cs" />
     <Compile Include="BooleanFeatureStateParser.cs" />
     <Compile Include="DataAnnotationMetadataProvider.cs" />
@@ -109,6 +115,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

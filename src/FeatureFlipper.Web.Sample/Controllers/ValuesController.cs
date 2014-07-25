@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace FeatureFlipper.Web.Sample.Controllers
 {
-    [Feature("Values")]
+    [Feature("Values", Roles = "Admin", DependsOn = "Home")]
     public class ValuesController : ApiController
     {
         // GET api/values

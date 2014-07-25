@@ -74,6 +74,9 @@
   <ItemGroup>
     <Compile Include="CycleDetection\DefaultCycleDetectorTests.cs" />
     <Compile Include="CycleDetection\TarjanTests.cs" />
+    <Compile Include="FeatureDescriptorTests.cs" />
+    <Compile Include="DefaultFeatureExplorerTests.cs" />
+    <Compile Include="FeatureMetadataStoreTests.cs" />
     <Compile Include="DefaultConfigurationReaderTests.cs" />
     <Compile Include="DateRangeFeatureStateParserTests.cs" />
     <Compile Include="ServiceProviderExtensionsTests.cs" />
