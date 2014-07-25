@@ -1,5 +1,6 @@
 ﻿namespace FeatureFlipper.CycleDetection
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -26,6 +27,11 @@
         /// <param name="dependencies">The dependencies of the vertex.</param>
         public Vertex(string value, IEnumerable<Vertex> dependencies)
         {
+            if (dependencies == null)
+            {
+                throw new ArgumentNullException("dependencies");
+            }
+
             this.Value = value;
             this.Index = -1;
             this.Dependencies = dependencies.ToList();

@@ -25,17 +25,15 @@
         /// </summary>
         public ServiceContainer()
         {
+            this.RegisterSingleFactories();
+            this.RegisterMultiFactories();
+        }
+
+        private void RegisterSingleFactories()
+        {
             this.factories[typeof(ISystemClock)] = () => new SystemClock();
             this.factories[typeof(IConfigurationReader)] = () => new DefaultConfigurationReader();
             this.factories[typeof(IPrincipalProvider)] = () => new DefaultPrincipalProvider();
-
-            this.factoriesMulti[typeof(IFeatureStateParser)] = () => new List<IFeatureStateParser> 
-            { 
-                new BooleanFeatureStateParser(),
-                new DateFeatureStateParser(this.GetService<ISystemClock>()),
-                new VersionStateParser()
-            };
-
             this.factories[typeof(IFeatureExplorer)] = () => new DefaultFeatureExplorer(this.GetService<IFeatureMetadataStore>());
             this.factories[typeof(ICycleDetector)] = () => new DefaultCycleDetector();
             this.factories[typeof(IFeatureMetadataStore)] = () => new FeatureMetadataStore(this.GetService<ITypeResolver>(), this.GetService<ICycleDetector>());
@@ -43,15 +41,24 @@
             this.factories[typeof(IMetadataProvider)] = () => new DataAnnotationMetadataProvider(this.GetService<IFeatureMetadataStore>());
             this.factories[typeof(ITypeResolver)] = () => new FeatureTypeResolver(this.GetService<IAssembliesResolver>());
             this.factories[typeof(IRoleMatrixProvider)] = () => new DefaultRoleMatrixProvider();
-            this.factoriesMulti[typeof(IFeatureProvider)] = () => new List<IFeatureProvider> 
-            { 
+            this.factories[typeof(IFeatureFlipper)] = () => new DefaultFeatureFlipper(this.GetServices<IFeatureProvider>(), this.GetService<IMetadataProvider>());
+        }
+
+        private void RegisterMultiFactories()
+        {
+            this.factoriesMulti[typeof(IFeatureProvider)] = () => new IFeatureProvider[]
+            {
                 new ConfigurationFeatureProvider(this.GetService<IConfigurationReader>(), this.GetServices<IFeatureStateParser>()),
                 new RoleFeatureProvider(this.GetService<IRoleMatrixProvider>(), this.GetService<IPrincipalProvider>())
             };
-
-            this.factories[typeof(IFeatureFlipper)] = () => new DefaultFeatureFlipper(this.GetServices<IFeatureProvider>(), this.GetService<IMetadataProvider>());
+            this.factoriesMulti[typeof(IFeatureStateParser)] = () => new IFeatureStateParser[]
+            {
+                new BooleanFeatureStateParser(),
+                new DateFeatureStateParser(this.GetService<ISystemClock>()),
+                new VersionStateParser()
+            };
         }
-        
+
         /// <summary>
         /// Provides a service instance given a service type.
         /// </summary>

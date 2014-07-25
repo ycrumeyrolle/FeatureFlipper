@@ -51,18 +51,18 @@
 
             Dictionary<string, FeatureMetadata> feature2 = new Dictionary<string, FeatureMetadata>();
             feature2.Add(string.Empty, new FeatureMetadata("Y", null, this.GetType(), null, null));
-            
+
             Dictionary<string, FeatureMetadata> feature3 = new Dictionary<string, FeatureMetadata>();
             feature3.Add(string.Empty, new FeatureMetadata("Z", null, this.GetType(), null, null));
             Mock<IFeatureMetadataStore> store = new Mock<IFeatureMetadataStore>(MockBehavior.Strict);
             store
                 .Setup(s => s.Value)
                 .Returns(new Dictionary<string, Dictionary<string, FeatureMetadata>>()
-                {
-                    {"X", feature1},
-                    {"Y", feature2},
-                    {"Z", feature3}
-                });
+                         {
+                             { "X", feature1 },
+                             { "Y", feature2 },
+                             { "Z", feature3 }
+                         });
             DataAnnotationMetadataProvider provider = new DataAnnotationMetadataProvider(store.Object);
 
             // Act

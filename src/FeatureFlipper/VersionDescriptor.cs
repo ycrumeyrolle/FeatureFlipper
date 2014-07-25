@@ -16,7 +16,7 @@ namespace FeatureFlipper
         /// <param name="type">The type of the feature.</param>
         /// <param name="dependencies">The feature dependencies.</param>
         /// <param name="roles">The feature roles.</param>
-        public VersionDescriptor(string version, Type type, string[] dependencies, string[] roles)
+        internal VersionDescriptor(string version, Type type, string[] dependencies, string[] roles)
         {
             this.Name = version;
             this.FeatureType = type;

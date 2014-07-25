@@ -52,11 +52,11 @@
             store
                 .Setup(s => s.Value)
                 .Returns(new Dictionary<string, Dictionary<string, FeatureMetadata>>()
-                {
-                    {"X", feature1},
-                    {"Y", feature2},
-                    {"Z", feature3}
-                });
+                         {
+                             { "X", feature1 },
+                             { "Y", feature2 },
+                             { "Z", feature3 }
+                         });
             DefaultFeatureExplorer explorer = new DefaultFeatureExplorer(store.Object);
 
             // Act

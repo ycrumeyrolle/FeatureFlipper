@@ -16,12 +16,12 @@
         public void Ctor()
         {
             // Act 
-            const string key = "123";
-            var context = new ConfigurationFeatureContext(key);
+            const string Key = "123";
+            var context = new ConfigurationFeatureContext(Key);
 
             // Assert
             Assert.NotNull(context.Key);
-            Assert.Equal(key, context.Key);
+            Assert.Equal(Key, context.Key);
         }
     }
 }

@@ -17,7 +17,7 @@
 
         private readonly ICycleDetector cycleDetector;
 
-        private readonly Lazy<IDictionary<string, Dictionary<string, FeatureMetadata>>> cache;
+        private readonly Lazy<Dictionary<string, Dictionary<string, FeatureMetadata>>> cache;
       
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureMetadataStore"/> class.
@@ -38,11 +38,11 @@
 
             this.typeResolver = typeResolver;
             this.cycleDetector = cycleDetector;
-            this.cache = new Lazy<IDictionary<string, Dictionary<string, FeatureMetadata>>>(InitializeMetatada);
+            this.cache = new Lazy<Dictionary<string, Dictionary<string, FeatureMetadata>>>(this.InitializeMetatada);
         }
 
         /// <inheritsdoc />
-        public IDictionary<string, Dictionary<string, FeatureMetadata>> Value
+        public Dictionary<string, Dictionary<string, FeatureMetadata>> Value
         {
             get
             {
@@ -50,7 +50,7 @@
             }
         }
 
-        private IDictionary<string, Dictionary<string, FeatureMetadata>> InitializeMetatada()
+        private Dictionary<string, Dictionary<string, FeatureMetadata>> InitializeMetatada()
         {
             var featuresType = this.typeResolver.GetTypes();
             if (featuresType == null)

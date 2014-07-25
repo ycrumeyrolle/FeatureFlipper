@@ -101,6 +101,7 @@
     <Compile Include="DateFeatureStateParserTests.cs" />
     <Compile Include="BooleanFeatureStateParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CycleDetection\VertexTests.cs" />
     <Compile Include="XAssembly.cs" />
   </ItemGroup>
   <ItemGroup>

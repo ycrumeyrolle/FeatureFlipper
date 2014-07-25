@@ -1,15 +1,17 @@
 ﻿namespace FeatureFlipper
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// Provides a store for metadata/
+    /// Provides a store for metadata.
     /// </summary>
     public interface IFeatureMetadataStore
     {
         /// <summary>
         /// Gets the store value.
         /// </summary>
-        IDictionary<string, Dictionary<string, FeatureMetadata>> Value { get; }
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "By design")]
+        Dictionary<string, Dictionary<string, FeatureMetadata>> Value { get; }
     }
 }
