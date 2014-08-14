@@ -87,12 +87,12 @@ build_script:
 #---------------------------------#
 
 test:
-  assemblies:
-    - FeatureFlipper.Tests.dll
-    - FeatureFlipper.Unity.Tests.dll
-    - FeatureFlipper.WebApi.Tests.dll
+  #assemblies:
+  #  - FeatureFlipper.Tests.dll
+  #  - FeatureFlipper.Unity.Tests.dll
+  #  - FeatureFlipper.WebApi.Tests.dll
 
-  categories:
+  #categories:
    # - UI
    # - E2E
 
