@@ -87,8 +87,8 @@ build_script:
 #---------------------------------#
 
 test:
-  #assemblies:
-  #  - FeatureFlipper.Tests.dll
+  assemblies:
+    - *\bin\$(configuration)\*Tests.dll
   #  - FeatureFlipper.Unity.Tests.dll
   #  - FeatureFlipper.WebApi.Tests.dll
 
