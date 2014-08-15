@@ -1,25 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
-    <metadata>
-        <id>FeatureFlipper.WebApi</id>
-        <version>2.0.1</version>
-        <title>FeatureFlipper for WebAPI</title>
-        <authors>Yann Crumeyrolle</authors>
-        <owners>Yann Crumeyrolle</owners>
-        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-        <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A feature flipping system for ASP.Net WebAPI.</description>
-        <summary />
-        <copyright />
-        <tags>feature flipping flipper toggle WebAPI http</tags>
-        <dependencies>
-            <dependency id="FeatureFlipper" version="2.0.1" />
-            <dependency id="Microsoft.AspNet.WebApi.Core" version="5.1.2" />
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="bin\Release\FeatureFlipper.WebApi.dll" target="lib\net45\FeatureFlipper.WebApi.dll" />
-        <file src="bin\Release\FeatureFlipper.WebApi.XML" target="lib\net45\FeatureFlipper.WebApi.XML" />
-    </files>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A feature flipping system for ASP.Net WebAPI.</description>
+    <summary />
+    <copyright />
+    <tags>feature flipping flipper toggle WebAPI http</tags>
+    <dependencies>
+      <dependency id="FeatureFlipper" version="$version$" />
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.1.2" />
+    </dependencies>
+  </metadata>
 </package>

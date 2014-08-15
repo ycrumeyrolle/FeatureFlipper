@@ -1,5 +1,5 @@
 #FeatureFlipper
-[![Build Status](https://travis-ci.org/ycrumeyrolle/FeatureFlipper.png?branch=master)](https://travis-ci.org/ycrumeyrolle/FeatureFlipper)
+[![Build status](https://ci.appveyor.com/api/projects/status/c318ti86rdw58ksc)](https://ci.appveyor.com/project/ycrumeyrolle/featureflipper)
 
 *A feature flipping system.*
 
@@ -65,7 +65,6 @@ In your configuration file :
     {
         // do feature enabled by date
     }
-
 	
 ```
 

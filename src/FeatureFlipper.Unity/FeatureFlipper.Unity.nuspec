@@ -1,25 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
-    <metadata>
-        <id>FeatureFlipper.Unity</id>
-        <version>2.0.1</version>
-        <title>FeatureFlipper with Unity</title>
-        <authors>Yann Crumeyrolle</authors>
-        <owners>Yann Crumeyrolle</owners>
-        <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-        <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A feature flipping system with Unity.</description>
-        <summary />
-        <copyright />
-        <tags>feature flipping flipper toggle Unity IoC</tags>
-        <dependencies>
-            <dependency id="FeatureFlipper" version="2.0.1" />
-            <dependency id="Unity" version="3.5.1404.0" />
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="bin\Release\FeatureFlipper.Unity.dll" target="lib\net45\FeatureFlipper.Unity.dll" />
-        <file src="bin\Release\FeatureFlipper.Unity.XML" target="lib\net45\FeatureFlipper.Unity.XML" />
-    </files>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/ycrumeyrolle/FeatureFlipper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A feature flipping system with Unity.</description>
+    <summary />
+    <copyright />
+    <tags>feature flipping flipper toggle Unity IoC</tags>
+    <dependencies>
+      <dependency id="FeatureFlipper" version="$version$" />
+      <dependency id="Unity" version="3.5.1404.0" />
+    </dependencies>
+  </metadata>
 </package>
